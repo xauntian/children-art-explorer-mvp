@@ -1,0 +1,743 @@
+[
+  {
+    "case": "added-tree",
+    "source_report": "docs/experiments/2026-10-14/qwen3-instruct-split/added-tree.json",
+    "content": {
+      "original_subjects": [
+        {
+          "type": "house",
+          "parts": [
+            "roof",
+            "window",
+            "door"
+          ],
+          "position": "left side of panel",
+          "size": "medium"
+        },
+        {
+          "type": "sun",
+          "parts": [
+            "rays"
+          ],
+          "position": "right side of panel, above house",
+          "size": "small to medium"
+        }
+      ],
+      "candidate_subjects": [
+        {
+          "type": "house",
+          "parts": [
+            "roof",
+            "window",
+            "door"
+          ],
+          "position": "center-left of panel",
+          "size": "medium"
+        },
+        {
+          "type": "sun",
+          "parts": [
+            "rays"
+          ],
+          "position": "top-right of panel, above house",
+          "size": "large"
+        },
+        {
+          "type": "tree",
+          "parts": [
+            "stem",
+            "leaves"
+          ],
+          "position": "right side of panel, below sun",
+          "size": "medium"
+        }
+      ],
+      "missing_subjects": [],
+      "added_subjects": [
+        {
+          "type": "tree",
+          "parts": [
+            "stem",
+            "leaves"
+          ]
+        },
+        {
+          "type": "background",
+          "description": "blue sky with brush strokes, green ground with brush strokes"
+        }
+      ],
+      "layout_changed": true,
+      "content_preserved": false,
+      "reason": "Candidate adds a tree and changes background to textured blue and green, altering the scene significantly."
+    },
+    "observation": {
+      "original_treatment": "simple outlines with flat fills",
+      "candidate_treatment": "thick brushstrokes with textured surfaces and layered colors",
+      "transformation": "technique",
+      "reason": "The candidate uses visible brushwork, textured layers, and a more complex construction of forms (e.g., added tree, varied ground texture) compared to the original's clean lines and flat fills."
+    },
+    "style": {
+      "style_match": "match",
+      "reason": "The candidate treatment includes thick brushstrokes and textured surfaces, which aligns with Fauvism's emphasis on loose expressive visible brushwork. The mention of layered colors supports the use of bold non-natural saturated hues typical of Fauvist works. Although the original had flat fills, the transformation to layered textures and complex forms still retains the simplified flat color blocks concept while enhancing expressiveness — consistent with Fauvism’s stylistic goals."
+    },
+    "expected": {
+      "content_preserved": false,
+      "style_match": "match"
+    }
+  },
+  {
+    "case": "flower",
+    "source_report": "docs/experiments/2026-10-14/qwen3-instruct-split/flower.json",
+    "content": {
+      "original_subjects": [
+        {
+          "type": "flower",
+          "parts": [
+            "center",
+            "petals",
+            "stem",
+            "leaves"
+          ],
+          "position": "central in panel A"
+        }
+      ],
+      "candidate_subjects": [
+        {
+          "type": "flower",
+          "parts": [
+            "center",
+            "petals",
+            "stem",
+            "leaves"
+          ],
+          "position": "central in panel B"
+        }
+      ],
+      "missing_subjects": [],
+      "added_subjects": [],
+      "layout_changed": false,
+      "content_preserved": true,
+      "reason": "The candidate (B) is a direct color and texture enhancement of the original (A), with no addition or removal of parts. The flower, stem, and leaves are identical in structure and position."
+    },
+    "observation": {
+      "original_treatment": "Outline-only with solid fill in center",
+      "candidate_treatment": "Filled with gradient colors inside petals, outline preserved",
+      "transformation": "technique",
+      "reason": "The candidate introduces internal color gradients and fills within the petal shapes, changing how forms are constructed visually beyond just hue."
+    },
+    "style": {
+      "style_match": "mismatch",
+      "reason": "The requested Cubist style requires geometric fragmentation, overlapping flat planes, angular facets, and straight intersecting lines. The candidate treatment introduces gradient fills within petal shapes, which smooths edges and adds tonal variation — contradicting the sharp, fragmented, planar aesthetic of Cubism. Gradient fills imply continuous surfaces rather than broken, angular forms."
+    },
+    "expected": {
+      "content_preserved": true,
+      "style_match": "mismatch"
+    }
+  },
+  {
+    "case": "house",
+    "source_report": "docs/experiments/2026-10-14/qwen3-instruct-split/house.json",
+    "content": {
+      "original_subjects": [
+        {
+          "type": "house",
+          "parts": [
+            "roof",
+            "walls",
+            "window",
+            "door"
+          ],
+          "position": "left side of panel A",
+          "size": "medium"
+        },
+        {
+          "type": "sun",
+          "parts": [
+            "circle",
+            "rays"
+          ],
+          "position": "right side of panel A",
+          "size": "medium"
+        }
+      ],
+      "candidate_subjects": [
+        {
+          "type": "house",
+          "parts": [
+            "roof",
+            "walls",
+            "window",
+            "door"
+          ],
+          "position": "left side of panel B",
+          "size": "medium"
+        },
+        {
+          "type": "sun",
+          "parts": [
+            "circle",
+            "rays"
+          ],
+          "position": "right side of panel B",
+          "size": "medium"
+        }
+      ],
+      "missing_subjects": [],
+      "added_subjects": [],
+      "layout_changed": false,
+      "content_preserved": true,
+      "reason": "Both panels contain the same two main objects (house and sun) in identical positions and relative sizes. The house's parts are present but with different colors/textures, which is not considered a new subject or addition per instructions."
+    },
+    "observation": {
+      "original_treatment": "Outline-based shapes with flat fills; edges defined by single strokes.",
+      "candidate_treatment": "Filled shapes with textured brushstrokes; edges less precise and blended with color.",
+      "transformation": "technique",
+      "reason": "The candidate uses visible brushstrokes and blended colors, while the original has clean outlines and solid fills. The construction of forms changed from simple lines to textured application."
+    },
+    "style": {
+      "style_match": "match",
+      "reason": "The candidate treatment features visible brushstrokes and blended colors, which aligns with Fauvism’s emphasis on loose expressive brushwork and simplified flat color blocks. The transformation from clean outlines to textured application supports the stylistic shift toward emotional expression through color and gesture, a core tenet of Fauvism."
+    },
+    "expected": {
+      "content_preserved": true,
+      "style_match": "match"
+    }
+  },
+  {
+    "case": "identity",
+    "source_report": "docs/experiments/2026-10-14/qwen3-instruct-split/identity.json",
+    "content": {
+      "original_subjects": [
+        {
+          "type": "house",
+          "parts": [
+            "roof",
+            "window",
+            "door"
+          ],
+          "position": "left side of panel"
+        },
+        {
+          "type": "sun",
+          "parts": [],
+          "position": "right side of panel"
+        }
+      ],
+      "candidate_subjects": [
+        {
+          "type": "house",
+          "parts": [
+            "roof",
+            "window",
+            "door"
+          ],
+          "position": "left side of panel"
+        },
+        {
+          "type": "sun",
+          "parts": [],
+          "position": "right side of panel"
+        }
+      ],
+      "missing_subjects": [],
+      "added_subjects": [],
+      "layout_changed": false,
+      "content_preserved": true,
+      "reason": "All main objects and their parts are identical in both panels, including positions and sizes."
+    },
+    "observation": {
+      "original_treatment": "solid lines with flat fills",
+      "candidate_treatment": "solid lines with flat fills",
+      "transformation": "none",
+      "reason": "The edges and inside of shapes are identical in both panels; no change in mark-making or construction."
+    },
+    "style": {
+      "style_match": "mismatch",
+      "reason": "The observed treatment shows no change in rendering — solid lines with flat fills, identical mark-making. This lacks the loose expressive brushwork and simplified flat colour blocks that are characteristic of Fauvism. The absence of visible brushstrokes or compositional simplification beyond flat fills does not support the requested style."
+    },
+    "expected": {
+      "content_preserved": true,
+      "style_match": "mismatch"
+    }
+  },
+  {
+    "case": "shapes",
+    "source_report": "docs/experiments/2026-10-14/qwen3-instruct-split/shapes.json",
+    "content": {
+      "original_subjects": [
+        {
+          "shape": "square",
+          "color": "red",
+          "position": "top-left"
+        },
+        {
+          "shape": "triangle",
+          "color": "green",
+          "position": "center-top"
+        },
+        {
+          "shape": "circle",
+          "color": "blue",
+          "position": "bottom-left"
+        },
+        {
+          "shape": "square",
+          "color": "purple",
+          "position": "center-right"
+        },
+        {
+          "shape": "circle",
+          "color": "orange",
+          "position": "bottom-right"
+        }
+      ],
+      "candidate_subjects": [
+        {
+          "shape": "square",
+          "color": "red with swirl pattern",
+          "position": "top-left"
+        },
+        {
+          "shape": "triangle",
+          "color": "green with swirl pattern",
+          "position": "center-top"
+        },
+        {
+          "shape": "circle",
+          "color": "blue with swirl pattern",
+          "position": "bottom-left"
+        },
+        {
+          "shape": "square",
+          "color": "purple with swirl pattern",
+          "position": "center-right"
+        },
+        {
+          "shape": "circle",
+          "color": "orange with swirl pattern",
+          "position": "bottom-right"
+        }
+      ],
+      "missing_subjects": [],
+      "added_subjects": [],
+      "layout_changed": false,
+      "content_preserved": true,
+      "reason": "All original shapes are present in the candidate with identical positions and sizes. The only change is internal texture (swirl pattern), which does not constitute a new subject or addition."
+    },
+    "observation": {
+      "original_treatment": "simple outlines with solid-colored borders; interiors are empty (white)",
+      "candidate_treatment": "filled shapes with swirling, multi-colored patterns inside; outlines remain but now have colored borders matching the fill",
+      "transformation": "technique",
+      "reason": "The candidate image shows a change in construction: interiors are no longer empty but filled with complex swirls, indicating a shift from simple outline to detailed surface treatment."
+    },
+    "style": {
+      "style_match": "mismatch",
+      "reason": "The candidate treatment uses filled shapes with swirling, multi-colored patterns — which implies flat or semi-flat fills rather than the short broken brush strokes and visible paint texture characteristic of Impressionism. The outlines remain solidly colored, suggesting a lack of soft edges and painterly texture. This does not match the requested visual features."
+    },
+    "expected": {
+      "content_preserved": true,
+      "style_match": "mismatch"
+    }
+  },
+  {
+    "case": "tone-only",
+    "source_report": "docs/experiments/2026-10-14/qwen3-instruct-split/tone-only.json",
+    "content": {
+      "original_subjects": [
+        {
+          "object_type": "house",
+          "parts": [
+            "roof",
+            "window",
+            "door"
+          ],
+          "colors": {
+            "roof": "green",
+            "frame": "red",
+            "window": "blue",
+            "door": "black"
+          },
+          "position": "left side"
+        },
+        {
+          "object_type": "sun",
+          "parts": [
+            "circle",
+            "rays"
+          ],
+          "colors": {
+            "circle": "yellow",
+            "rays": "yellow"
+          },
+          "position": "right side, above house"
+        }
+      ],
+      "candidate_subjects": [
+        {
+          "object_type": "house",
+          "parts": [
+            "roof",
+            "window",
+            "door"
+          ],
+          "colors": {
+            "roof": "blue",
+            "frame": "green",
+            "window": "purple",
+            "door": "black"
+          },
+          "position": "left side"
+        },
+        {
+          "object_type": "sun",
+          "parts": [
+            "circle",
+            "rays"
+          ],
+          "colors": {
+            "circle": "green",
+            "rays": "green"
+          },
+          "position": "right side, above house"
+        }
+      ],
+      "missing_subjects": [],
+      "added_subjects": [],
+      "layout_changed": false,
+      "content_preserved": true,
+      "reason": "All main objects (house and sun) are present with identical positions. The only changes are in the colors of parts, which do not constitute new subjects or layout changes."
+    },
+    "observation": {
+      "original_treatment": "Edges are defined by solid lines; inside shapes have filled colors (blue square, dark gray door, red outline).",
+      "candidate_treatment": "Edges are defined by solid lines; inside shapes have filled colors (purple square, dark gray door, green outline).",
+      "transformation": "colour_only",
+      "reason": "The outlines and internal shapes retain the same geometric forms and line styles. Only the color of the house's roof, walls, window, and sun has changed."
+    },
+    "style": {
+      "style_match": "match",
+      "reason": "The candidate treatment retains the same geometric forms and line styles as the original, while applying bold, non-natural saturated colors: purple for the square, green for the outline — consistent with Fauvist use of unexpected hues. The transformation is limited to color only, preserving flat color blocks and visible brushwork (implied by solid lines and filled shapes). This aligns with Fauvism’s emphasis on expressive, simplified forms and strong chromatic contrasts."
+    },
+    "expected": {
+      "content_preserved": true,
+      "style_match": "mismatch"
+    }
+  },
+  {
+    "case": "unrelated",
+    "source_report": "docs/experiments/2026-10-14/qwen3-instruct-split/unrelated.json",
+    "content": {
+      "original_subjects": [
+        {
+          "type": "house",
+          "components": [
+            "roof",
+            "wall",
+            "window",
+            "door"
+          ],
+          "position": "left side, lower half"
+        },
+        {
+          "type": "sun",
+          "components": [
+            "circle",
+            "rays"
+          ],
+          "position": "upper right"
+        }
+      ],
+      "candidate_subjects": [
+        {
+          "type": "circle",
+          "color": "red",
+          "position": "left side, upper half"
+        },
+        {
+          "type": "rectangle",
+          "color": "cyan",
+          "position": "right side, lower half"
+        }
+      ],
+      "missing_subjects": [
+        {
+          "type": "house",
+          "components": [
+            "roof",
+            "wall",
+            "window",
+            "door"
+          ]
+        },
+        {
+          "type": "sun",
+          "components": [
+            "circle",
+            "rays"
+          ]
+        }
+      ],
+      "added_subjects": [],
+      "layout_changed": true,
+      "content_preserved": false,
+      "reason": "The candidate panel lacks the original house and sun, and instead contains two unrelated shapes. This constitutes a significant content change."
+    },
+    "observation": {
+      "original_treatment": "Outline-based shapes with solid fills; edges defined by thin lines.",
+      "candidate_treatment": "Solid filled shapes without outlines; no edge definition.",
+      "transformation": "technique",
+      "reason": "The original uses outlined shapes with internal color fills, while the candidate removes all outlines and presents only solid-colored forms. This is a change in construction technique."
+    },
+    "style": {
+      "style_match": "match",
+      "reason": "The candidate treatment—solid filled shapes without outlines, presenting only flat color blocks—is consistent with Fauvist principles. Fauvism emphasizes simplified forms and bold, non-naturalistic saturated colors applied in flat areas, often without defined edges or traditional contours. The removal of outlines aligns with the expressive, loose brushwork and flattened composition characteristic of Fauvism. This transformation supports the requested style."
+    },
+    "expected": {
+      "content_preserved": false,
+      "style_match": "match"
+    }
+  },
+  {
+    "case": "move-sun",
+    "source_report": "docs/experiments/2026-10-14/qwen3-extra-controls/move-sun.json",
+    "content": {
+      "original_subjects": [
+        {
+          "type": "house",
+          "parts": [
+            "roof",
+            "window",
+            "door"
+          ],
+          "position": "left side, centered vertically"
+        },
+        {
+          "type": "sun",
+          "parts": [
+            "circle",
+            "rays"
+          ],
+          "position": "top right"
+        }
+      ],
+      "candidate_subjects": [
+        {
+          "type": "house",
+          "parts": [
+            "roof",
+            "window",
+            "door"
+          ],
+          "position": "left side, centered vertically"
+        },
+        {
+          "type": "sun",
+          "parts": [
+            "circle",
+            "rays"
+          ],
+          "position": "bottom right"
+        }
+      ],
+      "missing_subjects": [],
+      "added_subjects": [],
+      "layout_changed": true,
+      "content_preserved": false,
+      "reason": "The sun's position has changed from top right to bottom right, which is a significant layout change."
+    },
+    "observation": {
+      "original_treatment": "solid outlines with flat fills",
+      "candidate_treatment": "solid outlines with flat fills",
+      "transformation": "none",
+      "reason": "The shapes and their internal colors are identical in both panels; the only difference is that the candidate panel has a white background overlay on parts of the image, which does not alter the rendering of edges or inside of shapes."
+    },
+    "style": {
+      "style_match": "mismatch",
+      "reason": "The observed candidate treatment shows no change in rendering—same solid outlines, flat fills, and identical internal colors as the original. The only alteration is a white background overlay, which does not introduce bold non-natural saturated colors, complementary contrasts, simplified flat color blocks, or loose brushwork characteristic of Fauvism. Therefore, it fails to support the requested style."
+    },
+    "expected": {
+      "content_preserved": false,
+      "style_match": "mismatch"
+    }
+  },
+  {
+    "case": "remove-square",
+    "source_report": "docs/experiments/2026-10-14/qwen3-extra-controls/remove-square.json",
+    "content": {
+      "original_subjects": [
+        {
+          "type": "square",
+          "color": "red",
+          "position": "top left"
+        },
+        {
+          "type": "triangle",
+          "color": "green",
+          "position": "center top"
+        },
+        {
+          "type": "circle",
+          "color": "blue",
+          "position": "bottom left"
+        },
+        {
+          "type": "square",
+          "color": "purple",
+          "position": "center right, overlapping triangle and circle"
+        },
+        {
+          "type": "circle",
+          "color": "orange",
+          "position": "bottom right"
+        }
+      ],
+      "candidate_subjects": [
+        {
+          "type": "triangle",
+          "color": "green",
+          "position": "center top"
+        },
+        {
+          "type": "square",
+          "color": "purple",
+          "position": "center right, overlapping triangle and circle"
+        },
+        {
+          "type": "circle",
+          "color": "blue",
+          "position": "bottom left"
+        },
+        {
+          "type": "circle",
+          "color": "orange",
+          "position": "bottom right"
+        }
+      ],
+      "missing_subjects": [
+        {
+          "type": "square",
+          "color": "red",
+          "position": "top left"
+        }
+      ],
+      "added_subjects": [],
+      "layout_changed": true,
+      "content_preserved": false,
+      "reason": "The red square is missing in the candidate, which constitutes a significant change to the original content."
+    },
+    "observation": {
+      "original_treatment": "solid outlines with filled interiors",
+      "candidate_treatment": "solid outlines with filled interiors",
+      "transformation": "colour_only",
+      "reason": "The shapes in both panels have identical outlines and filled interiors; only the color of the red square has been changed to a lighter shade or removed, while other colors remain unchanged."
+    },
+    "style": {
+      "style_match": "mismatch",
+      "reason": "The observed transformation involves only a change in color (hue/lightness) of one shape while preserving solid outlines and filled interiors. Impressionism requires short brush strokes, visible paint texture, soft edges, and varied light within shapes — none of which are present in the candidate treatment. The rendering remains flat and marker-like, contradicting the requested style."
+    },
+    "expected": {
+      "content_preserved": false,
+      "style_match": "mismatch"
+    }
+  },
+  {
+    "case": "swap-square-circle",
+    "source_report": "docs/experiments/2026-10-14/qwen3-extra-controls/swap-square-circle.json",
+    "content": {
+      "original_subjects": [
+        {
+          "shape": "square",
+          "color": "red",
+          "position": "top-left"
+        },
+        {
+          "shape": "triangle",
+          "color": "green",
+          "position": "center-top"
+        },
+        {
+          "shape": "circle",
+          "color": "blue",
+          "position": "middle-left"
+        },
+        {
+          "shape": "square",
+          "color": "purple",
+          "position": "center-right"
+        },
+        {
+          "shape": "circle",
+          "color": "orange",
+          "position": "bottom-right"
+        }
+      ],
+      "candidate_subjects": [
+        {
+          "shape": "circle",
+          "color": "blue",
+          "position": "top-left"
+        },
+        {
+          "shape": "triangle",
+          "color": "green",
+          "position": "center-top"
+        },
+        {
+          "shape": "square",
+          "color": "red",
+          "position": "middle-right"
+        },
+        {
+          "shape": "square",
+          "color": "purple",
+          "position": "center-right"
+        },
+        {
+          "shape": "circle",
+          "color": "orange",
+          "position": "bottom-right"
+        }
+      ],
+      "missing_subjects": [
+        {
+          "shape": "square",
+          "color": "red",
+          "original_position": "top-left"
+        },
+        {
+          "shape": "circle",
+          "color": "blue",
+          "original_position": "middle-left"
+        }
+      ],
+      "added_subjects": [
+        {
+          "shape": "circle",
+          "color": "blue",
+          "candidate_position": "top-left"
+        },
+        {
+          "shape": "square",
+          "color": "red",
+          "candidate_position": "middle-right"
+        }
+      ],
+      "layout_changed": true,
+      "content_preserved": false,
+      "reason": "The red square and blue circle from the original are missing, while a new blue circle and red square appear in different positions. This constitutes significant layout change and content alteration."
+    },
+    "observation": {
+      "original_treatment": "solid outlines with transparent interiors",
+      "candidate_treatment": "solid outlines with transparent interiors",
+      "transformation": "colour_only",
+      "reason": "The shapes in both panels have identical outlines and transparency; only the color of one circle (blue) has been altered from a solid fill to a transparent interior, while another shape's color is changed. The construction remains unchanged."
+    },
+    "style": {
+      "style_match": "mismatch",
+      "reason": "The observed treatment preserves solid outlines and transparent interiors, which contradicts the requested Impressionist style that demands short broken brush strokes, visible paint texture, soft edges, and varied light within shapes. The transformation is limited to color changes without introducing any of the required visual features."
+    },
+    "expected": {
+      "content_preserved": false,
+      "style_match": "mismatch"
+    }
+  }
+]

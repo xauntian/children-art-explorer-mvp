@@ -1,0 +1,121 @@
+{
+  "_meta": {
+    "name": "broad-marker img2img style transfer",
+    "purpose": "把儿童粗马克笔原作的预处理图作为真实图像输入，生成指定画派风格的候选图",
+    "api_format": "ComfyUI /prompt API format (node_id -> {class_type, inputs})",
+    "note": "本文件为 ComfyUI API 格式工作流。运行前由 app/generator.py 注入 __checkpoint__ / __input_image__ / __positive_prompt__ / __negative_prompt__ / __width__ / __height__ / __seed__ / __steps__ / __cfg__ / __sampler_name__ / __scheduler__ / __denoise__ 等占位符；ControlNet 相关节点仅在 app.json 的 comfy.controlnet 非 null 时注入。节点类名与输入字段均已对照 ComfyUI 源码 nodes.py 核对。",
+    "verified_against": "ComfyUI 0.39.0 nodes.py (LoadImage, CheckpointLoaderSimple, CLIPTextEncode, ImageScale, VAEEncode, KSampler, VAEDecode, SaveImage, ControlNetLoader, ControlNetApplyAdvanced)"
+  },
+
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "__input_image__"
+    },
+    "_meta": { "title": "原始作品（预处理后的模型输入）" }
+  },
+
+  "2": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "__checkpoint__"
+    },
+    "_meta": { "title": "加载生成模型" }
+  },
+
+  "3": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": ["1", 0],
+      "upscale_method": "area",
+      "width": "__width__",
+      "height": "__height__",
+      "crop": "disabled"
+    },
+    "_meta": { "title": "缩放到生成尺寸（保持原图长宽比）" }
+  },
+
+  "4": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": ["3", 0],
+      "vae": ["2", 2]
+    },
+    "_meta": { "title": "原图编码为 latent（图生图起点）" }
+  },
+
+  "5": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "__positive_prompt__",
+      "clip": ["2", 1]
+    },
+    "_meta": { "title": "画派风格 Prompt" }
+  },
+
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "__negative_prompt__",
+      "clip": ["2", 1]
+    },
+    "_meta": { "title": "负向 Prompt" }
+  },
+
+  "7": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["2", 0],
+      "seed": "__seed__",
+      "steps": "__steps__",
+      "cfg": "__cfg__",
+      "sampler_name": "__sampler_name__",
+      "scheduler": "__scheduler__",
+      "positive": ["11", 0],
+      "negative": ["11", 1],
+      "latent_image": ["4", 0],
+      "denoise": "__denoise__"
+    },
+    "_meta": { "title": "采样（denoise < 1 且带 ControlNet 结构约束）" }
+  },
+
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["7", 0],
+      "vae": ["2", 2]
+    },
+    "_meta": { "title": "解码生成结果" }
+  },
+
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": ["8", 0],
+      "filename_prefix": "__filename_prefix__"
+    },
+    "_meta": { "title": "保存候选图" }
+  },
+
+  "10": {
+    "class_type": "ControlNetLoader",
+    "inputs": {
+      "control_net_name": "__controlnet__"
+    },
+    "_meta": { "title": "加载 ControlNet（结构约束，保持原作轮廓与构图）" }
+  },
+
+  "11": {
+    "class_type": "ControlNetApplyAdvanced",
+    "inputs": {
+      "positive": ["5", 0],
+      "negative": ["6", 0],
+      "control_net": ["10", 0],
+      "image": ["3", 0],
+      "strength": "__controlnet_strength__",
+      "start_percent": 0.0,
+      "end_percent": 0.8
+    },
+    "_meta": { "title": "把原作轮廓作为 ControlNet 条件" }
+  }
+}

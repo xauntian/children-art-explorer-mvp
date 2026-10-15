@@ -1,0 +1,29 @@
+Compare the original broad-marker artwork with the generated candidate image.
+The FIRST image is the ORIGINAL child drawing. The SECOND image is the CANDIDATE.
+Perform a coarse visual check against the requested style, not an art-historical
+authentication or a classification of the child's original artwork.
+
+Requested style: {style_name}
+Expected visible features: {style_features}
+Theme association guidance: {preservation_rules}
+
+Stylisation takes priority over preserving every element. Check whether the candidate
+clearly shows the requested visual style. Unchanged rendering or a mere hue change
+with the same marks is mismatch; insufficient style evidence is uncertain.
+The legacy field content_preserved means theme association, not exact object preservation.
+Return true when the original theme or some recognisable visual cues still connect the images.
+Omitting or merging elements, adding theme-related elements, changing counts, proportions,
+positions or composition, and repainting all materials and the background are allowed.
+Do not reject merely for those changes. Return false when the candidate is wholly unrelated,
+and null when the evidence is insufficient to decide the connection. Do not infer a connection
+merely because the candidate was requested or because both images are paintings.
+
+Reply with ONE JSON object and nothing else. Field types are strict:
+- style_match: a JSON string, exactly one of "match", "mismatch", "uncertain"
+- content_preserved: a JSON boolean true or false (bare, unquoted);
+  use null ONLY when it is genuinely impossible to decide
+- reason: a JSON string, one or two sentences describing the visible style evidence
+  and the theme or visual cues that connect the images, or why they do not connect
+
+Example of a valid reply:
+{"style_match": "match", "content_preserved": true, "reason": "Expressive painted forms and non-natural colour contrasts support the requested style. The garden theme remains recognisable despite omitted flowers and a rearranged composition."}

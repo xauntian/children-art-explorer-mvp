@@ -1,0 +1,22 @@
+# Children's Art Explorer MVP - backend and rule-test dependencies
+# Install from the repository root: python -m pip install -r requirements.txt
+# PyTorch/CUDA and custom-node dependencies belong to the separate ComfyUI environment.
+# See docs/DEPLOYMENT.md for the GPU-specific setup.
+
+numpy>=1.25.0
+opencv-python>=4.9
+requests>=2.31
+Pillow>=10.0
+
+# 测试
+pytest>=8.0
+ruff>=0.11
+
+# ---- 说明 ----
+# ComfyUI 自身依赖（transformers、safetensors、aiohttp、scipy、kornia、spandrel 等）
+# 由 ComfyUI 的 requirements.txt 管理，不要在这里重复固定版本，避免与 ComfyUI 冲突：
+#   git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git
+#   python -m pip install -r ComfyUI/requirements.txt
+#
+# 本地视觉模型通过 Ollama 管理，不在 Python 依赖内：
+#   ollama pull qwen3-vl:8b-instruct

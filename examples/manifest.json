@@ -1,0 +1,535 @@
+{
+  "version": "1.0.0",
+  "date": "2026-10-15",
+  "dataset_role": "development",
+  "training_performed": false,
+  "independent_acceptance": false,
+  "production_recipe": false,
+  "originals": [
+    {
+      "id": "01_garden",
+      "file": "samples/children_originals/01_garden.png",
+      "sha256": "30cba741d10ccea88291be54a7a70d1c5fe93d3fc987a4e443a78f7ac55ad227",
+      "size": [
+        736,
+        736
+      ]
+    },
+    {
+      "id": "02_family",
+      "file": "samples/children_originals/02_family.png",
+      "sha256": "5305ff0ec487c2a309c61748eb115f1baf1d8bee9cb97e7d8338a013021d8fcd",
+      "size": [
+        1080,
+        814
+      ]
+    },
+    {
+      "id": "03_hill_house",
+      "file": "samples/children_originals/03_hill_house.png",
+      "sha256": "f09b057c15c4aa625ef3e175f30d2a2637cef450bf33349fd347cc58e52f68ec",
+      "size": [
+        1000,
+        682
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "01_garden_fauvism",
+      "original": "samples/children_originals/01_garden.png",
+      "image": "examples/images/01_garden_fauvism.png",
+      "image_sha256": "2c5737a1c39901d81a69fb0e3d4909a6377c36a03084a224b480cfc23dff354c",
+      "input_preprocessed_sha256": "f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626",
+      "input_size": [
+        736,
+        736
+      ],
+      "output_size": [
+        1024,
+        1024
+      ],
+      "style": "fauvism",
+      "review_status": "development",
+      "visual_note": "一人及房屋、树、鸟、云、花与蝴蝶仍可辨认；蓝紫天空和橙绿地面增强冷暖对比，蜡笔颗粒已被连续油画笔触替换。",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+      "lora_strength": 1.0,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 4,
+        "cfg": 1.5,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 81401,
+      "elapsed_sec": 37.562,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "1",
+          "10",
+          "14",
+          "2",
+          "3",
+          "4",
+          "5",
+          "9"
+        ]
+      },
+      "positive_prompt": "Repaint the ENTIRE composition as a bold Fauvist oil painting. Fauvism uses intense non-natural colours, strong complementary warm-cool contrasts, broad masses of opaque paint, simplified expressive forms, flattened space and confident visible brushstrokes. Keep every subject and the overall arrangement from the reference, but completely reinterpret the colours, contours and surface instead of tracing the drawing. Use an expressive palette of turquoise, vermilion, violet, hot pink and yellow throughout the painting. No new subjects or scenery. No text, signature, watermark or border.",
+      "negative_prompt": "crayon texture, colored pencil hatching, marker scribbles, paper grain, traced outlines, added subjects, missing subjects, invented scenery, changed composition, text, signature, watermark, border",
+      "config": "examples/recipes/01_garden_fauvism.json",
+      "prompt_file": "examples/prompts/01_garden_fauvism.txt",
+      "workflow": "examples/recipes/01_garden_fauvism.workflow.json",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "01_garden_cubism",
+      "original": "samples/children_originals/01_garden.png",
+      "image": "examples/images/01_garden_cubism.png",
+      "image_sha256": "c87e69957758f2af7c8aadd6f179d2fc0a75ea295e9ccc2049b0b6472cc1f471",
+      "input_preprocessed_sha256": "f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626",
+      "input_size": [
+        736,
+        736
+      ],
+      "output_size": [
+        1024,
+        1024
+      ],
+      "style": "cubism",
+      "review_status": "retained",
+      "visual_note": "用户认可的立体主义版本，原有角面、色块和空间重组保持原样。",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 81411,
+      "elapsed_sec": 141.312,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "positive_prompt": "Repaint the ENTIRE image in the visual language of Cubism. forms are broken apart and reconstructed through interlocking angular planes, overlapping facets and simultaneous viewpoints; shifting contours and compressed depth connect the subjects and background into one fragmented pictorial space; ochre, warm grey, muted teal and deep blue articulate the geometry. Make the art movement unmistakable, prioritising its treatment of form, colour and brushwork over literal reproduction. use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style. Replace ALL source marks, outlines and paper texture with a coherent painted surface, freely redesigning contours and material. Output one painting with the source aspect ratio, no text, signature, watermark or border.",
+      "negative_prompt": "crayon texture, colored pencil hatching, traced scribbles, paper grain, text, words, letters, signature, watermark, gallery frame, decorative border, low quality",
+      "config": "examples/recipes/01_garden_cubism.json",
+      "prompt_file": "examples/prompts/01_garden_cubism.txt",
+      "workflow": "examples/recipes/01_garden_cubism.workflow.json",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "01_garden_impressionism",
+      "original": "samples/children_originals/01_garden.png",
+      "image": "examples/images/01_garden_impressionism.png",
+      "image_sha256": "0e0c4f1f0fcbfc9ab9dbe2e83ef0da209e43bf03958306657648f6e6953ea6dd",
+      "input_preprocessed_sha256": "f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626",
+      "input_size": [
+        736,
+        736
+      ],
+      "output_size": [
+        1024,
+        1024
+      ],
+      "style": "impressionism",
+      "review_status": "candidate",
+      "visual_note": "人物、房屋、树木与花地仍可辨认，共享暖日光与蓝紫投影。鸟、蝴蝶等小元素省略，人物变为长裙背影，位置关系重组。笔触比山坡参照细软，尚待评价。",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 81401,
+      "elapsed_sec": 123.156,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "1",
+          "10",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ]
+      },
+      "positive_prompt": "法国印象派的户外场景绘画：以自然日光、空气透视和开阔空间组织画面，暖亮部与蓝紫色阴影相互映衬，短而松散的色彩笔触构成形体，轮廓在光线中时隐时现。\n\n把输入画作为主题草稿，重新绘制为环境主导的中远景。前景、中景、远景构成连续空间。主要人物置于中景，每个人的完整身高约占画高的四分之一到三分之一，头身比例自然，面部仅为几笔色块。保留主要角色数量与关系；景物的尺度、位置、轮廓与细节可以重新组织，使所有主体融入同一片阳光和空气之中。以色面和受光关系塑造形体，完全替换原来的儿童画符号、轮廓和纸面材质。明亮而柔和的蓝天、浅金色日光、青绿与蓝紫色的色彩关系，笔触有方向和疏密变化，不强调雕刻般的纹理。保持原画宽高比，不出现文字、签名、水印或边框。",
+      "negative_prompt": "text, signature, watermark, frame, border, cartoon portrait, plastic doll, outlined clip art, embossed texture, repeating concentric grooves, muddy orange colour cast",
+      "config": "examples/recipes/01_garden_impressionism.json",
+      "prompt_file": "examples/prompts/01_garden_impressionism.txt",
+      "workflow": "examples/recipes/01_garden_impressionism.workflow.json",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "02_family_fauvism",
+      "original": "samples/children_originals/02_family.png",
+      "image": "examples/images/02_family_fauvism.png",
+      "image_sha256": "899e1a0fb5493d52647e81afc316769ee5dc80950078398571241a649bf59f15",
+      "input_preprocessed_sha256": "7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516",
+      "input_size": [
+        768,
+        576
+      ],
+      "output_size": [
+        1184,
+        888
+      ],
+      "style": "fauvism",
+      "review_status": "development",
+      "visual_note": "四人牵手与外高内矮的布局保留，人物形体重绘得更完整；背景与地面形成连续油画表面，部分衣服与肤色仍接近原图。",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+      "lora_strength": 1.0,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 4,
+        "cfg": 1.5,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 81402,
+      "elapsed_sec": 36.047,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "14",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "positive_prompt": "Repaint the ENTIRE composition as a bold Fauvist oil painting. Fauvism uses intense non-natural colours, strong complementary warm-cool contrasts, broad masses of opaque paint, simplified expressive forms, flattened space and confident visible brushstrokes. Keep every subject and the overall arrangement from the reference, but completely reinterpret the colours, contours and surface instead of tracing the drawing. Use an expressive palette of turquoise, vermilion, violet, hot pink and yellow throughout the painting. No new subjects or scenery. No text, signature, watermark or border.",
+      "negative_prompt": "crayon texture, colored pencil hatching, marker scribbles, paper grain, traced outlines, added subjects, missing subjects, invented scenery, changed composition, text, signature, watermark, border",
+      "config": "examples/recipes/02_family_fauvism.json",
+      "prompt_file": "examples/prompts/02_family_fauvism.txt",
+      "workflow": "examples/recipes/02_family_fauvism.workflow.json",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "02_family_cubism",
+      "original": "samples/children_originals/02_family.png",
+      "image": "examples/images/02_family_cubism.png",
+      "image_sha256": "0b73ba96e3a31adc9e4774cb762f409ec4d02bda4323526a90a72c4c85f9d4b1",
+      "input_preprocessed_sha256": "7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516",
+      "input_size": [
+        768,
+        576
+      ],
+      "output_size": [
+        1184,
+        888
+      ],
+      "style": "cubism",
+      "review_status": "retained",
+      "visual_note": "用户认可的立体主义版本，家庭关系与几何色面处理保持原样。",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 81402,
+      "elapsed_sec": 136.703,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "positive_prompt": "Repaint the ENTIRE image in the visual language of Cubism. forms are broken apart and reconstructed through interlocking angular planes, overlapping facets and simultaneous viewpoints; shifting contours and compressed depth connect the subjects and background into one fragmented pictorial space; ochre, warm grey, muted teal and deep blue articulate the geometry. Make the art movement unmistakable, prioritising its treatment of form, colour and brushwork over literal reproduction. use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style. Replace ALL source marks, outlines and paper texture with a coherent painted surface, freely redesigning contours and material. Output one painting with the source aspect ratio, no text, signature, watermark or border.",
+      "negative_prompt": "crayon texture, colored pencil hatching, traced scribbles, paper grain, text, words, letters, signature, watermark, gallery frame, decorative border, low quality",
+      "config": "examples/recipes/02_family_cubism.json",
+      "prompt_file": "examples/prompts/02_family_cubism.txt",
+      "workflow": "examples/recipes/02_family_cubism.workflow.json",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "02_family_impressionism",
+      "original": "samples/children_originals/02_family.png",
+      "image": "examples/images/02_family_impressionism.png",
+      "image_sha256": "ea91eda3992675196617e021d0a2cae9a56ef640c3fff2d114eb30d16d036ccf",
+      "input_preprocessed_sha256": "7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516",
+      "input_size": [
+        768,
+        576
+      ],
+      "output_size": [
+        1184,
+        888
+      ],
+      "style": "impressionism",
+      "review_status": "candidate",
+      "visual_note": "四人牵手关系保留，人物缩小至画高约三分之一，融入树影、草地与远景田野。改为背影视角，服装形体仍偏平滑；碎色笔触的强度尚不及山坡参照。",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 81403,
+      "elapsed_sec": 121.641,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "positive_prompt": "法国印象派的户外场景绘画：以自然日光、空气透视和开阔空间组织画面，暖亮部与蓝紫色阴影相互映衬，短而松散的色彩笔触构成形体，轮廓在光线中时隐时现。\n\n把输入画作为主题草稿，重新绘制为环境主导的中远景。前景、中景、远景构成连续空间。主要人物置于中景，每个人的完整身高约占画高的四分之一到三分之一，头身比例自然，面部仅为几笔色块。保留主要角色数量与关系；景物的尺度、位置、轮廓与细节可以重新组织，使所有主体融入同一片阳光和空气之中。以色面和受光关系塑造形体，完全替换原来的儿童画符号、轮廓和纸面材质。明亮而柔和的蓝天、浅金色日光、青绿与蓝紫色的色彩关系，笔触有方向和疏密变化，不强调雕刻般的纹理。保持原画宽高比，不出现文字、签名、水印或边框。",
+      "negative_prompt": "text, signature, watermark, frame, border, cartoon portrait, plastic doll, outlined clip art, embossed texture, repeating concentric grooves, muddy orange colour cast",
+      "config": "examples/recipes/02_family_impressionism.json",
+      "prompt_file": "examples/prompts/02_family_impressionism.txt",
+      "workflow": "examples/recipes/02_family_impressionism.workflow.json",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "03_hill_house_fauvism",
+      "original": "samples/children_originals/03_hill_house.png",
+      "image": "examples/images/03_hill_house_fauvism.png",
+      "image_sha256": "6688deb7773d3e8bde4e9755f780e50ea9fdd93cdd71afe93975a2fac82acd23",
+      "input_preprocessed_sha256": "c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57",
+      "input_size": [
+        768,
+        520
+      ],
+      "output_size": [
+        1248,
+        840
+      ],
+      "style": "fauvism",
+      "review_status": "development",
+      "visual_note": "四人及房屋、树、花的关系保留；蓝紫、亮粉天空与青绿云朵和山坡形成大幅配色变化，原纸面与颗粒线条改为覆盖性油画笔触。",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+      "lora_strength": 1.0,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 4,
+        "cfg": 1.5,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 81403,
+      "elapsed_sec": 36.046,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "14",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "positive_prompt": "Repaint the ENTIRE composition as a bold Fauvist oil painting. Fauvism uses intense non-natural colours, strong complementary warm-cool contrasts, broad masses of opaque paint, simplified expressive forms, flattened space and confident visible brushstrokes. Keep every subject and the overall arrangement from the reference, but completely reinterpret the colours, contours and surface instead of tracing the drawing. Use an expressive palette of turquoise, vermilion, violet, hot pink and yellow throughout the painting. No new subjects or scenery. No text, signature, watermark or border.",
+      "negative_prompt": "crayon texture, colored pencil hatching, marker scribbles, paper grain, traced outlines, added subjects, missing subjects, invented scenery, changed composition, text, signature, watermark, border",
+      "config": "examples/recipes/03_hill_house_fauvism.json",
+      "prompt_file": "examples/prompts/03_hill_house_fauvism.txt",
+      "workflow": "examples/recipes/03_hill_house_fauvism.workflow.json",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "03_hill_house_cubism",
+      "original": "samples/children_originals/03_hill_house.png",
+      "image": "examples/images/03_hill_house_cubism.png",
+      "image_sha256": "9c6ef62ed237810062574e0cf20ad73ea12f8ab50d1e80adcda5d5f1cead392e",
+      "input_preprocessed_sha256": "c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57",
+      "input_size": [
+        768,
+        520
+      ],
+      "output_size": [
+        1248,
+        840
+      ],
+      "style": "cubism",
+      "review_status": "retained",
+      "visual_note": "用户认可的立体主义版本，山坡与树冠的几何处理保持原样。",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 81403,
+      "elapsed_sec": 267.297,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "positive_prompt": "Repaint the ENTIRE image in the visual language of Cubism. forms are broken apart and reconstructed through interlocking angular planes, overlapping facets and simultaneous viewpoints; shifting contours and compressed depth connect the subjects and background into one fragmented pictorial space; ochre, warm grey, muted teal and deep blue articulate the geometry. Make the art movement unmistakable, prioritising its treatment of form, colour and brushwork over literal reproduction. use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style. Replace ALL source marks, outlines and paper texture with a coherent painted surface, freely redesigning contours and material. Output one painting with the source aspect ratio, no text, signature, watermark or border.",
+      "negative_prompt": "crayon texture, colored pencil hatching, traced scribbles, paper grain, text, words, letters, signature, watermark, gallery frame, decorative border, low quality",
+      "config": "examples/recipes/03_hill_house_cubism.json",
+      "prompt_file": "examples/prompts/03_hill_house_cubism.txt",
+      "workflow": "examples/recipes/03_hill_house_cubism.workflow.json",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "03_hill_house_impressionism",
+      "original": "samples/children_originals/03_hill_house.png",
+      "image": "examples/images/03_hill_house_impressionism.png",
+      "image_sha256": "04b53939298443e44d47a3caa4df42fbd06224d7890523de9317cf91e244a37c",
+      "input_preprocessed_sha256": "c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57",
+      "input_size": [
+        768,
+        520
+      ],
+      "output_size": [
+        1248,
+        840
+      ],
+      "style": "impressionism",
+      "review_status": "reference",
+      "visual_note": "用户指定的视觉参照，原图保持不变。以明亮日光、蓝紫阴影与方向碎笔触为对照；右下角已有疑似伪签名。",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 81403,
+      "elapsed_sec": 136.703,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "positive_prompt": "Repaint the ENTIRE image in the visual language of Impressionism. French Impressionism exemplified by Claude Monet and Camille Pissarro: fleeting natural light, luminous atmosphere and optical colour mixing; loose, short, irregular brushstrokes and adjacent touches of colour build the forms; warm sunlit highlights, cool blue-violet shadows and soft lost-and-found edges replace hard outlines. Make the art movement unmistakable, prioritising its treatment of form, colour and brushwork over literal reproduction. use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style. Replace ALL source marks, outlines and paper texture with a coherent painted surface, freely redesigning contours and material. Output one painting with the source aspect ratio, no text, signature, watermark or border.",
+      "negative_prompt": "crayon texture, colored pencil hatching, traced scribbles, paper grain, text, words, letters, signature, watermark, gallery frame, decorative border, low quality",
+      "config": "examples/recipes/03_hill_house_impressionism.json",
+      "prompt_file": "examples/prompts/03_hill_house_impressionism.txt",
+      "workflow": "examples/recipes/03_hill_house_impressionism.workflow.json",
+      "automatic_check": null,
+      "confirmed_output": false
+    }
+  ]
+}

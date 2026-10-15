@@ -1,0 +1,33 @@
+# pytest 配置
+#
+# 仅运行规则测试（不需要模型与服务）：
+#     python -m pytest tests/unit
+# 不指定路径的 python -m pytest 会同时收集真实服务集成测试。
+# 真实服务与模型的集成测试需显式指定：
+#     python -m pytest tests/integration -v -m integration
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+    "integration: 需要真实本地服务与模型权重的测试",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = [
+    "E501",   # 行长度由 formatter 处理
+    "B008",   # 允许函数调用作为默认值（pytest 夹具常见）
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E402"]
+"tools/*" = ["E402"]
+"conftest.py" = ["E402"]

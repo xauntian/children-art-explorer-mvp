@@ -1,0 +1,35 @@
+{
+  "source": "User-provided development artwork",
+  "author_age_verified": false,
+  "medium_verified": false,
+  "independent_acceptance_set": false,
+  "images": [
+    {
+      "id": "01_garden",
+      "file": "samples/children_originals/01_garden.png",
+      "sha256": "30cba741d10ccea88291be54a7a70d1c5fe93d3fc987a4e443a78f7ac55ad227",
+      "size": [
+        736,
+        736
+      ]
+    },
+    {
+      "id": "02_family",
+      "file": "samples/children_originals/02_family.png",
+      "sha256": "5305ff0ec487c2a309c61748eb115f1baf1d8bee9cb97e7d8338a013021d8fcd",
+      "size": [
+        1080,
+        814
+      ]
+    },
+    {
+      "id": "03_hill_house",
+      "file": "samples/children_originals/03_hill_house.png",
+      "sha256": "f09b057c15c4aa625ef3e175f30d2a2637cef450bf33349fd347cc58e52f68ec",
+      "size": [
+        1000,
+        682
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "config_version": "1.2.0",
+
+  "comfy": {
+    "base_url": "http://127.0.0.1:8188",
+    "workflow_path": "workflows/image_edit_qwen.json",
+    "checkpoint": "v1-5-pruned-emaonly-fp16.safetensors",
+    "controlnet": null,
+    "unet_name": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+    "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+    "vae_name": "qwen_image_vae.safetensors",
+    "shift": 3.0,
+    "lora_name": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+    "lora_strength": 1.0,
+    "connect_timeout_sec": 5,
+    "request_timeout_sec": 30,
+    "job_timeout_sec": 900,
+    "poll_interval_sec": 1.5
+  },
+
+  "checker": {
+    "base_url": "http://127.0.0.1:11434",
+    "api": "chat",
+    "model": "qwen3-vl:8b-instruct",
+    "mode": "comparison",
+    "two_stage_control": false,
+    "connect_timeout_sec": 5,
+    "request_timeout_sec": 300,
+    "keep_alive": "10m",
+    "options": {
+      "temperature": 0,
+      "seed": 0,
+      "num_predict": 768,
+      "num_ctx": 8192,
+      "num_gpu": 0
+    }
+  },
+
+  "capture": {
+    "device_index": 0,
+    "backend": "dshow",
+    "width": 1920,
+    "height": 1080,
+    "warmup_frames": 5,
+    "settle_ms": 300
+  },
+
+  "preprocess": {
+    "max_input_side": 768,
+    "frame_detect": true,
+    "border_trim_ratio": 0.06,
+    "crop_ratios": [0.0, 0.0, 0.0, 0.0],
+    "min_area_ratio": 0.15,
+    "max_area_ratio": 0.98,
+    "approx_epsilon_ratio": 0.02,
+    "output_format": "png"
+  },
+
+  "generation": {
+    "max_attempts": 2,
+    "base_seed": null,
+    "negative_prompt": "crayon texture, colored pencil hatching, traced scribbles, paper grain, text, words, letters, signature, watermark, gallery frame, decorative border, low quality",
+    "samplers": {
+      "fauvism": { "steps": 4, "cfg": 1.0, "denoise": 1.0, "sampler_name": "euler", "scheduler": "simple" },
+      "cubism": { "steps": 4, "cfg": 1.0, "denoise": 1.0, "sampler_name": "euler", "scheduler": "simple" },
+      "impressionism": { "steps": 4, "cfg": 1.0, "denoise": 1.0, "sampler_name": "euler", "scheduler": "simple" }
+    },
+    "controlnet_strength": 0.55,
+    "seed_stride": 1
+  },
+
+  "paths": {
+    "runs_dir": "runs",
+    "workflow_dir": "workflows",
+    "prompt_dir": "prompts",
+    "style_config": "configs/styles.json",
+    "temp_suffix": ".tmp"
+  },
+
+  "print": {
+    "print_enabled": false
+  },
+
+  "logging": {
+    "level": "INFO"
+  }
+}

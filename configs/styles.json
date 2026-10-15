@@ -1,0 +1,30 @@
+{
+  "config_version": "1.0.0",
+  "prompt_version": "1.6.0",
+  "styles": [
+    {
+      "id": "fauvism",
+      "name": "Fauvism",
+      "name_zh": "野兽派",
+      "enabled": true,
+      "style_features": "intense non-natural colours and strong complementary contrasts; broad masses of opaque paint, simplified expressive forms, flattened space and energetic brushstrokes; colour expresses emotion instead of copying natural appearances",
+      "preservation_rules": "use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style"
+    },
+    {
+      "id": "cubism",
+      "name": "Cubism",
+      "name_zh": "立体主义",
+      "enabled": true,
+      "style_features": "forms are broken apart and reconstructed through interlocking angular planes, overlapping facets and simultaneous viewpoints; shifting contours and compressed depth connect the subjects and background into one fragmented pictorial space; ochre, warm grey, muted teal and deep blue articulate the geometry",
+      "preservation_rules": "use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style"
+    },
+    {
+      "id": "impressionism",
+      "name": "Impressionism",
+      "name_zh": "印象派",
+      "enabled": true,
+      "style_features": "French Impressionism exemplified by Claude Monet and Camille Pissarro: fleeting natural light, luminous atmosphere and optical colour mixing; loose, short, irregular brushstrokes and adjacent touches of colour build the forms; warm sunlit highlights, cool blue-violet shadows and soft lost-and-found edges replace hard outlines",
+      "preservation_rules": "use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style"
+    }
+  ]
+}
