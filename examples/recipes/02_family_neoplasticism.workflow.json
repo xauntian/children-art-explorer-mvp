@@ -1,0 +1,224 @@
+{
+  "_meta": {
+    "name": "Extended art movements / full original artwork",
+    "purpose": "Single source artwork and reusable movement summary; no crop and no second image.",
+    "api_format": "ComfyUI /prompt API format (node_id -> {class_type, inputs})",
+    "note": "本工作流为 ComfyUI API 格式。运行前由 app/generator.py 注入 __unet_name__ / __text_encoder__ / __vae_name__ / __input_image__ / __positive_prompt__ / __negative_prompt__ / __seed__ / __steps__ / __cfg__ / __sampler_name__ / __scheduler__ / __shift__ / __filename_prefix__ 等占位符。",
+    "verified_against": "ComfyUI 0.39.0 + ComfyUI-GGUF; 节点类名与输入字段已对照 /object_info 与实际模板 image_qwen_image_edit_2509.json 核对",
+    "models": {
+      "diffusion_models": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoders": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf + Qwen2.5-VL-7B-Instruct-mmproj-BF16.gguf (unsloth/Qwen2.5-VL-7B-Instruct-GGUF)",
+      "vae": "qwen_image_vae.safetensors (Comfy-Org/Qwen-Image_ComfyUI)"
+    }
+  },
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "__input_image__"
+    },
+    "_meta": {
+      "title": "原始作品（预处理后的模型输入）"
+    }
+  },
+  "2": {
+    "class_type": "UnetLoaderGGUF",
+    "inputs": {
+      "unet_name": "__unet_name__"
+    },
+    "_meta": {
+      "title": "加载 Qwen-Image-Edit-2509（GGUF 量化扩散模型）"
+    }
+  },
+  "3": {
+    "class_type": "CLIPLoaderGGUF",
+    "inputs": {
+      "clip_name": "__text_encoder__",
+      "type": "qwen_image"
+    },
+    "_meta": {
+      "title": "加载 Qwen2.5-VL 文本/视觉编码器（Q4_K_M + mmproj）"
+    }
+  },
+  "4": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "__vae_name__"
+    },
+    "_meta": {
+      "title": "加载 Qwen Image VAE"
+    }
+  },
+  "5": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 768,
+      "height": 576,
+      "crop": "disabled"
+    },
+    "_meta": {
+      "title": "Full artwork, no center crop"
+    }
+  },
+  "6": {
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "inputs": {
+      "clip": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ],
+      "image1": [
+        "5",
+        0
+      ],
+      "prompt": "__positive_prompt__"
+    },
+    "_meta": {
+      "title": "正向条件：原图 + 画派重绘指令"
+    }
+  },
+  "7": {
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "inputs": {
+      "clip": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ],
+      "image1": [
+        "5",
+        0
+      ],
+      "prompt": "__negative_prompt__"
+    },
+    "_meta": {
+      "title": "负向条件"
+    }
+  },
+  "8": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "5",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "原图编码为 latent（编辑起点；denoise 保持 1.0）"
+    }
+  },
+  "9": {
+    "class_type": "ModelSamplingAuraFlow",
+    "inputs": {
+      "model": [
+        "14",
+        0
+      ],
+      "shift": "__shift__"
+    },
+    "_meta": {
+      "title": "Qwen Image 采样设置"
+    }
+  },
+  "10": {
+    "class_type": "CFGNorm",
+    "inputs": {
+      "model": [
+        "9",
+        0
+      ],
+      "strength": 1.0
+    },
+    "_meta": {
+      "title": "CFG 归一化"
+    }
+  },
+  "11": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "10",
+        0
+      ],
+      "seed": "__seed__",
+      "steps": "__steps__",
+      "cfg": "__cfg__",
+      "sampler_name": "__sampler_name__",
+      "scheduler": "__scheduler__",
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "8",
+        0
+      ],
+      "denoise": "__denoise__"
+    },
+    "_meta": {
+      "title": "采样（图像编辑模型按指令整体重绘）"
+    }
+  },
+  "12": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "解码生成结果"
+    }
+  },
+  "13": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "12",
+        0
+      ],
+      "filename_prefix": "__filename_prefix__"
+    },
+    "_meta": {
+      "title": "保存候选图"
+    }
+  },
+  "14": {
+    "class_type": "LoraLoaderModelOnly",
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "lora_name": "__lora_name__",
+      "strength_model": "__lora_strength__"
+    },
+    "_meta": {
+      "title": "加速 LoRA（Lightning 少步采样）；未配置 lora_name 时由 app/generator.py 自动旁路"
+    }
+  }
+}

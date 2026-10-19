@@ -1,45 +1,81 @@
-# 开发样例与复现配方
+# 八画派开发样例与复现
 
-本页收录三张原画与九张当前展示结果。图片不属于独立验收集，也不代表已完成真实儿童研究。所有样例的自动确认状态均为空；用户认可只针对指定图片。
+三张用户提供的原画、八种画派、二十四张选定结果。五种新增画派各三张，共十五张新候选，生成于 2026 年 10 月 19 日。原画都已用于调参，不是独立验收集；没有儿童参与者测试结果。
 
-[本地 HTML 画廊](gallery.html) · [完整参数与哈希](manifest.json) · [项目说明](../MVP_V1.0.md)
+- [完整 HTML 对照页](gallery.html)：每种画派分别并排展示原画与结果，含实际 Prompt、参数及状态。克隆后在浏览器打开；GitHub 文件页显示源码。
+- [参数与哈希清单](manifest.json)：全部二十四张结果的模型、种子、采样、耗时、图片和配方路径。
+- [实验画派注册表](styles.json) · [项目说明](../MVP_V1.0.md)
 
-## 对照
+下图为一家四口原画与五种新增方向的预览；完整八画派结果见下表及对照页。
 
-| 原画 | 野兽派 · 开发候选 | 立体主义 · 用户认可 | 印象派 |
+![五种新增画派预览](overview.jpg)
+
+## 原始输入
+
+| 花园 | 一家四口 | 山坡与房屋 |
+|---|---|---|
+| ![花园原画](../samples/children_originals/01_garden.png) | ![一家四口原画](../samples/children_originals/02_family.png) | ![山坡与房屋原画](../samples/children_originals/03_hill_house.png) |
+
+## 选定结果
+
+| 画派 | 花园 | 一家四口 | 山坡与房屋 |
 |---|---|---|---|
-| 花园<br><img src='../samples/children_originals/01_garden.png' width='220' alt='花园原画'> | <img src='images/01_garden_fauvism.png' width='220' alt='花园·野兽派'><br>开发候选 · 未验收 | <img src='images/01_garden_cubism.png' width='220' alt='花园·立体主义'><br>用户认可 · 保留 | <img src='images/01_garden_impressionism.png' width='220' alt='花园·印象派'><br>新候选 · 待评价 |
-| 一家四口<br><img src='../samples/children_originals/02_family.png' width='220' alt='一家四口原画'> | <img src='images/02_family_fauvism.png' width='220' alt='一家四口·野兽派'><br>开发候选 · 未验收 | <img src='images/02_family_cubism.png' width='220' alt='一家四口·立体主义'><br>用户认可 · 保留 | <img src='images/02_family_impressionism.png' width='220' alt='一家四口·印象派'><br>新候选 · 待评价 |
-| 山坡与房屋<br><img src='../samples/children_originals/03_hill_house.png' width='220' alt='山坡与房屋原画'> | <img src='images/03_hill_house_fauvism.png' width='220' alt='山坡与房屋·野兽派'><br>开发候选 · 未验收 | <img src='images/03_hill_house_cubism.png' width='220' alt='山坡与房屋·立体主义'><br>用户认可 · 保留 | <img src='images/03_hill_house_impressionism.png' width='220' alt='山坡与房屋·印象派'><br>用户认可 · 视觉参照 |
+| 野兽派 · 既有开发候选 | ![花园野兽派](images/01_garden_fauvism.png) | ![家庭野兽派](images/02_family_fauvism.png) | ![山坡野兽派](images/03_hill_house_fauvism.png) |
+| 立体主义 · 用户认可保留 | ![花园立体主义](images/01_garden_cubism.png) | ![家庭立体主义](images/02_family_cubism.png) | ![山坡立体主义](images/03_hill_house_cubism.png) |
+| 印象派 · 前两张待评价，山坡为认可参照 | ![花园印象派](images/01_garden_impressionism.png) | ![家庭印象派](images/02_family_impressionism.png) | ![山坡印象派](images/03_hill_house_impressionism.png) |
+| 后印象派（梵高方向）· 新候选 | ![花园后印象派](images/01_garden_post_impressionism.png) | ![家庭后印象派](images/02_family_post_impressionism.png) | ![山坡后印象派](images/03_hill_house_post_impressionism.png) |
+| 表现主义 · 新候选 | ![花园表现主义](images/01_garden_expressionism.png) | ![家庭表现主义](images/02_family_expressionism.png) | ![山坡表现主义](images/03_hill_house_expressionism.png) |
+| 超现实主义 · 新候选 | ![花园超现实主义](images/01_garden_surrealism.png) | ![家庭超现实主义](images/02_family_surrealism.png) | ![山坡超现实主义](images/03_hill_house_surrealism.png) |
+| 新造型主义 · 新候选 | ![花园新造型主义](images/01_garden_neoplasticism.png) | ![家庭新造型主义](images/02_family_neoplasticism.png) | ![山坡新造型主义](images/03_hill_house_neoplasticism.png) |
+| 波普艺术 · 新候选 | ![花园波普艺术](images/01_garden_pop_art.png) | ![家庭波普艺术](images/02_family_pop_art.png) | ![山坡波普艺术](images/03_hill_house_pop_art.png) |
 
-## 当前限制
+三张立体主义及山坡印象派保留原始 PNG、Prompt 和参数。野兽派仍为开发样例；花园与家庭印象派仍待评价，人物改为背影，笔触较山坡参照细软。山坡印象派右下角已有疑似伪签名，未修图或替换。
 
-- 野兽派为开发样例；尚未证明在新输入上有稳定的画派表现。
-- 立体主义三张与山坡印象派获用户认可；不等于系统自动确认或独立质量验收。
-- 两张新印象派共用同一份中文摘要，以环境、光照与空间为重点；人物变为背影，笔触比山坡参照细软，仍待用户评价。
-- 花园部分小元素省略，山坡参照保留右下角疑似伪签名；样例页不把这些限制隐藏为已解决。
-- 当前展示采用多种独立配方。野兽派样例的实际 Prompt 仍保留更强的内容约束；它是该图的复现记录，不替代全局“风格优先、主题关联”规则。
+## 新增方向与待评价问题
 
-## 复现一张新印象派候选
+| 画派 | 当前选择 | 共用 Prompt | 可见限制 |
+|---|---|---|---|
+| 后印象派 | 梵高式方向：有方向的短笔触、形体节奏、黄橙与蓝紫对比 | [查看](prompts/01_garden_post_impressionism.txt) | 不代表整个后印象派；花园场景重组，家庭与山坡仍有儿童画轮廓 |
+| 表现主义 | 扭曲形体、倾斜空间、粗重轮廓和情绪性笔触 | [查看](prompts/01_garden_expressionism.txt) | 本组偏焦虑和紧张，花园人物呈惊叫表情，山坡有火焰状笔触 |
+| 超现实主义 | 明亮云海、悬浮岛屿、尺度错位与不可能空间 | [查看](prompts/01_garden_surrealism.txt) | 造型偏圆润童话感，人物数量和位置可变化 |
+| 新造型主义 | 水平垂直结构、红黄蓝与黑白、非对称平衡 | [查看](prompts/01_garden_neoplasticism.txt) | 具象内容高度抽象，是否保留足够主题联系尚不明确 |
+| 波普艺术 | 四联图像重复、专色、粗轮廓和印刷质感 | [查看](prompts/01_garden_pop_art.txt) | 部分结果仍保留粗糙手绘线条与原画符号 |
 
-完成 [本地部署](../docs/DEPLOYMENT.md) 后，在仓库根目录的 PowerShell 中执行：
+每种新增画派跨三张原画严格共用正负 Prompt。原图为唯一图像条件，不先生成逐图 caption，不输入其他画作作参考。五种新增画派的十五张结果均待用户评价，没有自动粗检通过记录，也未完成独立质量验收；未作为已确认的 `output.png` 发布。
+
+## 配方
+
+| 用途 | steps / CFG | LoRA | 输出尺寸 |
+|---|---|---|---|
+| 应用默认三画派 | 4 / 1 | Lightning，强度 1 | 由生产工作流决定 |
+| 野兽派展示 | 4 / 1.5 | Lightning，强度 1 | 见单图清单 |
+| 立体主义、印象派展示 | 20 / 4 | 无 | 见单图清单 |
+| 本次新增五种画派 | 20 / 4 | 无 | 长边 768 px |
+
+展示均使用 Qwen-Image-Edit-2509-Q3_K_M.gguf、Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf 与 qwen_image_vae.safetensors；Euler / simple、shift 3、denoise 1。完整画作关闭画框检测、前处理裁边及模型侧裁切。记录的耗时包含上传、排队、等待和下载，不是纯采样速度。
+
+八画派注册表 `examples/styles.json` 仅供独立展示配方使用，Prompt 版本为 `extended-1.0`。生产仍使用 `configs/styles.json` 的三个画派及原有配置、Prompt 和检查器；候选不会自动加入正式随机池。
+
+## 本地复现
+
+在仓库根目录执行，先按 [部署说明](../docs/DEPLOYMENT.md) 准备 Python 环境、权重与本地 ComfyUI。以下命令只生成一张独立候选，不调用自动检查或确认，也不覆盖仓库选图。
 
 ```powershell
-$artPrompt = Get-Content -Raw -Encoding UTF8 examples/prompts/01_garden_impressionism.txt
+$example = (Get-Content -Raw -Encoding UTF8 examples/manifest.json | ConvertFrom-Json).results |
+    Where-Object { $_.id -eq '01_garden_post_impressionism' }
+$artPrompt = Get-Content -Raw -Encoding UTF8 $example.prompt_file
 .\.venv\Scripts\python.exe -m tools.bench_generate `
-  --photo samples/children_originals/01_garden.png --artwork --style impressionism `
-  --config examples/recipes/01_garden_impressionism.json `
-  --prompt $artPrompt --seed 81401 --out runs/bench
+    --photo $example.original --artwork --style $example.style `
+    --config $example.config --prompt $artPrompt --seed $example.seed `
+    --out runs/bench
 ```
 
-这会调用本地模型，只生成候选与参数记录，不调用自动检查器或生成已确认的 `output.png`。其他图使用 manifest 中对应的输入、配方、Prompt 和种子。每个配方包含实际采样、预处理、负面提示和模型侧尺寸；图像、正面 Prompt 与实际参数均已单独保存。
+替换 `id` 可复现其他选图。逐件串行运行，服务错误时停止。种子与配方不保证不同硬件、服务或缓存状态下逐像素一致。
 
-| 配方组 | 参数 | 状态 |
-|---|---|---|
-| 应用默认（`configs/app.json`） | 4 步、CFG 1、Lightning | 正常自动流程基线 |
-| 三张野兽派示例 | 4 步、CFG 1.5、Lightning | 开发候选 |
-| 立体主义与印象派示例 | 20 步、CFG 4、无 LoRA | 具体状态见图 |
+新增配方仅将路径改为仓库相对路径，并固定生成时实际使用的预处理与无 LoRA 设置。`config_sha256`、`workflow_sha256` 对应公开文件；`source_generation_*_sha256` 记录原始生成文件的哈希。图片按原始字节复制。
 
-所有样例使用 Euler/simple、shift 3、denoise 1。样例工作流不做模型侧中心裁切；应用默认工作流与样例不同。已保存图片是生成时的结果，不保证不同服务版本、硬件或缓存状态下逐像素一致。
+只重建 HTML 对照页（不调用模型）：
 
-原画只作为图像条件；复现不需要加入逐图对象描述。生成前请核对本机模型文件名与配置一致。
+```powershell
+.\.venv\Scripts\python.exe examples/build_gallery.py
+```

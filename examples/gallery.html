@@ -1,3 +1,1387 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Children’s Art Explorer · MVP V1.0</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f4f5ee;color:#24362b;font:15px/1.7 system-ui,"Microsoft YaHei",sans-serif}main{width:min(1700px,95%);margin:auto;padding:42px 0}h1{font-size:34px;line-height:1.2}header{max-width:1000px;margin-bottom:32px}header p{color:#58665c}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}section{background:white;border:1px solid #dbe1d8;border-radius:15px;padding:24px;margin:24px 0}h2{margin:0 0 18px}h3{font-size:15px;margin:0 0 12px}img{width:100%;height:320px;object-fit:contain;background:#f7f8f3;border-radius:6px}article{min-width:0}article p{font-size:13px}span{display:inline-block;background:#edf1e6;font-size:12px;padding:2px 8px;border-radius:5px;margin-top:10px}small{color:#687569}a{color:#366146;text-underline-offset:3px}@media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:580px){.grid{grid-template-columns:1fr}main{width:94%}section{padding:16px}h1{font-size:28px}}
-</style></head><body><main><header><p>CHILDREN’S ART EXPLORER · MVP V1.0</p><h1>同一个主题，不同的绘画语言</h1><p>三张开发输入、九张当前展示。立体主义三张与山坡印象派保留用户认可结果；野兽派和另外两张印象派仍是开发候选。三画派独立质量验收尚未完成。</p><p>样例使用独立生成配方，不等于应用默认配置或自动确认结果。两张新印象派人物改为背影、笔触较参照细软；山坡参照仍有疑似伪签名。</p><a href="README.md">样例与复现</a> · <a href="manifest.json">参数与哈希</a> · <a href="../MVP_V1.0.md">MVP 文档</a></header><section><h2>花园</h2><div class='grid'><article><h3>原画</h3><a href='../samples/children_originals/01_garden.png'><img src='../samples/children_originals/01_garden.png' alt='花园原画'></a><p>开发输入 · 原始文件</p></article><article><h3>野兽派</h3><a href='images/01_garden_fauvism.png'><img src='images/01_garden_fauvism.png' alt='花园·野兽派'></a><span>开发候选 · 未验收</span><p>一人及房屋、树、鸟、云、花与蝴蝶仍可辨认；蓝紫天空和橙绿地面增强冷暖对比，蜡笔颗粒已被连续油画笔触替换。</p><small>4 steps · CFG 1.5 · seed 81401 · Lightning</small><p><a href='recipes/01_garden_fauvism.json'>配方</a> · <a href='prompts/01_garden_fauvism.txt'>实际 Prompt</a></p></article><article><h3>立体主义</h3><a href='images/01_garden_cubism.png'><img src='images/01_garden_cubism.png' alt='花园·立体主义'></a><span>用户认可 · 保留</span><p>用户认可的立体主义版本，原有角面、色块和空间重组保持原样。</p><small>20 steps · CFG 4.0 · seed 81411 · 无 LoRA</small><p><a href='recipes/01_garden_cubism.json'>配方</a> · <a href='prompts/01_garden_cubism.txt'>实际 Prompt</a></p></article><article><h3>印象派</h3><a href='images/01_garden_impressionism.png'><img src='images/01_garden_impressionism.png' alt='花园·印象派'></a><span>新候选 · 待评价</span><p>人物、房屋、树木与花地仍可辨认，共享暖日光与蓝紫投影。鸟、蝴蝶等小元素省略，人物变为长裙背影，位置关系重组。笔触比山坡参照细软，尚待评价。</p><small>20 steps · CFG 4.0 · seed 81401 · 无 LoRA</small><p><a href='recipes/01_garden_impressionism.json'>配方</a> · <a href='prompts/01_garden_impressionism.txt'>实际 Prompt</a></p></article></div></section><section><h2>一家四口</h2><div class='grid'><article><h3>原画</h3><a href='../samples/children_originals/02_family.png'><img src='../samples/children_originals/02_family.png' alt='一家四口原画'></a><p>开发输入 · 原始文件</p></article><article><h3>野兽派</h3><a href='images/02_family_fauvism.png'><img src='images/02_family_fauvism.png' alt='一家四口·野兽派'></a><span>开发候选 · 未验收</span><p>四人牵手与外高内矮的布局保留，人物形体重绘得更完整；背景与地面形成连续油画表面，部分衣服与肤色仍接近原图。</p><small>4 steps · CFG 1.5 · seed 81402 · Lightning</small><p><a href='recipes/02_family_fauvism.json'>配方</a> · <a href='prompts/02_family_fauvism.txt'>实际 Prompt</a></p></article><article><h3>立体主义</h3><a href='images/02_family_cubism.png'><img src='images/02_family_cubism.png' alt='一家四口·立体主义'></a><span>用户认可 · 保留</span><p>用户认可的立体主义版本，家庭关系与几何色面处理保持原样。</p><small>20 steps · CFG 4.0 · seed 81402 · 无 LoRA</small><p><a href='recipes/02_family_cubism.json'>配方</a> · <a href='prompts/02_family_cubism.txt'>实际 Prompt</a></p></article><article><h3>印象派</h3><a href='images/02_family_impressionism.png'><img src='images/02_family_impressionism.png' alt='一家四口·印象派'></a><span>新候选 · 待评价</span><p>四人牵手关系保留，人物缩小至画高约三分之一，融入树影、草地与远景田野。改为背影视角，服装形体仍偏平滑；碎色笔触的强度尚不及山坡参照。</p><small>20 steps · CFG 4.0 · seed 81403 · 无 LoRA</small><p><a href='recipes/02_family_impressionism.json'>配方</a> · <a href='prompts/02_family_impressionism.txt'>实际 Prompt</a></p></article></div></section><section><h2>山坡与房屋</h2><div class='grid'><article><h3>原画</h3><a href='../samples/children_originals/03_hill_house.png'><img src='../samples/children_originals/03_hill_house.png' alt='山坡与房屋原画'></a><p>开发输入 · 原始文件</p></article><article><h3>野兽派</h3><a href='images/03_hill_house_fauvism.png'><img src='images/03_hill_house_fauvism.png' alt='山坡与房屋·野兽派'></a><span>开发候选 · 未验收</span><p>四人及房屋、树、花的关系保留；蓝紫、亮粉天空与青绿云朵和山坡形成大幅配色变化，原纸面与颗粒线条改为覆盖性油画笔触。</p><small>4 steps · CFG 1.5 · seed 81403 · Lightning</small><p><a href='recipes/03_hill_house_fauvism.json'>配方</a> · <a href='prompts/03_hill_house_fauvism.txt'>实际 Prompt</a></p></article><article><h3>立体主义</h3><a href='images/03_hill_house_cubism.png'><img src='images/03_hill_house_cubism.png' alt='山坡与房屋·立体主义'></a><span>用户认可 · 保留</span><p>用户认可的立体主义版本，山坡与树冠的几何处理保持原样。</p><small>20 steps · CFG 4.0 · seed 81403 · 无 LoRA</small><p><a href='recipes/03_hill_house_cubism.json'>配方</a> · <a href='prompts/03_hill_house_cubism.txt'>实际 Prompt</a></p></article><article><h3>印象派</h3><a href='images/03_hill_house_impressionism.png'><img src='images/03_hill_house_impressionism.png' alt='山坡与房屋·印象派'></a><span>用户认可 · 视觉参照</span><p>用户指定的视觉参照，原图保持不变。以明亮日光、蓝紫阴影与方向碎笔触为对照；右下角已有疑似伪签名。</p><small>20 steps · CFG 4.0 · seed 81403 · 无 LoRA</small><p><a href='recipes/03_hill_house_impressionism.json'>配方</a> · <a href='prompts/03_hill_house_impressionism.txt'>实际 Prompt</a></p></article></div></section><footer>所有图片为开发资料，不是独立验收集。模型权重与本机任务记录不包含在仓库内。</footer></main></body></html>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>八画派作品对照</title><style>
+:root{color-scheme:light;--ink:#23332c;--muted:#657369;--line:#dce3d9;--accent:#365d45}
+*{box-sizing:border-box}body{margin:0;background:#f4f5ef;color:var(--ink);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}
+main{width:min(1840px,calc(100% - 48px));margin:auto;padding:42px 0 28px}header{max-width:1120px;margin-bottom:26px}
+.eyebrow{font-size:12px;letter-spacing:.15em;color:var(--accent);font-weight:700;margin:0 0 10px}
+h1{font-size:clamp(28px,3.2vw,42px);line-height:1.2;margin:0 0 16px}h2{font-size:23px;margin:0 0 18px}h3{font-size:14px;margin:0 0 12px}h4{font-size:12px;margin:14px 0 5px}
+.intro{color:var(--muted);margin:10px 0}.counts,.links,nav{display:flex;gap:10px 18px;flex-wrap:wrap}.counts{margin:20px 0}.counts span{border:1px solid var(--line);border-radius:20px;font-size:13px;padding:4px 12px}
+.movement{scroll-margin-top:100px;margin-bottom:36px}.comparisons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.comparison-card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}.image-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}figure{margin:0;min-width:0}.image-pair h4{margin:0 0 8px;color:var(--muted)}
+.image-well{display:flex;height:clamp(170px,17vw,270px);padding:5px;background:#f8f9f5;border:1px solid #e6eae2;border-radius:8px;align-items:center;justify-content:center}.image-well img{display:block;width:100%;height:100%;object-fit:contain}.dimensions{font-size:11px;color:var(--muted);margin:0}.result-details{margin-top:16px}
+figcaption{padding-top:14px}.tag{display:inline-block;padding:3px 8px;font-size:12px;border-radius:4px;background:#eef1e9;color:var(--accent)}.tag.reference{background:#e8eef6;color:#3b587a}.tag.candidate{background:#fbf0d9;color:#7c5d20}
+.note{font-size:13px;margin:12px 0;overflow-wrap:anywhere}.check-status{font-size:12px;color:var(--muted);margin:10px 0}.links{font-size:12px;margin-top:12px}a{color:var(--accent);text-underline-offset:3px}a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+details{border-top:1px solid var(--line);margin-top:15px;padding-top:10px}summary{cursor:pointer;font-size:12px;font-weight:600}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.65 ui-monospace,Consolas,monospace;color:var(--muted);margin:6px 0 12px}footer{font-size:12px;color:var(--muted)}
+.movement-nav{position:sticky;top:0;z-index:2;background:rgba(244,245,239,.97);padding:14px 0;margin:0 0 28px;gap:8px}.movement-nav a{padding:5px 12px;border:1px solid var(--line);border-radius:18px;font-size:13px;text-decoration:none}.movement-nav a:hover{background:#e7eddf}.data-links{margin-top:16px}
+@media(max-width:1180px){.comparisons{grid-template-columns:1fr}.image-well{height:clamp(220px,35vw,420px)}.comparison-card{padding:22px}.image-pair{gap:20px}}
+@media(max-width:620px){main{width:calc(100% - 24px);padding-top:26px}.comparison-card{padding:16px}.image-pair{grid-template-columns:1fr;gap:20px}.image-well{height:min(78vw,390px)}h2{font-size:21px}.movement-nav{position:static}.movement{scroll-margin-top:12px}}
+</style></head><body><main>
+<header><p class="eyebrow">AMCC5000 · CHILDREN’S ART EXPLORER</p><h1>八画派作品对照</h1>
+<p class="intro">每个画派收录花园、一家四口、山坡与房屋三组原画与选定结果。点击图片可查看完整尺寸，展开卡片可查看实际 Prompt 与参数。</p>
+<p class="intro">立体主义三张为用户认可的保留结果，山坡印象派为指定视觉参照，其余二十张待评价。新增五种画派共十五张候选，未执行自动粗检或独立质量验收。</p>
+<p class="intro">当前页面为开发样例对照。三张原画均参与过调参；正式流程仍从野兽派、立体主义、印象派中随机选择，八画派实验配方不覆盖应用默认配置。</p>
+<div class="counts"><span>3 张原画</span><span>8 种画派</span><span>24 张结果</span><span>3 张认可保留</span><span>1 张风格参照</span><span>20 张待评价候选</span></div>
+<div class="links data-links"><a href="README.md">样例与复现</a><a href="manifest.json" target="_blank" rel="noopener">参数与哈希清单</a><a href="styles.json" target="_blank" rel="noopener">实验画派配置</a><a href="../MVP_V1.0.md">MVP 文档</a></div></header>
+<nav class="movement-nav" aria-label="八画派导航"><a href="#fauvism">野兽派</a> <a href="#cubism">立体主义</a> <a href="#impressionism">印象派</a> <a href="#post_impressionism">后印象派（梵高式方向）</a> <a href="#expressionism">表现主义</a> <a href="#surrealism">超现实主义</a> <a href="#neoplasticism">新造型主义</a> <a href="#pop_art">波普艺术</a></nav>
+<section class="movement" id="fauvism" aria-labelledby="title-fauvism">
+          <h2 id="title-fauvism">野兽派</h2><div class="comparisons"><article class="comparison-card" id="01_garden_fauvism">
+      <h3>花园</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/01_garden.png" alt="花园原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">736 × 736 px</p>
+            <div class="links"><a href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/01_garden_fauvism.png" target="_blank" rel="noopener" aria-label="查看野兽派原尺寸图片">
+            <img src="images/01_garden_fauvism.png" alt="花园 · 野兽派，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1024 × 1024 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">开发候选 · 待评价</span>
+      <p class="note">一人及房屋、树、鸟、云、花与蝴蝶仍可辨认；蓝紫天空和橙绿地面增强冷暖对比，蜡笔颗粒已被连续油画笔触替换。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/01_garden_fauvism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/01_garden_fauvism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/01_garden_fauvism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/01_garden_fauvism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the ENTIRE composition as a bold Fauvist oil painting. Fauvism uses intense non-natural colours, strong complementary warm-cool contrasts, broad masses of opaque paint, simplified expressive forms, flattened space and confident visible brushstrokes. Keep every subject and the overall arrangement from the reference, but completely reinterpret the colours, contours and surface instead of tracing the drawing. Use an expressive palette of turquoise, vermilion, violet, hot pink and yellow throughout the painting. No new subjects or scenery. No text, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>crayon texture, colored pencil hatching, marker scribbles, paper grain, traced outlines, added subjects, missing subjects, invented scenery, changed composition, text, signature, watermark, border</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: &quot;Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors&quot;,
+  &quot;lora_strength&quot;: 1.0,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 4,
+    &quot;cfg&quot;: 1.5,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 81401,
+  &quot;input_size&quot;: [
+    736,
+    736
+  ],
+  &quot;output_size&quot;: [
+    1024,
+    1024
+  ],
+  &quot;elapsed_sec&quot;: 37.562,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;2c5737a1c39901d81a69fb0e3d4909a6377c36a03084a224b480cfc23dff354c&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626&quot;,
+  &quot;config&quot;: &quot;examples/recipes/01_garden_fauvism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/01_garden_fauvism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/01_garden_fauvism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="02_family_fauvism">
+      <h3>一家四口</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/02_family.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/02_family.png" alt="一家四口原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1080 × 814 px</p>
+            <div class="links"><a href="../samples/children_originals/02_family.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/02_family_fauvism.png" target="_blank" rel="noopener" aria-label="查看野兽派原尺寸图片">
+            <img src="images/02_family_fauvism.png" alt="一家四口 · 野兽派，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1184 × 888 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">开发候选 · 待评价</span>
+      <p class="note">四人牵手与外高内矮的布局保留，人物形体重绘得更完整；背景与地面形成连续油画表面，部分衣服与肤色仍接近原图。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/02_family_fauvism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/02_family_fauvism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/02_family_fauvism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/02_family_fauvism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the ENTIRE composition as a bold Fauvist oil painting. Fauvism uses intense non-natural colours, strong complementary warm-cool contrasts, broad masses of opaque paint, simplified expressive forms, flattened space and confident visible brushstrokes. Keep every subject and the overall arrangement from the reference, but completely reinterpret the colours, contours and surface instead of tracing the drawing. Use an expressive palette of turquoise, vermilion, violet, hot pink and yellow throughout the painting. No new subjects or scenery. No text, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>crayon texture, colored pencil hatching, marker scribbles, paper grain, traced outlines, added subjects, missing subjects, invented scenery, changed composition, text, signature, watermark, border</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: &quot;Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors&quot;,
+  &quot;lora_strength&quot;: 1.0,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 4,
+    &quot;cfg&quot;: 1.5,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 81402,
+  &quot;input_size&quot;: [
+    768,
+    576
+  ],
+  &quot;output_size&quot;: [
+    1184,
+    888
+  ],
+  &quot;elapsed_sec&quot;: 36.047,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;899e1a0fb5493d52647e81afc316769ee5dc80950078398571241a649bf59f15&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516&quot;,
+  &quot;config&quot;: &quot;examples/recipes/02_family_fauvism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/02_family_fauvism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/02_family_fauvism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="03_hill_house_fauvism">
+      <h3>山坡与房屋</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/03_hill_house.png" alt="山坡与房屋原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1000 × 682 px</p>
+            <div class="links"><a href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/03_hill_house_fauvism.png" target="_blank" rel="noopener" aria-label="查看野兽派原尺寸图片">
+            <img src="images/03_hill_house_fauvism.png" alt="山坡与房屋 · 野兽派，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1248 × 840 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">开发候选 · 待评价</span>
+      <p class="note">四人及房屋、树、花的关系保留；蓝紫、亮粉天空与青绿云朵和山坡形成大幅配色变化，原纸面与颗粒线条改为覆盖性油画笔触。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/03_hill_house_fauvism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/03_hill_house_fauvism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/03_hill_house_fauvism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/03_hill_house_fauvism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the ENTIRE composition as a bold Fauvist oil painting. Fauvism uses intense non-natural colours, strong complementary warm-cool contrasts, broad masses of opaque paint, simplified expressive forms, flattened space and confident visible brushstrokes. Keep every subject and the overall arrangement from the reference, but completely reinterpret the colours, contours and surface instead of tracing the drawing. Use an expressive palette of turquoise, vermilion, violet, hot pink and yellow throughout the painting. No new subjects or scenery. No text, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>crayon texture, colored pencil hatching, marker scribbles, paper grain, traced outlines, added subjects, missing subjects, invented scenery, changed composition, text, signature, watermark, border</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: &quot;Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors&quot;,
+  &quot;lora_strength&quot;: 1.0,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 4,
+    &quot;cfg&quot;: 1.5,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 81403,
+  &quot;input_size&quot;: [
+    768,
+    520
+  ],
+  &quot;output_size&quot;: [
+    1248,
+    840
+  ],
+  &quot;elapsed_sec&quot;: 36.046,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;6688deb7773d3e8bde4e9755f780e50ea9fdd93cdd71afe93975a2fac82acd23&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57&quot;,
+  &quot;config&quot;: &quot;examples/recipes/03_hill_house_fauvism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/03_hill_house_fauvism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/03_hill_house_fauvism.workflow.json&quot;
+}</pre></details>
+    </div></article></div></section><section class="movement" id="cubism" aria-labelledby="title-cubism">
+          <h2 id="title-cubism">立体主义</h2><div class="comparisons"><article class="comparison-card" id="01_garden_cubism">
+      <h3>花园</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/01_garden.png" alt="花园原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">736 × 736 px</p>
+            <div class="links"><a href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/01_garden_cubism.png" target="_blank" rel="noopener" aria-label="查看立体主义原尺寸图片">
+            <img src="images/01_garden_cubism.png" alt="花园 · 立体主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1024 × 1024 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag retained">用户认可 · 保留</span>
+      <p class="note">用户认可的立体主义版本，原有角面、色块和空间重组保持原样。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/01_garden_cubism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/01_garden_cubism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/01_garden_cubism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/01_garden_cubism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the ENTIRE image in the visual language of Cubism. forms are broken apart and reconstructed through interlocking angular planes, overlapping facets and simultaneous viewpoints; shifting contours and compressed depth connect the subjects and background into one fragmented pictorial space; ochre, warm grey, muted teal and deep blue articulate the geometry. Make the art movement unmistakable, prioritising its treatment of form, colour and brushwork over literal reproduction. use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style. Replace ALL source marks, outlines and paper texture with a coherent painted surface, freely redesigning contours and material. Output one painting with the source aspect ratio, no text, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>crayon texture, colored pencil hatching, traced scribbles, paper grain, text, words, letters, signature, watermark, gallery frame, decorative border, low quality</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 81411,
+  &quot;input_size&quot;: [
+    736,
+    736
+  ],
+  &quot;output_size&quot;: [
+    1024,
+    1024
+  ],
+  &quot;elapsed_sec&quot;: 141.312,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;c87e69957758f2af7c8aadd6f179d2fc0a75ea295e9ccc2049b0b6472cc1f471&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626&quot;,
+  &quot;config&quot;: &quot;examples/recipes/01_garden_cubism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/01_garden_cubism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/01_garden_cubism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="02_family_cubism">
+      <h3>一家四口</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/02_family.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/02_family.png" alt="一家四口原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1080 × 814 px</p>
+            <div class="links"><a href="../samples/children_originals/02_family.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/02_family_cubism.png" target="_blank" rel="noopener" aria-label="查看立体主义原尺寸图片">
+            <img src="images/02_family_cubism.png" alt="一家四口 · 立体主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1184 × 888 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag retained">用户认可 · 保留</span>
+      <p class="note">用户认可的立体主义版本，家庭关系与几何色面处理保持原样。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/02_family_cubism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/02_family_cubism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/02_family_cubism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/02_family_cubism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the ENTIRE image in the visual language of Cubism. forms are broken apart and reconstructed through interlocking angular planes, overlapping facets and simultaneous viewpoints; shifting contours and compressed depth connect the subjects and background into one fragmented pictorial space; ochre, warm grey, muted teal and deep blue articulate the geometry. Make the art movement unmistakable, prioritising its treatment of form, colour and brushwork over literal reproduction. use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style. Replace ALL source marks, outlines and paper texture with a coherent painted surface, freely redesigning contours and material. Output one painting with the source aspect ratio, no text, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>crayon texture, colored pencil hatching, traced scribbles, paper grain, text, words, letters, signature, watermark, gallery frame, decorative border, low quality</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 81402,
+  &quot;input_size&quot;: [
+    768,
+    576
+  ],
+  &quot;output_size&quot;: [
+    1184,
+    888
+  ],
+  &quot;elapsed_sec&quot;: 136.703,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;0b73ba96e3a31adc9e4774cb762f409ec4d02bda4323526a90a72c4c85f9d4b1&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516&quot;,
+  &quot;config&quot;: &quot;examples/recipes/02_family_cubism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/02_family_cubism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/02_family_cubism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="03_hill_house_cubism">
+      <h3>山坡与房屋</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/03_hill_house.png" alt="山坡与房屋原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1000 × 682 px</p>
+            <div class="links"><a href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/03_hill_house_cubism.png" target="_blank" rel="noopener" aria-label="查看立体主义原尺寸图片">
+            <img src="images/03_hill_house_cubism.png" alt="山坡与房屋 · 立体主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1248 × 840 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag retained">用户认可 · 保留</span>
+      <p class="note">用户认可的立体主义版本，山坡与树冠的几何处理保持原样。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/03_hill_house_cubism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/03_hill_house_cubism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/03_hill_house_cubism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/03_hill_house_cubism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the ENTIRE image in the visual language of Cubism. forms are broken apart and reconstructed through interlocking angular planes, overlapping facets and simultaneous viewpoints; shifting contours and compressed depth connect the subjects and background into one fragmented pictorial space; ochre, warm grey, muted teal and deep blue articulate the geometry. Make the art movement unmistakable, prioritising its treatment of form, colour and brushwork over literal reproduction. use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style. Replace ALL source marks, outlines and paper texture with a coherent painted surface, freely redesigning contours and material. Output one painting with the source aspect ratio, no text, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>crayon texture, colored pencil hatching, traced scribbles, paper grain, text, words, letters, signature, watermark, gallery frame, decorative border, low quality</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 81403,
+  &quot;input_size&quot;: [
+    768,
+    520
+  ],
+  &quot;output_size&quot;: [
+    1248,
+    840
+  ],
+  &quot;elapsed_sec&quot;: 267.297,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;9c6ef62ed237810062574e0cf20ad73ea12f8ab50d1e80adcda5d5f1cead392e&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57&quot;,
+  &quot;config&quot;: &quot;examples/recipes/03_hill_house_cubism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/03_hill_house_cubism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/03_hill_house_cubism.workflow.json&quot;
+}</pre></details>
+    </div></article></div></section><section class="movement" id="impressionism" aria-labelledby="title-impressionism">
+          <h2 id="title-impressionism">印象派</h2><div class="comparisons"><article class="comparison-card" id="01_garden_impressionism">
+      <h3>花园</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/01_garden.png" alt="花园原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">736 × 736 px</p>
+            <div class="links"><a href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/01_garden_impressionism.png" target="_blank" rel="noopener" aria-label="查看印象派原尺寸图片">
+            <img src="images/01_garden_impressionism.png" alt="花园 · 印象派，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1024 × 1024 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">人物、房屋、树木与花地仍可辨认，共享暖日光与蓝紫投影。鸟、蝴蝶等小元素省略，人物变为长裙背影，位置关系重组。笔触比山坡参照细软，尚待评价。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/01_garden_impressionism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/01_garden_impressionism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/01_garden_impressionism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/01_garden_impressionism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>法国印象派的户外场景绘画：以自然日光、空气透视和开阔空间组织画面，暖亮部与蓝紫色阴影相互映衬，短而松散的色彩笔触构成形体，轮廓在光线中时隐时现。
+
+把输入画作为主题草稿，重新绘制为环境主导的中远景。前景、中景、远景构成连续空间。主要人物置于中景，每个人的完整身高约占画高的四分之一到三分之一，头身比例自然，面部仅为几笔色块。保留主要角色数量与关系；景物的尺度、位置、轮廓与细节可以重新组织，使所有主体融入同一片阳光和空气之中。以色面和受光关系塑造形体，完全替换原来的儿童画符号、轮廓和纸面材质。明亮而柔和的蓝天、浅金色日光、青绿与蓝紫色的色彩关系，笔触有方向和疏密变化，不强调雕刻般的纹理。保持原画宽高比，不出现文字、签名、水印或边框。</pre><h4>负向 Prompt</h4>
+        <pre>text, signature, watermark, frame, border, cartoon portrait, plastic doll, outlined clip art, embossed texture, repeating concentric grooves, muddy orange colour cast</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 81401,
+  &quot;input_size&quot;: [
+    736,
+    736
+  ],
+  &quot;output_size&quot;: [
+    1024,
+    1024
+  ],
+  &quot;elapsed_sec&quot;: 123.156,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;0e0c4f1f0fcbfc9ab9dbe2e83ef0da209e43bf03958306657648f6e6953ea6dd&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626&quot;,
+  &quot;config&quot;: &quot;examples/recipes/01_garden_impressionism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/01_garden_impressionism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/01_garden_impressionism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="02_family_impressionism">
+      <h3>一家四口</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/02_family.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/02_family.png" alt="一家四口原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1080 × 814 px</p>
+            <div class="links"><a href="../samples/children_originals/02_family.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/02_family_impressionism.png" target="_blank" rel="noopener" aria-label="查看印象派原尺寸图片">
+            <img src="images/02_family_impressionism.png" alt="一家四口 · 印象派，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1184 × 888 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">四人牵手关系保留，人物缩小至画高约三分之一，融入树影、草地与远景田野。改为背影视角，服装形体仍偏平滑；碎色笔触的强度尚不及山坡参照。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/02_family_impressionism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/02_family_impressionism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/02_family_impressionism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/02_family_impressionism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>法国印象派的户外场景绘画：以自然日光、空气透视和开阔空间组织画面，暖亮部与蓝紫色阴影相互映衬，短而松散的色彩笔触构成形体，轮廓在光线中时隐时现。
+
+把输入画作为主题草稿，重新绘制为环境主导的中远景。前景、中景、远景构成连续空间。主要人物置于中景，每个人的完整身高约占画高的四分之一到三分之一，头身比例自然，面部仅为几笔色块。保留主要角色数量与关系；景物的尺度、位置、轮廓与细节可以重新组织，使所有主体融入同一片阳光和空气之中。以色面和受光关系塑造形体，完全替换原来的儿童画符号、轮廓和纸面材质。明亮而柔和的蓝天、浅金色日光、青绿与蓝紫色的色彩关系，笔触有方向和疏密变化，不强调雕刻般的纹理。保持原画宽高比，不出现文字、签名、水印或边框。</pre><h4>负向 Prompt</h4>
+        <pre>text, signature, watermark, frame, border, cartoon portrait, plastic doll, outlined clip art, embossed texture, repeating concentric grooves, muddy orange colour cast</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 81403,
+  &quot;input_size&quot;: [
+    768,
+    576
+  ],
+  &quot;output_size&quot;: [
+    1184,
+    888
+  ],
+  &quot;elapsed_sec&quot;: 121.641,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;ea91eda3992675196617e021d0a2cae9a56ef640c3fff2d114eb30d16d036ccf&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516&quot;,
+  &quot;config&quot;: &quot;examples/recipes/02_family_impressionism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/02_family_impressionism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/02_family_impressionism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="03_hill_house_impressionism">
+      <h3>山坡与房屋</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/03_hill_house.png" alt="山坡与房屋原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1000 × 682 px</p>
+            <div class="links"><a href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/03_hill_house_impressionism.png" target="_blank" rel="noopener" aria-label="查看印象派原尺寸图片">
+            <img src="images/03_hill_house_impressionism.png" alt="山坡与房屋 · 印象派，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1248 × 840 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag reference">用户认可 · 风格参照</span>
+      <p class="note">用户指定的视觉参照，原图保持不变。以明亮日光、蓝紫阴影与方向碎笔触为对照；右下角已有疑似伪签名。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/03_hill_house_impressionism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/03_hill_house_impressionism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/03_hill_house_impressionism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/03_hill_house_impressionism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the ENTIRE image in the visual language of Impressionism. French Impressionism exemplified by Claude Monet and Camille Pissarro: fleeting natural light, luminous atmosphere and optical colour mixing; loose, short, irregular brushstrokes and adjacent touches of colour build the forms; warm sunlit highlights, cool blue-violet shadows and soft lost-and-found edges replace hard outlines. Make the art movement unmistakable, prioritising its treatment of form, colour and brushwork over literal reproduction. use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style. Replace ALL source marks, outlines and paper texture with a coherent painted surface, freely redesigning contours and material. Output one painting with the source aspect ratio, no text, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>crayon texture, colored pencil hatching, traced scribbles, paper grain, text, words, letters, signature, watermark, gallery frame, decorative border, low quality</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 81403,
+  &quot;input_size&quot;: [
+    768,
+    520
+  ],
+  &quot;output_size&quot;: [
+    1248,
+    840
+  ],
+  &quot;elapsed_sec&quot;: 136.703,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;04b53939298443e44d47a3caa4df42fbd06224d7890523de9317cf91e244a37c&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57&quot;,
+  &quot;config&quot;: &quot;examples/recipes/03_hill_house_impressionism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/03_hill_house_impressionism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/03_hill_house_impressionism.workflow.json&quot;
+}</pre></details>
+    </div></article></div></section><section class="movement" id="post_impressionism" aria-labelledby="title-post_impressionism">
+          <h2 id="title-post_impressionism">后印象派（梵高式方向）</h2><div class="comparisons"><article class="comparison-card" id="01_garden_post_impressionism">
+      <h3>花园</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/01_garden.png" alt="花园原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">736 × 736 px</p>
+            <div class="links"><a href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/01_garden_post_impressionism.png" target="_blank" rel="noopener" aria-label="查看后印象派（梵高式方向）原尺寸图片">
+            <img src="images/01_garden_post_impressionism.png" alt="花园 · 后印象派（梵高式方向），完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 768 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">黄橙田野与深蓝人物由方向笔触和回旋色带构成；人物、植物与日光保留户外主题，但房屋、鸟等线索省略，场景与人数被重新组织。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/01_garden_post_impressionism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/01_garden_post_impressionism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/01_garden_post_impressionism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/01_garden_post_impressionism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the entire source using one selected Van Gogh-inspired direction within Post-Impressionism. Build the image from rhythmic, directional dashes of opaque paint that follow the movement and volume of the forms. Use saturated yellow-orange light against blue-violet shadows, expressive contour changes and energetic colour contrasts. Distinct marks should construct substantial painted forms and create a unified visual rhythm, with varied stroke direction and density across the surface. Let the energy arise from the relationships between shapes and marks rather than uniform decorative spirals.
+
+Use the supplied original as the only visual input and thematic starting point. Retain its broad subject, relationships or a few recognisable cues; freely simplify, merge, omit or add related elements and reorganise scale, position and composition. Replace all original linework, filling marks and paper texture with fresh painted structure. Keep the source aspect ratio and extend the painting to every edge. Output one complete painting without text, letters, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196001,
+  &quot;input_size&quot;: [
+    736,
+    736
+  ],
+  &quot;output_size&quot;: [
+    768,
+    768
+  ],
+  &quot;elapsed_sec&quot;: 129.156,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;7076bcb15bbd4e05c15e3b32f15aa85dd7fb4c1302f39a3a2918c506ca78f612&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626&quot;,
+  &quot;config&quot;: &quot;examples/recipes/01_garden_post_impressionism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/01_garden_post_impressionism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/01_garden_post_impressionism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="02_family_post_impressionism">
+      <h3>一家四口</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/02_family.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/02_family.png" alt="一家四口原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1080 × 814 px</p>
+            <div class="links"><a href="../samples/children_originals/02_family.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/02_family_post_impressionism.png" target="_blank" rel="noopener" aria-label="查看后印象派（梵高式方向）原尺寸图片">
+            <img src="images/02_family_post_impressionism.png" alt="一家四口 · 后印象派（梵高式方向），完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 576 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">蓝黄旋转笔触覆盖背景、草地与衣物，四人牵手和笑脸造型保留；轮廓与密集排线仍偏儿童画，笔触塑形的充分程度待评价。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/02_family_post_impressionism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/02_family_post_impressionism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/02_family_post_impressionism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/02_family_post_impressionism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the entire source using one selected Van Gogh-inspired direction within Post-Impressionism. Build the image from rhythmic, directional dashes of opaque paint that follow the movement and volume of the forms. Use saturated yellow-orange light against blue-violet shadows, expressive contour changes and energetic colour contrasts. Distinct marks should construct substantial painted forms and create a unified visual rhythm, with varied stroke direction and density across the surface. Let the energy arise from the relationships between shapes and marks rather than uniform decorative spirals.
+
+Use the supplied original as the only visual input and thematic starting point. Retain its broad subject, relationships or a few recognisable cues; freely simplify, merge, omit or add related elements and reorganise scale, position and composition. Replace all original linework, filling marks and paper texture with fresh painted structure. Keep the source aspect ratio and extend the painting to every edge. Output one complete painting without text, letters, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196002,
+  &quot;input_size&quot;: [
+    768,
+    576
+  ],
+  &quot;output_size&quot;: [
+    768,
+    576
+  ],
+  &quot;elapsed_sec&quot;: 120.156,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;67039eca7358d1c73a22190b801826311ee3ef6aafccd044aaa0de10bd035250&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516&quot;,
+  &quot;config&quot;: &quot;examples/recipes/02_family_post_impressionism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/02_family_post_impressionism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/02_family_post_impressionism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="03_hill_house_post_impressionism">
+      <h3>山坡与房屋</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/03_hill_house.png" alt="山坡与房屋原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1000 × 682 px</p>
+            <div class="links"><a href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/03_hill_house_post_impressionism.png" target="_blank" rel="noopener" aria-label="查看后印象派（梵高式方向）原尺寸图片">
+            <img src="images/03_hill_house_post_impressionism.png" alt="山坡与房屋 · 后印象派（梵高式方向），完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 520 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">细密方向笔触覆盖天空、树冠与山坡，房屋、四人、树和太阳仍可辨认；轮廓与笑脸符号延续原画，绘画造型仍偏稚拙。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/03_hill_house_post_impressionism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/03_hill_house_post_impressionism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/03_hill_house_post_impressionism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/03_hill_house_post_impressionism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the entire source using one selected Van Gogh-inspired direction within Post-Impressionism. Build the image from rhythmic, directional dashes of opaque paint that follow the movement and volume of the forms. Use saturated yellow-orange light against blue-violet shadows, expressive contour changes and energetic colour contrasts. Distinct marks should construct substantial painted forms and create a unified visual rhythm, with varied stroke direction and density across the surface. Let the energy arise from the relationships between shapes and marks rather than uniform decorative spirals.
+
+Use the supplied original as the only visual input and thematic starting point. Retain its broad subject, relationships or a few recognisable cues; freely simplify, merge, omit or add related elements and reorganise scale, position and composition. Replace all original linework, filling marks and paper texture with fresh painted structure. Keep the source aspect ratio and extend the painting to every edge. Output one complete painting without text, letters, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196003,
+  &quot;input_size&quot;: [
+    768,
+    520
+  ],
+  &quot;output_size&quot;: [
+    768,
+    520
+  ],
+  &quot;elapsed_sec&quot;: 118.657,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;a7526b47ce871ec62c7fcf9b8a141fdf528714633a59c5c7ed131d688bae8347&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57&quot;,
+  &quot;config&quot;: &quot;examples/recipes/03_hill_house_post_impressionism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/03_hill_house_post_impressionism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/03_hill_house_post_impressionism.workflow.json&quot;
+}</pre></details>
+    </div></article></div></section><section class="movement" id="expressionism" aria-labelledby="title-expressionism">
+          <h2 id="title-expressionism">表现主义</h2><div class="comparisons"><article class="comparison-card" id="01_garden_expressionism">
+      <h3>花园</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/01_garden.png" alt="花园原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">736 × 736 px</p>
+            <div class="links"><a href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/01_garden_expressionism.png" target="_blank" rel="noopener" aria-label="查看表现主义原尺寸图片">
+            <img src="images/01_garden_expressionism.png" alt="花园 · 表现主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 768 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">房屋、树木、鸟、花与蝴蝶仍可辨认，粗重黑线、扭曲形体和暗色旋涡天空重绘花园；中央人物变为张口惊叫的成人面貌，整体明显偏焦虑压抑。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/01_garden_expressionism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/01_garden_expressionism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/01_garden_expressionism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/01_garden_expressionism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the entire source as an Expressionist painting in which emotion changes the construction of the image. Use deliberately distorted contours, tense angular forms, compressed or unstable perspective and urgent, rough brushwork. Dissonant non-natural colours, dark accents and sharp light-dark contrasts should create one strong psychological atmosphere. Let the shapes lean, stretch and press against each other, with expressive differences in scale and an active rhythm of painted marks. Make the emotional deformation and spatial tension visible throughout the picture; colour changes alone are insufficient.
+
+Use the supplied original as the only visual input and thematic starting point. Keep its broad subject, central relationship or a few recognisable cues while freely simplifying, merging, omitting or adding related forms and changing viewpoint or composition. Rebuild all subjects and surroundings in the same expressive language. Replace the source outlines, filling marks and paper texture with a coherent painted surface. Keep the source aspect ratio. Output one complete painting without text, letters, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196011,
+  &quot;input_size&quot;: [
+    736,
+    736
+  ],
+  &quot;output_size&quot;: [
+    768,
+    768
+  ],
+  &quot;elapsed_sec&quot;: 129.172,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;289091e8b6131447acdb589ae24c49f8e6f5bba6286ebe459c0c026f0d7a03d2&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626&quot;,
+  &quot;config&quot;: &quot;examples/recipes/01_garden_expressionism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/01_garden_expressionism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/01_garden_expressionism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="02_family_expressionism">
+      <h3>一家四口</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/02_family.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/02_family.png" alt="一家四口原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1080 × 814 px</p>
+            <div class="links"><a href="../samples/children_originals/02_family.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/02_family_expressionism.png" target="_blank" rel="noopener" aria-label="查看表现主义原尺寸图片">
+            <img src="images/02_family_expressionism.png" alt="一家四口 · 表现主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 576 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">一家四口牵手、太阳与花草的主题保留，粗黑轮廓、尖角面容和暗蓝红色笔触强化表现性；儿童保持笑脸，右侧成人呈明显愁苦表情。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/02_family_expressionism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/02_family_expressionism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/02_family_expressionism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/02_family_expressionism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the entire source as an Expressionist painting in which emotion changes the construction of the image. Use deliberately distorted contours, tense angular forms, compressed or unstable perspective and urgent, rough brushwork. Dissonant non-natural colours, dark accents and sharp light-dark contrasts should create one strong psychological atmosphere. Let the shapes lean, stretch and press against each other, with expressive differences in scale and an active rhythm of painted marks. Make the emotional deformation and spatial tension visible throughout the picture; colour changes alone are insufficient.
+
+Use the supplied original as the only visual input and thematic starting point. Keep its broad subject, central relationship or a few recognisable cues while freely simplifying, merging, omitting or adding related forms and changing viewpoint or composition. Rebuild all subjects and surroundings in the same expressive language. Replace the source outlines, filling marks and paper texture with a coherent painted surface. Keep the source aspect ratio. Output one complete painting without text, letters, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196012,
+  &quot;input_size&quot;: [
+    768,
+    576
+  ],
+  &quot;output_size&quot;: [
+    768,
+    576
+  ],
+  &quot;elapsed_sec&quot;: 120.156,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;23420c194c2caf1a80b7e020904ecb9a5ea54f8bb44f586f903c51d316016a95&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516&quot;,
+  &quot;config&quot;: &quot;examples/recipes/02_family_expressionism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/02_family_expressionism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/02_family_expressionism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="03_hill_house_expressionism">
+      <h3>山坡与房屋</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/03_hill_house.png" alt="山坡与房屋原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1000 × 682 px</p>
+            <div class="links"><a href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/03_hill_house_expressionism.png" target="_blank" rel="noopener" aria-label="查看表现主义原尺寸图片">
+            <img src="images/03_hill_house_expressionism.png" alt="山坡与房屋 · 表现主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 520 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">山坡、倾斜房屋、树木、四个人物和笑脸太阳仍可辨认，弯曲山体与强烈黑红笔触重塑空间；橙红色尖锐笔触形成近似火焰的紧张氛围。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/03_hill_house_expressionism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/03_hill_house_expressionism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/03_hill_house_expressionism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/03_hill_house_expressionism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Repaint the entire source as an Expressionist painting in which emotion changes the construction of the image. Use deliberately distorted contours, tense angular forms, compressed or unstable perspective and urgent, rough brushwork. Dissonant non-natural colours, dark accents and sharp light-dark contrasts should create one strong psychological atmosphere. Let the shapes lean, stretch and press against each other, with expressive differences in scale and an active rhythm of painted marks. Make the emotional deformation and spatial tension visible throughout the picture; colour changes alone are insufficient.
+
+Use the supplied original as the only visual input and thematic starting point. Keep its broad subject, central relationship or a few recognisable cues while freely simplifying, merging, omitting or adding related forms and changing viewpoint or composition. Rebuild all subjects and surroundings in the same expressive language. Replace the source outlines, filling marks and paper texture with a coherent painted surface. Keep the source aspect ratio. Output one complete painting without text, letters, signature, watermark or border.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196013,
+  &quot;input_size&quot;: [
+    768,
+    520
+  ],
+  &quot;output_size&quot;: [
+    768,
+    520
+  ],
+  &quot;elapsed_sec&quot;: 118.656,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;e87f0b48ffc1db106870d66c861e61ba7450e6b02e2d9260bfbf544829f4fbc4&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57&quot;,
+  &quot;config&quot;: &quot;examples/recipes/03_hill_house_expressionism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/03_hill_house_expressionism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/03_hill_house_expressionism.workflow.json&quot;
+}</pre></details>
+    </div></article></div></section><section class="movement" id="surrealism" aria-labelledby="title-surrealism">
+          <h2 id="title-surrealism">超现实主义</h2><div class="comparisons"><article class="comparison-card" id="01_garden_surrealism">
+      <h3>花园</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/01_garden.png" alt="花园原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">736 × 736 px</p>
+            <div class="links"><a href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/01_garden_surrealism.png" target="_blank" rel="noopener" aria-label="查看超现实主义原尺寸图片">
+            <img src="images/01_garden_surrealism.png" alt="花园 · 超现实主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 768 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">人物、房屋、树木与花朵悬浮在连续云海中，放大的鸟与分离岛屿造成尺度和重力错位；主要原作线索仍可辨认，形体偏圆润的童话绘画。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/01_garden_surrealism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/01_garden_surrealism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/01_garden_surrealism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/01_garden_surrealism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Completely repaint the ENTIRE source image as a luminous Surrealist oil painting. Reconstruct its theme inside a visibly impossible dream space: the whole landscape is lifted into separate floating islands above a continuous sea of clouds, while familiar forms repeat at dramatically different scales. Paint every figure and object with convincing solid volumes, warm daylight and deliberate soft shadows. Human faces remain calm and friendly. Replace ALL source outlines, filling marks and white paper with fresh painted forms and continuous painted space. Preserve a few recognisable source motifs while freely changing their positions, sizes and relationships. Keep the original aspect ratio. Output one complete painting with no text, letters, signature, watermark or frame.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves, dark horror scene, skeletal face, hollow eyes, disturbing anatomy, dismemberment, frightening monster</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10199021,
+  &quot;input_size&quot;: [
+    736,
+    736
+  ],
+  &quot;output_size&quot;: [
+    768,
+    768
+  ],
+  &quot;elapsed_sec&quot;: 136.688,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;d465a7f419c6570b54c0841f6b75304d52a7758d78ddec4dc6cb58b147456e7d&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626&quot;,
+  &quot;config&quot;: &quot;examples/recipes/01_garden_surrealism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/01_garden_surrealism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/01_garden_surrealism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="02_family_surrealism">
+      <h3>一家四口</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/02_family.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/02_family.png" alt="一家四口原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1080 × 814 px</p>
+            <div class="links"><a href="../samples/children_originals/02_family.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/02_family_surrealism.png" target="_blank" rel="noopener" aria-label="查看超现实主义原尺寸图片">
+            <img src="images/02_family_surrealism.png" alt="一家四口 · 超现实主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 576 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">四人牵手分站在分离的悬浮岛屿上，云海与不同尺度的远近岛屿构成不可能空间；太阳、花草和家庭关系保留，形体以柔和体积和暖光重新绘制。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/02_family_surrealism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/02_family_surrealism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/02_family_surrealism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/02_family_surrealism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Completely repaint the ENTIRE source image as a luminous Surrealist oil painting. Reconstruct its theme inside a visibly impossible dream space: the whole landscape is lifted into separate floating islands above a continuous sea of clouds, while familiar forms repeat at dramatically different scales. Paint every figure and object with convincing solid volumes, warm daylight and deliberate soft shadows. Human faces remain calm and friendly. Replace ALL source outlines, filling marks and white paper with fresh painted forms and continuous painted space. Preserve a few recognisable source motifs while freely changing their positions, sizes and relationships. Keep the original aspect ratio. Output one complete painting with no text, letters, signature, watermark or frame.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves, dark horror scene, skeletal face, hollow eyes, disturbing anatomy, dismemberment, frightening monster</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10199022,
+  &quot;input_size&quot;: [
+    768,
+    576
+  ],
+  &quot;output_size&quot;: [
+    768,
+    576
+  ],
+  &quot;elapsed_sec&quot;: 127.671,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;b5d201e271c2ff5946a1766e07c7e5de545ad36cd1bff02ccc6750d053483acf&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516&quot;,
+  &quot;config&quot;: &quot;examples/recipes/02_family_surrealism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/02_family_surrealism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/02_family_surrealism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="03_hill_house_surrealism">
+      <h3>山坡与房屋</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/03_hill_house.png" alt="山坡与房屋原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1000 × 682 px</p>
+            <div class="links"><a href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/03_hill_house_surrealism.png" target="_blank" rel="noopener" aria-label="查看超现实主义原尺寸图片">
+            <img src="images/03_hill_house_surrealism.png" alt="山坡与房屋 · 超现实主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 520 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">山坡与房屋转为云海上的悬浮岛，人物群在不同尺度的岛屿上重复出现；原作的家庭与房屋主题保留，人物数量和位置被自由重组，整体采用柔和暖光与完整绘画体积。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/03_hill_house_surrealism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/03_hill_house_surrealism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/03_hill_house_surrealism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/03_hill_house_surrealism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Completely repaint the ENTIRE source image as a luminous Surrealist oil painting. Reconstruct its theme inside a visibly impossible dream space: the whole landscape is lifted into separate floating islands above a continuous sea of clouds, while familiar forms repeat at dramatically different scales. Paint every figure and object with convincing solid volumes, warm daylight and deliberate soft shadows. Human faces remain calm and friendly. Replace ALL source outlines, filling marks and white paper with fresh painted forms and continuous painted space. Preserve a few recognisable source motifs while freely changing their positions, sizes and relationships. Keep the original aspect ratio. Output one complete painting with no text, letters, signature, watermark or frame.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves, dark horror scene, skeletal face, hollow eyes, disturbing anatomy, dismemberment, frightening monster</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10199023,
+  &quot;input_size&quot;: [
+    768,
+    520
+  ],
+  &quot;output_size&quot;: [
+    768,
+    520
+  ],
+  &quot;elapsed_sec&quot;: 121.843,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;38dde0798572eef755bbea273cbb9dc699a4d0b64f7fe0e718d3938e1c85d489&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57&quot;,
+  &quot;config&quot;: &quot;examples/recipes/03_hill_house_surrealism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/03_hill_house_surrealism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/03_hill_house_surrealism.workflow.json&quot;
+}</pre></details>
+    </div></article></div></section><section class="movement" id="neoplasticism" aria-labelledby="title-neoplasticism">
+          <h2 id="title-neoplasticism">新造型主义</h2><div class="comparisons"><article class="comparison-card" id="01_garden_neoplasticism">
+      <h3>花园</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/01_garden.png" alt="花园原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">736 × 736 px</p>
+            <div class="links"><a href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/01_garden_neoplasticism.png" target="_blank" rel="noopener" aria-label="查看新造型主义原尺寸图片">
+            <img src="images/01_garden_neoplasticism.png" alt="花园 · 新造型主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 768 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">粗黑横竖线与红黄蓝、白色矩形形成非对称构成；具象内容已完全抽象，原作主题联系尚不明确。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/01_garden_neoplasticism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/01_garden_neoplasticism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/01_garden_neoplasticism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/01_garden_neoplasticism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Create a fully abstract Neo-Plasticist painting from the source. Translate every source figure, object and background mark into flat rectangular colour fields inside an asymmetric grid of thick horizontal and vertical black lines. Use pure red, yellow, blue, white and black, with broad white regions and unequal divisions in dynamic balance. All edges are straight and orthogonal. All fields are uniform and completely flat. Leave no figurative silhouettes, curves, diagonals, depth, shading or texture. Use the source only to suggest the relative grouping, scale and balance of areas. Keep the original aspect ratio. Output one complete unsigned geometric composition with no text, lettering, watermark or frame.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196031,
+  &quot;input_size&quot;: [
+    736,
+    736
+  ],
+  &quot;output_size&quot;: [
+    768,
+    768
+  ],
+  &quot;elapsed_sec&quot;: 135.172,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;f0c04e4e26fcd63eb69c9fc44f351efa2dbe926c9c8f5ce1aaf866faadfa1250&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626&quot;,
+  &quot;config&quot;: &quot;examples/recipes/01_garden_neoplasticism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/01_garden_neoplasticism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/01_garden_neoplasticism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="02_family_neoplasticism">
+      <h3>一家四口</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/02_family.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/02_family.png" alt="一家四口原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1080 × 814 px</p>
+            <div class="links"><a href="../samples/children_originals/02_family.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/02_family_neoplasticism.png" target="_blank" rel="noopener" aria-label="查看新造型主义原尺寸图片">
+            <img src="images/02_family_neoplasticism.png" alt="一家四口 · 新造型主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 576 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">长短不一的矩形与粗黑网格形成节奏，原来的四人形象已转为抽象色面；主题线索需另行验证。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/02_family_neoplasticism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/02_family_neoplasticism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/02_family_neoplasticism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/02_family_neoplasticism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Create a fully abstract Neo-Plasticist painting from the source. Translate every source figure, object and background mark into flat rectangular colour fields inside an asymmetric grid of thick horizontal and vertical black lines. Use pure red, yellow, blue, white and black, with broad white regions and unequal divisions in dynamic balance. All edges are straight and orthogonal. All fields are uniform and completely flat. Leave no figurative silhouettes, curves, diagonals, depth, shading or texture. Use the source only to suggest the relative grouping, scale and balance of areas. Keep the original aspect ratio. Output one complete unsigned geometric composition with no text, lettering, watermark or frame.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196032,
+  &quot;input_size&quot;: [
+    768,
+    576
+  ],
+  &quot;output_size&quot;: [
+    768,
+    576
+  ],
+  &quot;elapsed_sec&quot;: 120.156,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;3abb02ddf86d0af2ac6fb051900e08aacfdd85fb06814a727d651bba75c4fc13&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516&quot;,
+  &quot;config&quot;: &quot;examples/recipes/02_family_neoplasticism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/02_family_neoplasticism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/02_family_neoplasticism.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="03_hill_house_neoplasticism">
+      <h3>山坡与房屋</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/03_hill_house.png" alt="山坡与房屋原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1000 × 682 px</p>
+            <div class="links"><a href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/03_hill_house_neoplasticism.png" target="_blank" rel="noopener" aria-label="查看新造型主义原尺寸图片">
+            <img src="images/03_hill_house_neoplasticism.png" alt="山坡与房屋 · 新造型主义，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 520 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">原色色块与正交网格重组画面；高度抽象后不再直接呈现山坡、房屋与人物，关联性仍待评价。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/03_hill_house_neoplasticism.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/03_hill_house_neoplasticism.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/03_hill_house_neoplasticism.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/03_hill_house_neoplasticism.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Create a fully abstract Neo-Plasticist painting from the source. Translate every source figure, object and background mark into flat rectangular colour fields inside an asymmetric grid of thick horizontal and vertical black lines. Use pure red, yellow, blue, white and black, with broad white regions and unequal divisions in dynamic balance. All edges are straight and orthogonal. All fields are uniform and completely flat. Leave no figurative silhouettes, curves, diagonals, depth, shading or texture. Use the source only to suggest the relative grouping, scale and balance of areas. Keep the original aspect ratio. Output one complete unsigned geometric composition with no text, lettering, watermark or frame.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196033,
+  &quot;input_size&quot;: [
+    768,
+    520
+  ],
+  &quot;output_size&quot;: [
+    768,
+    520
+  ],
+  &quot;elapsed_sec&quot;: 118.641,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;f1ba3eb407b008bbab9ccb68d092c77b8b550b373ccf1dc7bb8b525a7e9d5427&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57&quot;,
+  &quot;config&quot;: &quot;examples/recipes/03_hill_house_neoplasticism.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/03_hill_house_neoplasticism.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/03_hill_house_neoplasticism.workflow.json&quot;
+}</pre></details>
+    </div></article></div></section><section class="movement" id="pop_art" aria-labelledby="title-pop_art">
+          <h2 id="title-pop_art">波普艺术</h2><div class="comparisons"><article class="comparison-card" id="01_garden_pop_art">
+      <h3>花园</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/01_garden.png" alt="花园原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">736 × 736 px</p>
+            <div class="links"><a href="../samples/children_originals/01_garden.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/01_garden_pop_art.png" target="_blank" rel="noopener" aria-label="查看波普艺术原尺寸图片">
+            <img src="images/01_garden_pop_art.png" alt="花园 · 波普艺术，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 768 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">粗黑轮廓、高饱和色块和印刷网点构成四联画面；房屋、人物、树、鸟与蝴蝶仍可识别，分格采用不同裁切，花朵被省略。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/01_garden_pop_art.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/01_garden_pop_art.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/01_garden_pop_art.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/01_garden_pop_art.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Rebuild the source imagery as one Pop Art silkscreen print arranged in a two-by-two grid of four panels. Each panel repeats the same source-inspired scene with a different vivid spot-colour palette. Replace every crayon line and filling mark with bold clean silhouettes, flat graphic shapes, crisp ink edges and strong figure-ground contrast. Slight ink-registration offsets and selective printed texture support the repeated commercial-image appearance; dots are optional. Retain the source theme and recognisable motifs while freely simplifying and recolouring them. All four panels belong to one complete print with the original overall aspect ratio. No text, slogans, lettering, signature, logo, watermark or decorative border.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196041,
+  &quot;input_size&quot;: [
+    736,
+    736
+  ],
+  &quot;output_size&quot;: [
+    768,
+    768
+  ],
+  &quot;elapsed_sec&quot;: 129.157,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;ed9f9614a4e44982f354a64454ddd0d106491594b29fd2d457d54bae1e2629b3&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626&quot;,
+  &quot;config&quot;: &quot;examples/recipes/01_garden_pop_art.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/01_garden_pop_art.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/01_garden_pop_art.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="02_family_pop_art">
+      <h3>一家四口</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/02_family.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/02_family.png" alt="一家四口原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1080 × 814 px</p>
+            <div class="links"><a href="../samples/children_originals/02_family.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/02_family_pop_art.png" target="_blank" rel="noopener" aria-label="查看波普艺术原尺寸图片">
+            <img src="images/02_family_pop_art.png" alt="一家四口 · 波普艺术，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 576 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">四联画面重复四人牵手、太阳与花的主题，以不同专色重排背景和衣着；局部仍保留粗糙手绘线条，印刷质感的统一性待评价。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/02_family_pop_art.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/02_family_pop_art.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/02_family_pop_art.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/02_family_pop_art.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Rebuild the source imagery as one Pop Art silkscreen print arranged in a two-by-two grid of four panels. Each panel repeats the same source-inspired scene with a different vivid spot-colour palette. Replace every crayon line and filling mark with bold clean silhouettes, flat graphic shapes, crisp ink edges and strong figure-ground contrast. Slight ink-registration offsets and selective printed texture support the repeated commercial-image appearance; dots are optional. Retain the source theme and recognisable motifs while freely simplifying and recolouring them. All four panels belong to one complete print with the original overall aspect ratio. No text, slogans, lettering, signature, logo, watermark or decorative border.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196042,
+  &quot;input_size&quot;: [
+    768,
+    576
+  ],
+  &quot;output_size&quot;: [
+    768,
+    576
+  ],
+  &quot;elapsed_sec&quot;: 120.141,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;6447c395e22abf23046fabcbb48de434cc90e44cc0882ec71d1bc597309d74d6&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516&quot;,
+  &quot;config&quot;: &quot;examples/recipes/02_family_pop_art.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/02_family_pop_art.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/02_family_pop_art.workflow.json&quot;
+}</pre></details>
+    </div></article>
+<article class="comparison-card" id="03_hill_house_pop_art">
+      <h3>山坡与房屋</h3><div class="image-pair">
+        <figure class="original"><h4>原画</h4>
+          <a class="image-well" href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener" aria-label="查看原画原尺寸图片">
+            <img src="../samples/children_originals/03_hill_house.png" alt="山坡与房屋原画，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">1000 × 682 px</p>
+            <div class="links"><a href="../samples/children_originals/03_hill_house.png" target="_blank" rel="noopener">原画原尺寸图片</a>
+              <a href="manifest.json" target="_blank" rel="noopener">原图与结果清单</a></div>
+          </figcaption></figure>
+        <figure class="result"><h4>画派结果</h4>
+          <a class="image-well" href="images/03_hill_house_pop_art.png" target="_blank" rel="noopener" aria-label="查看波普艺术原尺寸图片">
+            <img src="images/03_hill_house_pop_art.png" alt="山坡与房屋 · 波普艺术，完整画面" loading="lazy"></a>
+          <figcaption><p class="dimensions">768 × 520 px</p></figcaption>
+        </figure></div><div class="result-details">
+      <span class="tag candidate">候选 · 待评价</span>
+      <p class="note">四联版式重复山坡、房屋、树与四人，背景和主体以不同专色组合呈现；粗黑轮廓及山坡排线仍明显，部分手绘符号被保留。</p>
+      <p class="check-status">未自动检查 · 未生成系统已确认输出</p>
+      <div class="links"><a href="images/03_hill_house_pop_art.png" target="_blank" rel="noopener">结果原尺寸图片</a>
+<a href="recipes/03_hill_house_pop_art.json" target="_blank" rel="noopener">生成配方</a>
+<a href="prompts/03_hill_house_pop_art.txt" target="_blank" rel="noopener">实际 Prompt</a>
+<a href="recipes/03_hill_house_pop_art.workflow.json" target="_blank" rel="noopener">API 工作流</a></div>
+      <details><summary>Prompt 与参数</summary><h4>生成 Prompt</h4>
+        <pre>Rebuild the source imagery as one Pop Art silkscreen print arranged in a two-by-two grid of four panels. Each panel repeats the same source-inspired scene with a different vivid spot-colour palette. Replace every crayon line and filling mark with bold clean silhouettes, flat graphic shapes, crisp ink edges and strong figure-ground contrast. Slight ink-registration offsets and selective printed texture support the repeated commercial-image appearance; dots are optional. Retain the source theme and recognisable motifs while freely simplifying and recolouring them. All four panels belong to one complete print with the original overall aspect ratio. No text, slogans, lettering, signature, logo, watermark or decorative border.</pre><h4>负向 Prompt</h4>
+        <pre>text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves</pre><h4>实际参数与来源</h4>
+        <pre>{
+  &quot;model&quot;: &quot;Qwen-Image-Edit-2509-Q3_K_M.gguf&quot;,
+  &quot;text_encoder&quot;: &quot;Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf&quot;,
+  &quot;vae&quot;: &quot;qwen_image_vae.safetensors&quot;,
+  &quot;lora_name&quot;: null,
+  &quot;lora_strength&quot;: null,
+  &quot;shift&quot;: 3.0,
+  &quot;sampler_params&quot;: {
+    &quot;steps&quot;: 20,
+    &quot;cfg&quot;: 4.0,
+    &quot;denoise&quot;: 1.0,
+    &quot;sampler_name&quot;: &quot;euler&quot;,
+    &quot;scheduler&quot;: &quot;simple&quot;
+  },
+  &quot;seed&quot;: 10196043,
+  &quot;input_size&quot;: [
+    768,
+    520
+  ],
+  &quot;output_size&quot;: [
+    768,
+    520
+  ],
+  &quot;elapsed_sec&quot;: 118.656,
+  &quot;elapsed_scope&quot;: &quot;upload, queue, wait and download; not sampler-only time&quot;,
+  &quot;image_sha256&quot;: &quot;a002706068b0c1fff7d014f24c070364af0e59c2bd3afe9f9192b51d0555f427&quot;,
+  &quot;input_preprocessed_sha256&quot;: &quot;c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57&quot;,
+  &quot;config&quot;: &quot;examples/recipes/03_hill_house_pop_art.json&quot;,
+  &quot;prompt_file&quot;: &quot;examples/prompts/03_hill_house_pop_art.txt&quot;,
+  &quot;workflow&quot;: &quot;examples/recipes/03_hill_house_pop_art.workflow.json&quot;
+}</pre></details>
+    </div></article></div></section><footer>选图日期：2026-10-19。图片直接引用公开样例原文件；本页不生成系统已确认输出。用户认可、自动粗检和独立质量验收分别记录。</footer>
+</main></body></html>

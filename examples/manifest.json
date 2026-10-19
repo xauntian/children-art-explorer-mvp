@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "date": "2026-10-15",
+  "version": "1.1.0",
+  "date": "2026-10-19",
   "dataset_role": "development",
   "training_performed": false,
   "independent_acceptance": false,
@@ -530,6 +530,1110 @@
       "workflow": "examples/recipes/03_hill_house_impressionism.workflow.json",
       "automatic_check": null,
       "confirmed_output": false
+    },
+    {
+      "id": "01_garden_post_impressionism",
+      "original": "samples/children_originals/01_garden.png",
+      "image": "examples/images/01_garden_post_impressionism.png",
+      "prompt_file": "examples/prompts/01_garden_post_impressionism.txt",
+      "config": "examples/recipes/01_garden_post_impressionism.json",
+      "workflow": "examples/recipes/01_garden_post_impressionism.workflow.json",
+      "image_sha256": "7076bcb15bbd4e05c15e3b32f15aa85dd7fb4c1302f39a3a2918c506ca78f612",
+      "input_preprocessed_sha256": "f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626",
+      "input_size": [
+        736,
+        736
+      ],
+      "output_size": [
+        768,
+        768
+      ],
+      "style": "post_impressionism",
+      "review_status": "candidate",
+      "visual_note": "黄橙田野与深蓝人物由方向笔触和回旋色带构成；人物、植物与日光保留户外主题，但房屋、鸟等线索省略，场景与人数被重新组织。",
+      "recorded_at": "2026-10-18T20:29:52.838256+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196001,
+      "elapsed_sec": 129.156,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Repaint the entire source using one selected Van Gogh-inspired direction within Post-Impressionism. Build the image from rhythmic, directional dashes of opaque paint that follow the movement and volume of the forms. Use saturated yellow-orange light against blue-violet shadows, expressive contour changes and energetic colour contrasts. Distinct marks should construct substantial painted forms and create a unified visual rhythm, with varied stroke direction and density across the surface. Let the energy arise from the relationships between shapes and marks rather than uniform decorative spirals.\n\nUse the supplied original as the only visual input and thematic starting point. Retain its broad subject, relationships or a few recognisable cues; freely simplify, merge, omit or add related elements and reorganise scale, position and composition. Replace all original linework, filling marks and paper texture with fresh painted structure. Keep the source aspect ratio and extend the painting to every edge. Output one complete painting without text, letters, signature, watermark or border.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "2f69aac196e180678ed4133a96223dd3cd547c523f8c966861b1d91843acffd2",
+      "workflow_sha256": "e35bef78d71619eeddc98e581fdadd1bd5cf9fe5aa29816b4d5b565b62878b68",
+      "source_generation_config_sha256": "2d3e104b168bf5ce716afa3da019c9d981ffa94a0043f30be00c9e66a2fbaa00",
+      "source_generation_workflow_sha256": "4ace54c0259c40f18932b6c0b68d6395104edbaf42eb08801a1818f29e1e1a98",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "01_garden_expressionism",
+      "original": "samples/children_originals/01_garden.png",
+      "image": "examples/images/01_garden_expressionism.png",
+      "prompt_file": "examples/prompts/01_garden_expressionism.txt",
+      "config": "examples/recipes/01_garden_expressionism.json",
+      "workflow": "examples/recipes/01_garden_expressionism.workflow.json",
+      "image_sha256": "289091e8b6131447acdb589ae24c49f8e6f5bba6286ebe459c0c026f0d7a03d2",
+      "input_preprocessed_sha256": "f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626",
+      "input_size": [
+        736,
+        736
+      ],
+      "output_size": [
+        768,
+        768
+      ],
+      "style": "expressionism",
+      "review_status": "candidate",
+      "visual_note": "房屋、树木、鸟、花与蝴蝶仍可辨认，粗重黑线、扭曲形体和暗色旋涡天空重绘花园；中央人物变为张口惊叫的成人面貌，整体明显偏焦虑压抑。",
+      "recorded_at": "2026-10-18T20:36:01.048863+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196011,
+      "elapsed_sec": 129.172,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Repaint the entire source as an Expressionist painting in which emotion changes the construction of the image. Use deliberately distorted contours, tense angular forms, compressed or unstable perspective and urgent, rough brushwork. Dissonant non-natural colours, dark accents and sharp light-dark contrasts should create one strong psychological atmosphere. Let the shapes lean, stretch and press against each other, with expressive differences in scale and an active rhythm of painted marks. Make the emotional deformation and spatial tension visible throughout the picture; colour changes alone are insufficient.\n\nUse the supplied original as the only visual input and thematic starting point. Keep its broad subject, central relationship or a few recognisable cues while freely simplifying, merging, omitting or adding related forms and changing viewpoint or composition. Rebuild all subjects and surroundings in the same expressive language. Replace the source outlines, filling marks and paper texture with a coherent painted surface. Keep the source aspect ratio. Output one complete painting without text, letters, signature, watermark or border.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "8935621980095f17acbbfe5c36536cc0e3fcecfcc1b7ad50912fd7d2ca3bfd3c",
+      "workflow_sha256": "e35bef78d71619eeddc98e581fdadd1bd5cf9fe5aa29816b4d5b565b62878b68",
+      "source_generation_config_sha256": "2d3e104b168bf5ce716afa3da019c9d981ffa94a0043f30be00c9e66a2fbaa00",
+      "source_generation_workflow_sha256": "4ace54c0259c40f18932b6c0b68d6395104edbaf42eb08801a1818f29e1e1a98",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "01_garden_surrealism",
+      "original": "samples/children_originals/01_garden.png",
+      "image": "examples/images/01_garden_surrealism.png",
+      "prompt_file": "examples/prompts/01_garden_surrealism.txt",
+      "config": "examples/recipes/01_garden_surrealism.json",
+      "workflow": "examples/recipes/01_garden_surrealism.workflow.json",
+      "image_sha256": "d465a7f419c6570b54c0841f6b75304d52a7758d78ddec4dc6cb58b147456e7d",
+      "input_preprocessed_sha256": "f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626",
+      "input_size": [
+        736,
+        736
+      ],
+      "output_size": [
+        768,
+        768
+      ],
+      "style": "surrealism",
+      "review_status": "candidate",
+      "visual_note": "人物、房屋、树木与花朵悬浮在连续云海中，放大的鸟与分离岛屿造成尺度和重力错位；主要原作线索仍可辨认，形体偏圆润的童话绘画。",
+      "recorded_at": "2026-10-18T20:56:22.947980+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10199021,
+      "elapsed_sec": 136.688,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Completely repaint the ENTIRE source image as a luminous Surrealist oil painting. Reconstruct its theme inside a visibly impossible dream space: the whole landscape is lifted into separate floating islands above a continuous sea of clouds, while familiar forms repeat at dramatically different scales. Paint every figure and object with convincing solid volumes, warm daylight and deliberate soft shadows. Human faces remain calm and friendly. Replace ALL source outlines, filling marks and white paper with fresh painted forms and continuous painted space. Preserve a few recognisable source motifs while freely changing their positions, sizes and relationships. Keep the original aspect ratio. Output one complete painting with no text, letters, signature, watermark or frame.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves, dark horror scene, skeletal face, hollow eyes, disturbing anatomy, dismemberment, frightening monster",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "bbbed95e73802588fb7be65dbcb7e6143e9a055d0b7e2915bbf3d4a81299abca",
+      "workflow_sha256": "e35bef78d71619eeddc98e581fdadd1bd5cf9fe5aa29816b4d5b565b62878b68",
+      "source_generation_config_sha256": "25e73579ddb71ed0aa334c554d25a36b8edfd36c30b7c608fded207243a098e3",
+      "source_generation_workflow_sha256": "4ace54c0259c40f18932b6c0b68d6395104edbaf42eb08801a1818f29e1e1a98",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "01_garden_neoplasticism",
+      "original": "samples/children_originals/01_garden.png",
+      "image": "examples/images/01_garden_neoplasticism.png",
+      "prompt_file": "examples/prompts/01_garden_neoplasticism.txt",
+      "config": "examples/recipes/01_garden_neoplasticism.json",
+      "workflow": "examples/recipes/01_garden_neoplasticism.workflow.json",
+      "image_sha256": "f0c04e4e26fcd63eb69c9fc44f351efa2dbe926c9c8f5ce1aaf866faadfa1250",
+      "input_preprocessed_sha256": "f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626",
+      "input_size": [
+        736,
+        736
+      ],
+      "output_size": [
+        768,
+        768
+      ],
+      "style": "neoplasticism",
+      "review_status": "candidate",
+      "visual_note": "粗黑横竖线与红黄蓝、白色矩形形成非对称构成；具象内容已完全抽象，原作主题联系尚不明确。",
+      "recorded_at": "2026-10-18T20:17:36.376213+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196031,
+      "elapsed_sec": 135.172,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Create a fully abstract Neo-Plasticist painting from the source. Translate every source figure, object and background mark into flat rectangular colour fields inside an asymmetric grid of thick horizontal and vertical black lines. Use pure red, yellow, blue, white and black, with broad white regions and unequal divisions in dynamic balance. All edges are straight and orthogonal. All fields are uniform and completely flat. Leave no figurative silhouettes, curves, diagonals, depth, shading or texture. Use the source only to suggest the relative grouping, scale and balance of areas. Keep the original aspect ratio. Output one complete unsigned geometric composition with no text, lettering, watermark or frame.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "config_sha256": "eb5442e55210bfcb5c4bd7875302ae4cf494ab2418971d24c454afa86259c38d",
+      "workflow_sha256": "e35bef78d71619eeddc98e581fdadd1bd5cf9fe5aa29816b4d5b565b62878b68",
+      "source_generation_config_sha256": "2d3e104b168bf5ce716afa3da019c9d981ffa94a0043f30be00c9e66a2fbaa00",
+      "source_generation_workflow_sha256": "4ace54c0259c40f18932b6c0b68d6395104edbaf42eb08801a1818f29e1e1a98",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "01_garden_pop_art",
+      "original": "samples/children_originals/01_garden.png",
+      "image": "examples/images/01_garden_pop_art.png",
+      "prompt_file": "examples/prompts/01_garden_pop_art.txt",
+      "config": "examples/recipes/01_garden_pop_art.json",
+      "workflow": "examples/recipes/01_garden_pop_art.workflow.json",
+      "image_sha256": "ed9f9614a4e44982f354a64454ddd0d106491594b29fd2d457d54bae1e2629b3",
+      "input_preprocessed_sha256": "f4c7f501bd6a0af39b159f83ce4c2641678166da09a07d26529dfa84638cf626",
+      "input_size": [
+        736,
+        736
+      ],
+      "output_size": [
+        768,
+        768
+      ],
+      "style": "pop_art",
+      "review_status": "candidate",
+      "visual_note": "粗黑轮廓、高饱和色块和印刷网点构成四联画面；房屋、人物、树、鸟与蝴蝶仍可识别，分格采用不同裁切，花朵被省略。",
+      "recorded_at": "2026-10-18T20:23:44.635769+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196041,
+      "elapsed_sec": 129.157,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Rebuild the source imagery as one Pop Art silkscreen print arranged in a two-by-two grid of four panels. Each panel repeats the same source-inspired scene with a different vivid spot-colour palette. Replace every crayon line and filling mark with bold clean silhouettes, flat graphic shapes, crisp ink edges and strong figure-ground contrast. Slight ink-registration offsets and selective printed texture support the repeated commercial-image appearance; dots are optional. Retain the source theme and recognisable motifs while freely simplifying and recolouring them. All four panels belong to one complete print with the original overall aspect ratio. No text, slogans, lettering, signature, logo, watermark or decorative border.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "77f73eee793e15406a0d06ac9d5ecd380ab446a6e81e29ae2e0c73c923b67127",
+      "workflow_sha256": "e35bef78d71619eeddc98e581fdadd1bd5cf9fe5aa29816b4d5b565b62878b68",
+      "source_generation_config_sha256": "2d3e104b168bf5ce716afa3da019c9d981ffa94a0043f30be00c9e66a2fbaa00",
+      "source_generation_workflow_sha256": "4ace54c0259c40f18932b6c0b68d6395104edbaf42eb08801a1818f29e1e1a98",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "02_family_post_impressionism",
+      "original": "samples/children_originals/02_family.png",
+      "image": "examples/images/02_family_post_impressionism.png",
+      "prompt_file": "examples/prompts/02_family_post_impressionism.txt",
+      "config": "examples/recipes/02_family_post_impressionism.json",
+      "workflow": "examples/recipes/02_family_post_impressionism.workflow.json",
+      "image_sha256": "67039eca7358d1c73a22190b801826311ee3ef6aafccd044aaa0de10bd035250",
+      "input_preprocessed_sha256": "7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516",
+      "input_size": [
+        768,
+        576
+      ],
+      "output_size": [
+        768,
+        576
+      ],
+      "style": "post_impressionism",
+      "review_status": "candidate",
+      "visual_note": "蓝黄旋转笔触覆盖背景、草地与衣物，四人牵手和笑脸造型保留；轮廓与密集排线仍偏儿童画，笔触塑形的充分程度待评价。",
+      "recorded_at": "2026-10-18T20:31:53.078275+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196002,
+      "elapsed_sec": 120.156,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Repaint the entire source using one selected Van Gogh-inspired direction within Post-Impressionism. Build the image from rhythmic, directional dashes of opaque paint that follow the movement and volume of the forms. Use saturated yellow-orange light against blue-violet shadows, expressive contour changes and energetic colour contrasts. Distinct marks should construct substantial painted forms and create a unified visual rhythm, with varied stroke direction and density across the surface. Let the energy arise from the relationships between shapes and marks rather than uniform decorative spirals.\n\nUse the supplied original as the only visual input and thematic starting point. Retain its broad subject, relationships or a few recognisable cues; freely simplify, merge, omit or add related elements and reorganise scale, position and composition. Replace all original linework, filling marks and paper texture with fresh painted structure. Keep the source aspect ratio and extend the painting to every edge. Output one complete painting without text, letters, signature, watermark or border.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "2c738633bd81a6d33c8ae3afb2181483c2630497b5b552e2fb9cc9fe562fe11e",
+      "workflow_sha256": "6c95f98233f6daedb593715c62d41e7a60f6d70127c99aa31354d6c92d654d2b",
+      "source_generation_config_sha256": "e77bfc4ed6c62ae17db4f363016c4e5d2be7e93169f4602b87990bc59dbf0bc0",
+      "source_generation_workflow_sha256": "60d7948f5ed254a8a1f0c4a5083b5b06d118f16253a355aff0dcf6aaf49257d6",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "02_family_expressionism",
+      "original": "samples/children_originals/02_family.png",
+      "image": "examples/images/02_family_expressionism.png",
+      "prompt_file": "examples/prompts/02_family_expressionism.txt",
+      "config": "examples/recipes/02_family_expressionism.json",
+      "workflow": "examples/recipes/02_family_expressionism.workflow.json",
+      "image_sha256": "23420c194c2caf1a80b7e020904ecb9a5ea54f8bb44f586f903c51d316016a95",
+      "input_preprocessed_sha256": "7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516",
+      "input_size": [
+        768,
+        576
+      ],
+      "output_size": [
+        768,
+        576
+      ],
+      "style": "expressionism",
+      "review_status": "candidate",
+      "visual_note": "一家四口牵手、太阳与花草的主题保留，粗黑轮廓、尖角面容和暗蓝红色笔触强化表现性；儿童保持笑脸，右侧成人呈明显愁苦表情。",
+      "recorded_at": "2026-10-18T20:38:01.284881+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196012,
+      "elapsed_sec": 120.156,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Repaint the entire source as an Expressionist painting in which emotion changes the construction of the image. Use deliberately distorted contours, tense angular forms, compressed or unstable perspective and urgent, rough brushwork. Dissonant non-natural colours, dark accents and sharp light-dark contrasts should create one strong psychological atmosphere. Let the shapes lean, stretch and press against each other, with expressive differences in scale and an active rhythm of painted marks. Make the emotional deformation and spatial tension visible throughout the picture; colour changes alone are insufficient.\n\nUse the supplied original as the only visual input and thematic starting point. Keep its broad subject, central relationship or a few recognisable cues while freely simplifying, merging, omitting or adding related forms and changing viewpoint or composition. Rebuild all subjects and surroundings in the same expressive language. Replace the source outlines, filling marks and paper texture with a coherent painted surface. Keep the source aspect ratio. Output one complete painting without text, letters, signature, watermark or border.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "6441a6ef14096fcceaeff07cbc972683cd6701b9591703f7d0c9d0db7acb1087",
+      "workflow_sha256": "6c95f98233f6daedb593715c62d41e7a60f6d70127c99aa31354d6c92d654d2b",
+      "source_generation_config_sha256": "e77bfc4ed6c62ae17db4f363016c4e5d2be7e93169f4602b87990bc59dbf0bc0",
+      "source_generation_workflow_sha256": "60d7948f5ed254a8a1f0c4a5083b5b06d118f16253a355aff0dcf6aaf49257d6",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "02_family_surrealism",
+      "original": "samples/children_originals/02_family.png",
+      "image": "examples/images/02_family_surrealism.png",
+      "prompt_file": "examples/prompts/02_family_surrealism.txt",
+      "config": "examples/recipes/02_family_surrealism.json",
+      "workflow": "examples/recipes/02_family_surrealism.workflow.json",
+      "image_sha256": "b5d201e271c2ff5946a1766e07c7e5de545ad36cd1bff02ccc6750d053483acf",
+      "input_preprocessed_sha256": "7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516",
+      "input_size": [
+        768,
+        576
+      ],
+      "output_size": [
+        768,
+        576
+      ],
+      "style": "surrealism",
+      "review_status": "candidate",
+      "visual_note": "四人牵手分站在分离的悬浮岛屿上，云海与不同尺度的远近岛屿构成不可能空间；太阳、花草和家庭关系保留，形体以柔和体积和暖光重新绘制。",
+      "recorded_at": "2026-10-18T20:58:30.719605+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10199022,
+      "elapsed_sec": 127.671,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Completely repaint the ENTIRE source image as a luminous Surrealist oil painting. Reconstruct its theme inside a visibly impossible dream space: the whole landscape is lifted into separate floating islands above a continuous sea of clouds, while familiar forms repeat at dramatically different scales. Paint every figure and object with convincing solid volumes, warm daylight and deliberate soft shadows. Human faces remain calm and friendly. Replace ALL source outlines, filling marks and white paper with fresh painted forms and continuous painted space. Preserve a few recognisable source motifs while freely changing their positions, sizes and relationships. Keep the original aspect ratio. Output one complete painting with no text, letters, signature, watermark or frame.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves, dark horror scene, skeletal face, hollow eyes, disturbing anatomy, dismemberment, frightening monster",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "efb696e192097dbc4fc8bfbb8ef14405fd5773e54fd5c5961413d15ff33c7caf",
+      "workflow_sha256": "6c95f98233f6daedb593715c62d41e7a60f6d70127c99aa31354d6c92d654d2b",
+      "source_generation_config_sha256": "2ea618d323855020b30fdf76802d541f4391367e9772ed9a88fd5bf532c6534f",
+      "source_generation_workflow_sha256": "60d7948f5ed254a8a1f0c4a5083b5b06d118f16253a355aff0dcf6aaf49257d6",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "02_family_neoplasticism",
+      "original": "samples/children_originals/02_family.png",
+      "image": "examples/images/02_family_neoplasticism.png",
+      "prompt_file": "examples/prompts/02_family_neoplasticism.txt",
+      "config": "examples/recipes/02_family_neoplasticism.json",
+      "workflow": "examples/recipes/02_family_neoplasticism.workflow.json",
+      "image_sha256": "3abb02ddf86d0af2ac6fb051900e08aacfdd85fb06814a727d651bba75c4fc13",
+      "input_preprocessed_sha256": "7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516",
+      "input_size": [
+        768,
+        576
+      ],
+      "output_size": [
+        768,
+        576
+      ],
+      "style": "neoplasticism",
+      "review_status": "candidate",
+      "visual_note": "长短不一的矩形与粗黑网格形成节奏，原来的四人形象已转为抽象色面；主题线索需另行验证。",
+      "recorded_at": "2026-10-18T20:19:36.636385+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196032,
+      "elapsed_sec": 120.156,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Create a fully abstract Neo-Plasticist painting from the source. Translate every source figure, object and background mark into flat rectangular colour fields inside an asymmetric grid of thick horizontal and vertical black lines. Use pure red, yellow, blue, white and black, with broad white regions and unequal divisions in dynamic balance. All edges are straight and orthogonal. All fields are uniform and completely flat. Leave no figurative silhouettes, curves, diagonals, depth, shading or texture. Use the source only to suggest the relative grouping, scale and balance of areas. Keep the original aspect ratio. Output one complete unsigned geometric composition with no text, lettering, watermark or frame.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "f31b07fb64f988e85fd560db953ecdf993b7ead4ea6ca1ed4a5b98d4a4198ad2",
+      "workflow_sha256": "6c95f98233f6daedb593715c62d41e7a60f6d70127c99aa31354d6c92d654d2b",
+      "source_generation_config_sha256": "e77bfc4ed6c62ae17db4f363016c4e5d2be7e93169f4602b87990bc59dbf0bc0",
+      "source_generation_workflow_sha256": "60d7948f5ed254a8a1f0c4a5083b5b06d118f16253a355aff0dcf6aaf49257d6",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "02_family_pop_art",
+      "original": "samples/children_originals/02_family.png",
+      "image": "examples/images/02_family_pop_art.png",
+      "prompt_file": "examples/prompts/02_family_pop_art.txt",
+      "config": "examples/recipes/02_family_pop_art.json",
+      "workflow": "examples/recipes/02_family_pop_art.workflow.json",
+      "image_sha256": "6447c395e22abf23046fabcbb48de434cc90e44cc0882ec71d1bc597309d74d6",
+      "input_preprocessed_sha256": "7893b48b9ef5b6cfea59bf32b5d5dc49a15e9f775f24cd8fb0bbc5d318fe7516",
+      "input_size": [
+        768,
+        576
+      ],
+      "output_size": [
+        768,
+        576
+      ],
+      "style": "pop_art",
+      "review_status": "candidate",
+      "visual_note": "四联画面重复四人牵手、太阳与花的主题，以不同专色重排背景和衣着；局部仍保留粗糙手绘线条，印刷质感的统一性待评价。",
+      "recorded_at": "2026-10-18T20:25:44.865643+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196042,
+      "elapsed_sec": 120.141,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Rebuild the source imagery as one Pop Art silkscreen print arranged in a two-by-two grid of four panels. Each panel repeats the same source-inspired scene with a different vivid spot-colour palette. Replace every crayon line and filling mark with bold clean silhouettes, flat graphic shapes, crisp ink edges and strong figure-ground contrast. Slight ink-registration offsets and selective printed texture support the repeated commercial-image appearance; dots are optional. Retain the source theme and recognisable motifs while freely simplifying and recolouring them. All four panels belong to one complete print with the original overall aspect ratio. No text, slogans, lettering, signature, logo, watermark or decorative border.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "1fe7e07d5bfb4d6f8da0eb114147d71100a25d80b6fc678eef77078f24af9787",
+      "workflow_sha256": "6c95f98233f6daedb593715c62d41e7a60f6d70127c99aa31354d6c92d654d2b",
+      "source_generation_config_sha256": "e77bfc4ed6c62ae17db4f363016c4e5d2be7e93169f4602b87990bc59dbf0bc0",
+      "source_generation_workflow_sha256": "60d7948f5ed254a8a1f0c4a5083b5b06d118f16253a355aff0dcf6aaf49257d6",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "03_hill_house_post_impressionism",
+      "original": "samples/children_originals/03_hill_house.png",
+      "image": "examples/images/03_hill_house_post_impressionism.png",
+      "prompt_file": "examples/prompts/03_hill_house_post_impressionism.txt",
+      "config": "examples/recipes/03_hill_house_post_impressionism.json",
+      "workflow": "examples/recipes/03_hill_house_post_impressionism.workflow.json",
+      "image_sha256": "a7526b47ce871ec62c7fcf9b8a141fdf528714633a59c5c7ed131d688bae8347",
+      "input_preprocessed_sha256": "c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57",
+      "input_size": [
+        768,
+        520
+      ],
+      "output_size": [
+        768,
+        520
+      ],
+      "style": "post_impressionism",
+      "review_status": "candidate",
+      "visual_note": "细密方向笔触覆盖天空、树冠与山坡，房屋、四人、树和太阳仍可辨认；轮廓与笑脸符号延续原画，绘画造型仍偏稚拙。",
+      "recorded_at": "2026-10-18T20:33:51.792810+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196003,
+      "elapsed_sec": 118.657,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Repaint the entire source using one selected Van Gogh-inspired direction within Post-Impressionism. Build the image from rhythmic, directional dashes of opaque paint that follow the movement and volume of the forms. Use saturated yellow-orange light against blue-violet shadows, expressive contour changes and energetic colour contrasts. Distinct marks should construct substantial painted forms and create a unified visual rhythm, with varied stroke direction and density across the surface. Let the energy arise from the relationships between shapes and marks rather than uniform decorative spirals.\n\nUse the supplied original as the only visual input and thematic starting point. Retain its broad subject, relationships or a few recognisable cues; freely simplify, merge, omit or add related elements and reorganise scale, position and composition. Replace all original linework, filling marks and paper texture with fresh painted structure. Keep the source aspect ratio and extend the painting to every edge. Output one complete painting without text, letters, signature, watermark or border.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "fb211d93c22851d0706983f3e2aeae589a5023b99beda4d37d4f7b5bce5cdff3",
+      "workflow_sha256": "7de199a633c95263195f30789266207a6f0e01252d0118da5ab82ef6d9576787",
+      "source_generation_config_sha256": "50e25dd9efbb2f9513fcda72cf2b0deed79222b08d65a49cd80ad7aef29d75ec",
+      "source_generation_workflow_sha256": "e1a6adf5b448ae16800984cd138227fc67d7686410d0a208562e0d7ee3744186",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "03_hill_house_expressionism",
+      "original": "samples/children_originals/03_hill_house.png",
+      "image": "examples/images/03_hill_house_expressionism.png",
+      "prompt_file": "examples/prompts/03_hill_house_expressionism.txt",
+      "config": "examples/recipes/03_hill_house_expressionism.json",
+      "workflow": "examples/recipes/03_hill_house_expressionism.workflow.json",
+      "image_sha256": "e87f0b48ffc1db106870d66c861e61ba7450e6b02e2d9260bfbf544829f4fbc4",
+      "input_preprocessed_sha256": "c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57",
+      "input_size": [
+        768,
+        520
+      ],
+      "output_size": [
+        768,
+        520
+      ],
+      "style": "expressionism",
+      "review_status": "candidate",
+      "visual_note": "山坡、倾斜房屋、树木、四个人物和笑脸太阳仍可辨认，弯曲山体与强烈黑红笔触重塑空间；橙红色尖锐笔触形成近似火焰的紧张氛围。",
+      "recorded_at": "2026-10-18T20:40:00.024204+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196013,
+      "elapsed_sec": 118.656,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Repaint the entire source as an Expressionist painting in which emotion changes the construction of the image. Use deliberately distorted contours, tense angular forms, compressed or unstable perspective and urgent, rough brushwork. Dissonant non-natural colours, dark accents and sharp light-dark contrasts should create one strong psychological atmosphere. Let the shapes lean, stretch and press against each other, with expressive differences in scale and an active rhythm of painted marks. Make the emotional deformation and spatial tension visible throughout the picture; colour changes alone are insufficient.\n\nUse the supplied original as the only visual input and thematic starting point. Keep its broad subject, central relationship or a few recognisable cues while freely simplifying, merging, omitting or adding related forms and changing viewpoint or composition. Rebuild all subjects and surroundings in the same expressive language. Replace the source outlines, filling marks and paper texture with a coherent painted surface. Keep the source aspect ratio. Output one complete painting without text, letters, signature, watermark or border.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "ff9a5446dedfb793b684b1b2826b3a9d0e96ee2df0e30eec307ee6da48bbcfcb",
+      "workflow_sha256": "7de199a633c95263195f30789266207a6f0e01252d0118da5ab82ef6d9576787",
+      "source_generation_config_sha256": "50e25dd9efbb2f9513fcda72cf2b0deed79222b08d65a49cd80ad7aef29d75ec",
+      "source_generation_workflow_sha256": "e1a6adf5b448ae16800984cd138227fc67d7686410d0a208562e0d7ee3744186",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "03_hill_house_surrealism",
+      "original": "samples/children_originals/03_hill_house.png",
+      "image": "examples/images/03_hill_house_surrealism.png",
+      "prompt_file": "examples/prompts/03_hill_house_surrealism.txt",
+      "config": "examples/recipes/03_hill_house_surrealism.json",
+      "workflow": "examples/recipes/03_hill_house_surrealism.workflow.json",
+      "image_sha256": "38dde0798572eef755bbea273cbb9dc699a4d0b64f7fe0e718d3938e1c85d489",
+      "input_preprocessed_sha256": "c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57",
+      "input_size": [
+        768,
+        520
+      ],
+      "output_size": [
+        768,
+        520
+      ],
+      "style": "surrealism",
+      "review_status": "candidate",
+      "visual_note": "山坡与房屋转为云海上的悬浮岛，人物群在不同尺度的岛屿上重复出现；原作的家庭与房屋主题保留，人物数量和位置被自由重组，整体采用柔和暖光与完整绘画体积。",
+      "recorded_at": "2026-10-18T21:00:32.639965+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10199023,
+      "elapsed_sec": 121.843,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Completely repaint the ENTIRE source image as a luminous Surrealist oil painting. Reconstruct its theme inside a visibly impossible dream space: the whole landscape is lifted into separate floating islands above a continuous sea of clouds, while familiar forms repeat at dramatically different scales. Paint every figure and object with convincing solid volumes, warm daylight and deliberate soft shadows. Human faces remain calm and friendly. Replace ALL source outlines, filling marks and white paper with fresh painted forms and continuous painted space. Preserve a few recognisable source motifs while freely changing their positions, sizes and relationships. Keep the original aspect ratio. Output one complete painting with no text, letters, signature, watermark or frame.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves, dark horror scene, skeletal face, hollow eyes, disturbing anatomy, dismemberment, frightening monster",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "69639d3995ccce92648bae7dc69000dfaebd2e5345a41fc66747ccd0b54fb0af",
+      "workflow_sha256": "7de199a633c95263195f30789266207a6f0e01252d0118da5ab82ef6d9576787",
+      "source_generation_config_sha256": "c5da66503b9b6efb29028996c492fd3d67c7418ef1e5a3695d6aaa2cdec005e6",
+      "source_generation_workflow_sha256": "e1a6adf5b448ae16800984cd138227fc67d7686410d0a208562e0d7ee3744186",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "03_hill_house_neoplasticism",
+      "original": "samples/children_originals/03_hill_house.png",
+      "image": "examples/images/03_hill_house_neoplasticism.png",
+      "prompt_file": "examples/prompts/03_hill_house_neoplasticism.txt",
+      "config": "examples/recipes/03_hill_house_neoplasticism.json",
+      "workflow": "examples/recipes/03_hill_house_neoplasticism.workflow.json",
+      "image_sha256": "f1ba3eb407b008bbab9ccb68d092c77b8b550b373ccf1dc7bb8b525a7e9d5427",
+      "input_preprocessed_sha256": "c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57",
+      "input_size": [
+        768,
+        520
+      ],
+      "output_size": [
+        768,
+        520
+      ],
+      "style": "neoplasticism",
+      "review_status": "candidate",
+      "visual_note": "原色色块与正交网格重组画面；高度抽象后不再直接呈现山坡、房屋与人物，关联性仍待评价。",
+      "recorded_at": "2026-10-18T20:21:35.379992+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196033,
+      "elapsed_sec": 118.641,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Create a fully abstract Neo-Plasticist painting from the source. Translate every source figure, object and background mark into flat rectangular colour fields inside an asymmetric grid of thick horizontal and vertical black lines. Use pure red, yellow, blue, white and black, with broad white regions and unequal divisions in dynamic balance. All edges are straight and orthogonal. All fields are uniform and completely flat. Leave no figurative silhouettes, curves, diagonals, depth, shading or texture. Use the source only to suggest the relative grouping, scale and balance of areas. Keep the original aspect ratio. Output one complete unsigned geometric composition with no text, lettering, watermark or frame.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "06d5d10ebc4b0eb89119608c57dd89af8530761964948952f1272a3c82557e2c",
+      "workflow_sha256": "7de199a633c95263195f30789266207a6f0e01252d0118da5ab82ef6d9576787",
+      "source_generation_config_sha256": "50e25dd9efbb2f9513fcda72cf2b0deed79222b08d65a49cd80ad7aef29d75ec",
+      "source_generation_workflow_sha256": "e1a6adf5b448ae16800984cd138227fc67d7686410d0a208562e0d7ee3744186",
+      "automatic_check": null,
+      "confirmed_output": false
+    },
+    {
+      "id": "03_hill_house_pop_art",
+      "original": "samples/children_originals/03_hill_house.png",
+      "image": "examples/images/03_hill_house_pop_art.png",
+      "prompt_file": "examples/prompts/03_hill_house_pop_art.txt",
+      "config": "examples/recipes/03_hill_house_pop_art.json",
+      "workflow": "examples/recipes/03_hill_house_pop_art.workflow.json",
+      "image_sha256": "a002706068b0c1fff7d014f24c070364af0e59c2bd3afe9f9192b51d0555f427",
+      "input_preprocessed_sha256": "c840f50d7da6426f9fd6168fccb4aff2df407bfc05bb394eaeaa169943465c57",
+      "input_size": [
+        768,
+        520
+      ],
+      "output_size": [
+        768,
+        520
+      ],
+      "style": "pop_art",
+      "review_status": "candidate",
+      "visual_note": "四联版式重复山坡、房屋、树与四人，背景和主体以不同专色组合呈现；粗黑轮廓及山坡排线仍明显，部分手绘符号被保留。",
+      "recorded_at": "2026-10-18T20:27:43.603036+00:00",
+      "model": "Qwen-Image-Edit-2509-Q3_K_M.gguf",
+      "text_encoder": "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+      "vae": "qwen_image_vae.safetensors",
+      "lora_name": null,
+      "lora_strength": null,
+      "shift": 3.0,
+      "sampler_params": {
+        "steps": 20,
+        "cfg": 4.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple"
+      },
+      "seed": 10196043,
+      "elapsed_sec": 118.656,
+      "elapsed_scope": "upload, queue, wait and download; not sampler-only time",
+      "positive_prompt": "Rebuild the source imagery as one Pop Art silkscreen print arranged in a two-by-two grid of four panels. Each panel repeats the same source-inspired scene with a different vivid spot-colour palette. Replace every crayon line and filling mark with bold clean silhouettes, flat graphic shapes, crisp ink edges and strong figure-ground contrast. Slight ink-registration offsets and selective printed texture support the repeated commercial-image appearance; dots are optional. Retain the source theme and recognisable motifs while freely simplifying and recolouring them. All four panels belong to one complete print with the original overall aspect ratio. No text, slogans, lettering, signature, logo, watermark or decorative border.",
+      "negative_prompt": "text, words, letters, captions, signature, watermark, logo, border, picture frame, pseudo-signature, artist initials, cursive marks, illegible handwriting, crayon texture, traced scribbles, plastic clay, embossed grooves",
+      "preprocess": {
+        "max_input_side": 768,
+        "frame_detect": false,
+        "border_trim_ratio": 0.0,
+        "crop_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "min_area_ratio": 0.15,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02
+      },
+      "sampler_cache": {
+        "status": "miss",
+        "sampler_ids": [
+          "11"
+        ],
+        "cached_nodes": [
+          "10",
+          "2",
+          "3",
+          "4",
+          "9"
+        ]
+      },
+      "config_sha256": "adbb12be8e29434d2503e7c75693f12c7e5e73ed80357e0472c214dc0c4d5009",
+      "workflow_sha256": "7de199a633c95263195f30789266207a6f0e01252d0118da5ab82ef6d9576787",
+      "source_generation_config_sha256": "50e25dd9efbb2f9513fcda72cf2b0deed79222b08d65a49cd80ad7aef29d75ec",
+      "source_generation_workflow_sha256": "e1a6adf5b448ae16800984cd138227fc67d7686410d0a208562e0d7ee3744186",
+      "automatic_check": null,
+      "confirmed_output": false
     }
+  ],
+  "experimental_registry": "examples/styles.json",
+  "style_ids": [
+    "fauvism",
+    "cubism",
+    "impressionism",
+    "post_impressionism",
+    "expressionism",
+    "surrealism",
+    "neoplasticism",
+    "pop_art"
   ]
 }

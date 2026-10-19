@@ -1,0 +1,70 @@
+{
+  "config_version": "1.0.0",
+  "prompt_version": "extended-1.0",
+  "styles": [
+    {
+      "id": "fauvism",
+      "name": "Fauvism",
+      "name_zh": "野兽派",
+      "enabled": true,
+      "style_features": "intense non-natural colours and strong complementary contrasts; broad masses of opaque paint, simplified expressive forms, flattened space and energetic brushstrokes; colour expresses emotion instead of copying natural appearances",
+      "preservation_rules": "use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style"
+    },
+    {
+      "id": "cubism",
+      "name": "Cubism",
+      "name_zh": "立体主义",
+      "enabled": true,
+      "style_features": "forms are broken apart and reconstructed through interlocking angular planes, overlapping facets and simultaneous viewpoints; shifting contours and compressed depth connect the subjects and background into one fragmented pictorial space; ochre, warm grey, muted teal and deep blue articulate the geometry",
+      "preservation_rules": "use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style"
+    },
+    {
+      "id": "impressionism",
+      "name": "Impressionism",
+      "name_zh": "印象派",
+      "enabled": true,
+      "style_features": "French Impressionism exemplified by Claude Monet and Camille Pissarro: fleeting natural light, luminous atmosphere and optical colour mixing; loose, short, irregular brushstrokes and adjacent touches of colour build the forms; warm sunlit highlights, cool blue-violet shadows and soft lost-and-found edges replace hard outlines",
+      "preservation_rules": "use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style"
+    },
+    {
+      "id": "post_impressionism",
+      "name": "Post-Impressionism (Van Gogh-inspired direction)",
+      "name_zh": "后印象派（梵高式方向）",
+      "enabled": true,
+      "style_features": "one selected Van Gogh-inspired direction within the diverse Post-Impressionist movement: rhythmic directional brushstrokes, distinct dashes of opaque colour and expressive contour changes construct solid forms; saturated yellow-orange and blue-violet contrasts organise light and shadow; visible painted marks follow the movement and volume of the subject",
+      "preservation_rules": "use the reference as thematic inspiration, retaining its broad subject or a few recognisable visual cues; freely simplify, omit, merge or add related elements and reorganise composition, scale and colour to support the selected painterly direction"
+    },
+    {
+      "id": "expressionism",
+      "name": "Expressionism",
+      "name_zh": "表现主义",
+      "enabled": true,
+      "style_features": "emotional intensity shapes the entire picture through deliberately distorted contours, tense angular forms, compressed or unstable perspective and urgent, rough brushwork; dissonant non-natural colours and sharp light-dark contrasts create psychological atmosphere; expressive deformation and spatial tension are visible beyond colour changes alone",
+      "preservation_rules": "use the reference as thematic inspiration, retaining its broad subject, relationship or a few recognisable visual cues; freely distort, simplify, merge or add related forms and reorganise scale, viewpoint and composition to express a coherent emotional atmosphere"
+    },
+    {
+      "id": "surrealism",
+      "name": "Surrealism",
+      "name_zh": "超现实主义",
+      "enabled": true,
+      "style_features": "dream logic transforms familiar forms through unexpected juxtaposition, metamorphosis, shifts of scale and impossible spatial relationships; convincing light and carefully rendered surfaces make the impossible relationships feel tangible; imagery grows from the source theme, with coherent visual connections rather than arbitrary unrelated fantasy objects",
+      "preservation_rules": "use the reference as the sole visual source and thematic starting point; retain at least a few recognisable source-derived cues or relationships while freely transforming their scale, material, position and context and introducing related dreamlike connections"
+    },
+    {
+      "id": "neoplasticism",
+      "name": "Neo-Plasticism",
+      "name_zh": "新造型主义",
+      "enabled": true,
+      "style_features": "strict horizontal and vertical black lines divide an asymmetrical orthogonal composition into flat rectangular fields; pure red, yellow and blue balance white, black and occasional neutral grey; unequal spacing, line weights and colour areas create dynamic equilibrium; all forms are reduced to a flat geometric structure without diagonals, curves, gradients or modeled depth",
+      "preservation_rules": "abstract the reference through its broad distribution of visual weight, relative groupings, scale contrasts or directional rhythm; preserve a few traceable layout relationships while translating all figurative forms into horizontal and vertical rectangular structure; literal object recognition is optional"
+    },
+    {
+      "id": "pop_art",
+      "name": "Pop Art",
+      "name_zh": "波普艺术",
+      "enabled": true,
+      "style_features": "screenprinted advertising and mass-produced commercial imagery: bold flattened source-derived motifs, a small vivid spot-colour palette, hard silhouettes, slight colour-registration offsets and deliberate serial repetition; repeated image panels vary ink colours and cropping while retaining graphic recognition; printing and repetition define the treatment, with halftone dots only as an optional secondary texture",
+      "preservation_rules": "use the reference as the sole visual source and retain its broad theme or a few recognisable motifs; simplify, crop, repeat and recolour source-derived imagery freely to create a coherent commercial-print composition without introducing unrelated brands, readable slogans or product labels"
+    }
+  ]
+}
