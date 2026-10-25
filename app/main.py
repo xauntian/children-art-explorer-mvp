@@ -54,7 +54,9 @@ class App:
         self.registry: StyleRegistry = self.config.load_styles()
         validate_registry(self.registry)
         self.config.require_prompt_files()
-        generate_prompt, check_prompt = self.config.load_prompts()
+        generate_prompt, check_prompt = self.config.load_prompts(
+            include_check=self.config.checker_enabled
+        )
 
         workflow_nodes = load_workflow(self.config.comfy_workflow_path)
         self.comfy_client = ComfyClient(
@@ -78,17 +80,20 @@ class App:
             lora_name=self.config.comfy_lora_name,
             lora_strength=self.config.comfy_lora_strength,
         )
-        self.checker = VisionChecker(
-            base_url=self.config.checker_base_url,
-            model=self.config.checker_model,
-            api=self.config.checker_api,
-            connect_timeout=self.config.checker_connect_timeout,
-            request_timeout=self.config.checker_request_timeout,
-            keep_alive=self.config.checker_keep_alive,
-            options=self.config.checker_options,
-            mode=self.config.checker_mode,
-            control=self.config.checker_control,
-        )
+        self.checker = None
+        if self.config.checker_enabled:
+            self.checker = VisionChecker(
+                base_url=self.config.checker_base_url,
+                model=self.config.checker_model,
+                api=self.config.checker_api,
+                connect_timeout=self.config.checker_connect_timeout,
+                request_timeout=self.config.checker_request_timeout,
+                keep_alive=self.config.checker_keep_alive,
+                options=self.config.checker_options,
+                mode=self.config.checker_mode,
+                control=self.config.checker_control,
+                style_validation=self.config.checker_style_validation,
+            )
         self.store = JobStore(self.config.runs_dir, self.config.temp_suffix)
         self.pipeline = Pipeline(
             config=self.config,
@@ -125,12 +130,15 @@ class App:
             "unet_name": self.config.comfy_unet_name if uses_unet else None,
             "text_encoder": self.config.comfy_text_encoder if uses_unet else None,
             "vae_name": self.config.comfy_vae_name if uses_unet else None,
-            "lora_name": self.config.comfy_lora_name if uses_unet else None,
+            "lora_name": (
+                self.config.comfy_lora_name if self.generator.uses_lora_loader() else None
+            ),
             "controlnet": self.config.comfy_controlnet,
-            "checker_model": self.config.checker_model,
+            "checker_enabled": self.config.checker_enabled,
+            "checker_model": self.config.checker_model if self.config.checker_enabled else None,
             "max_input_side": self.config.pre_max_input_side,
             "comfy_base_url": self.config.comfy_base_url,
-            "checker_base_url": self.config.checker_base_url,
+            "checker_base_url": self.config.checker_base_url if self.config.checker_enabled else None,
         }
 
         comfy: dict = {
@@ -160,7 +168,9 @@ class App:
         report["comfyui"] = comfy
 
         vision: dict = {"probe_status": "not_run", "reachable": None, "model_ok": None}
-        if probe_models:
+        if not self.config.checker_enabled:
+            vision.update(probe_status="skipped", reason="checker_disabled")
+        elif probe_models:
             vision.update(probe_status="completed", reachable=False, model_ok=False)
             try:
                 models = self.checker.list_models()
@@ -232,7 +242,7 @@ def _print_summary(summary: dict) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m app.main",
-        description="儿童艺术风格探索装置 MVP 后台入口（粗马克笔 → 随机画派 → 本地生成 → 双图检查 → 自动确认）",
+        description="儿童艺术风格探索装置 MVP 后台入口（粗马克笔 → 随机画派 → 本地生成 → 文件校验 → 直接输出）",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -290,13 +300,14 @@ def main(argv: list[str] | None = None) -> int:
             elif not comfy.get("generation_model_ok"):
                 log(f"[提示] 当前工作流的生成模型或依赖未就绪: {comfy.get('error')}")
                 ok = False
-            vision = report.get("vision", {})
-            if not vision.get("reachable"):
-                log(f"[提示] 视觉模型服务未就绪: {vision.get('error')}")
-                ok = False
-            elif not vision.get("model_ok"):
-                log(f"[提示] 配置的视觉模型未安装: {vision.get('models')}")
-                ok = False
+            if report.get("config", {}).get("checker_enabled", True):
+                vision = report.get("vision", {})
+                if not vision.get("reachable"):
+                    log(f"[提示] 视觉模型服务未就绪: {vision.get('error')}")
+                    ok = False
+                elif not vision.get("model_ok"):
+                    log(f"[提示] 配置的视觉模型未安装: {vision.get('models')}")
+                    ok = False
         return 0 if ok else 1
 
     if args.command == "resume":

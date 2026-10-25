@@ -1,9 +1,11 @@
-"""状态流转、自动确认与有限重试。
+"""状态流转、生成输出与可选审查。
 
 规则要点：
-- 每个任务最多生成两次；重试保持原图与原画派，只更换种子。
+- 关闭审查时只生成一次；启用审查时最多两次，重试保持原图与原画派，只更换种子。
 - 技术错误立即失败，不触发质量重试，不转人工审批，不调用云端替代服务。
-- 只有 style_match == "match" 且 content_preserved is True 时才写入 output.png。
+- 关闭审查的新任务只校验生成文件完整性，直接保存输出，不伪造风格或主题判定。
+- 开启审查时，生效的 style_match == "match" 且 content_preserved is True 才保存输出。
+  风格可来自明确记录的 user_override；这不表示模型独立验收了画派。
 - 同一时刻只处理一件作品。
 """
 
@@ -11,6 +13,7 @@ from __future__ import annotations
 
 import time
 from contextlib import contextmanager
+from math import isfinite
 
 from . import states
 from .checker import COMPARISON_VERSION, CheckResult, VisionChecker
@@ -20,9 +23,11 @@ from .errors import (
     GenerationError,
     PipelineError,
     PreprocessError,
+    TimeoutError_,
 )
+from .generation_guard import GuardedGenerator
 from .generator import ComfyGenerator
-from .preprocess import decode_image_bytes, encode_png, preprocess
+from .preprocess import decode_image_bytes, downsample_output, encode_png, preprocess
 from .storage import Job, JobStore, utc_now_iso
 from .styles import StyleAssigner
 
@@ -38,7 +43,7 @@ def timed(meta: dict, key: str):
 
 
 class Pipeline:
-    """把采集、预处理、随机画派、本地生成、双图检查与保存串起来。"""
+    """串联采集、预处理、随机画派、本地生成、可选检查与保存。"""
 
     def __init__(
         self,
@@ -46,9 +51,9 @@ class Pipeline:
         registry: StyleRegistry,
         store: JobStore,
         generator: ComfyGenerator,
-        checker: VisionChecker,
+        checker: VisionChecker | None,
         generate_prompt_template: str,
-        check_prompt_template: str,
+        check_prompt_template: str | None,
         style_assigner: StyleAssigner | None = None,
     ) -> None:
         self.config = config
@@ -59,6 +64,8 @@ class Pipeline:
         self.generate_prompt_template = generate_prompt_template
         self.check_prompt_template = check_prompt_template
         self.style_assigner = style_assigner or StyleAssigner(registry)
+        self._run_deadline: float | None = None
+        self._run_output_written = False
 
     # ---------- Prompt ----------
     @staticmethod
@@ -72,6 +79,8 @@ class Pipeline:
         return text
 
     def build_generate_prompt(self, style: StyleConfig) -> str:
+        if style.generate_prompt is not None:
+            return style.generate_prompt
         return self._fill(
             self.generate_prompt_template,
             {
@@ -83,6 +92,8 @@ class Pipeline:
         )
 
     def build_check_prompt(self, style: StyleConfig) -> str:
+        if self.check_prompt_template is None:
+            raise ConfigError("审查 Prompt 未加载；要审查历史任务，请先启用 checker")
         return self._fill(
             self.check_prompt_template,
             {
@@ -110,9 +121,11 @@ class Pipeline:
             "generate_prompt_file": str(self.config.generate_prompt_path.relative_to(self.config.project_root))
             if self.config.generate_prompt_path.is_relative_to(self.config.project_root)
             else str(self.config.generate_prompt_path),
-            "check_prompt_file": str(self.config.check_prompt_path.relative_to(self.config.project_root))
-            if self.config.check_prompt_path.is_relative_to(self.config.project_root)
-            else str(self.config.check_prompt_path),
+            "check_prompt_file": (
+                str(self.config.check_prompt_path.relative_to(self.config.project_root))
+                if self.config.check_prompt_path.is_relative_to(self.config.project_root)
+                else str(self.config.check_prompt_path)
+            ) if self.config.checker_enabled else None,
             "workflow_file": str(workflow_path.relative_to(self.config.project_root))
             if workflow_path.is_relative_to(self.config.project_root)
             else str(workflow_path),
@@ -129,22 +142,39 @@ class Pipeline:
             "lora_strength": self.config.comfy_lora_strength,
             "shift": self.config.comfy_shift,
             "samplers": self.config.samplers,
+            "checker_enabled": self.config.checker_enabled,
             "checker_model": self.config.checker_model,
             "checker_mode": self.config.checker_mode,
+            "checker_style_validation": self.config.checker_style_validation,
+            "style_check_source": (
+                "not_performed" if not self.config.checker_enabled else
+                "user_override" if self.config.checker_style_validation == "deferred" else "model"
+            ),
+            "style_calibration_pending": (
+                self.config.checker_style_validation == "deferred"
+                if self.config.checker_enabled else None
+            ),
             "checker_control": self.config.checker_control,
             "checker_api": self.config.checker_api,
             "checker_options": dict(self.config.checker_options),
             "checker_request_timeout": self.config.checker_request_timeout,
             "checker_keep_alive": self.config.checker_keep_alive,
-            "checker_prompt_version": COMPARISON_VERSION
-            if self.config.checker_mode == "comparison" else self.registry.prompt_version,
+            "checker_prompt_version": (
+                COMPARISON_VERSION if self.config.checker_mode == "comparison"
+                else self.registry.prompt_version
+            ) if self.config.checker_enabled else None,
             "max_attempts": self.config.max_attempts,
+            "time_budget_sec": self.config.generation_time_budget_sec,
             "print_enabled": self.config.print_enabled,
             "max_input_side": self.config.pre_max_input_side,
             "preprocess": {
                 "frame_detect": self.config.pre_frame_detect,
                 "border_trim_ratio": self.config.pre_border_trim_ratio,
                 "crop_ratios": list(self.config.pre_crop_ratios),
+                **({
+                    "paper_format": self.config.pre_paper_format,
+                    "output_short_side": self.config.pre_output_short_side,
+                } if self.config.pre_paper_format is not None else {}),
             },
         }
 
@@ -179,25 +209,88 @@ class Pipeline:
         style_id: str | None = None,
         job_id: str | None = None,
         force: bool = False,
+        started_at: float | None = None,
     ) -> dict:
         """执行一件作品的完整流程（阻塞直到 COMPLETED 或 FAILED）。
 
         force=True 用于重跑一个已失败（终态）的任务：沿用其已保存的画派，
         不重新随机选择画派，不覆盖其他任务的文件。
         """
-        started = time.monotonic()
+        started = time.monotonic() if started_at is None else started_at
+        if (
+            isinstance(started, bool) or not isinstance(started, (int, float))
+            or not isfinite(started) or started > time.monotonic()
+        ):
+            raise ConfigError("started_at 必须是不晚于当前时间的有限 monotonic 时间")
         job = self._prepare_job(style_id=style_id, job_id=job_id, force=force)
+        # A historical job without this snapshot key keeps its original policy.
+        budget = (job.meta.get("config") or {}).get("time_budget_sec")
+        original_generator = self.generator
+        previous_deadline = self._run_deadline
+        previous_output_written = self._run_output_written
+        self._run_deadline = None
+        self._run_output_written = False
+        run_budget = None
         try:
+            if budget is not None:
+                if (
+                    isinstance(budget, bool) or not isinstance(budget, (int, float))
+                    or not isfinite(budget) or budget <= 0
+                ):
+                    raise ConfigError("任务快照 time_budget_sec 必须是有限的正秒数或 null")
+                run_budget = float(budget)
+                self._run_deadline = started + run_budget
+                job.meta["generation_deadline"] = {"budget_sec": run_budget}
+                self.generator = GuardedGenerator(
+                    original_generator, self.config.project_root,
+                    deadline=self._run_deadline, finalize_margin_sec=0.2,
+                )
+                self._check_deadline(job)
             self._run_job(job, source_bytes, source_name)
         except PipelineError as exc:
+            if isinstance(exc, TimeoutError_) and self._run_output_written:
+                # The parent alone writes this exact Job output; a timed-out
+                # child cannot recreate it after we discard a late result.
+                try:
+                    job.output_path.unlink(missing_ok=True)
+                except OSError as cleanup_error:
+                    exc.details = {
+                        **(exc.details or {}), "output_cleanup_error": str(cleanup_error),
+                    }
+                job.meta.pop("output", None)
             if not states.is_terminal(job.state):
                 job.fail(exc)
         except Exception as exc:  # noqa: BLE001 - 未预期异常也进入失败状态
             if not states.is_terminal(job.state):
                 job.fail(PipelineError(f"未预期异常: {exc}", stage=job.state))
+        finally:
+            self.generator = original_generator
+            self._run_deadline = previous_deadline
+            self._run_output_written = previous_output_written
+            elapsed = time.monotonic() - started
+            if run_budget is not None:
+                job.meta["generation_deadline"].update(
+                    elapsed_sec=round(elapsed, 3), met=elapsed < run_budget,
+                )
         job.meta.setdefault("timings", {})["total_sec"] = round(time.monotonic() - started, 3)
         job.save()
         return self.summary(job)
+
+    def _check_deadline(self, job: Job) -> None:
+        if self._run_deadline is not None and time.monotonic() >= self._run_deadline:
+            budget = (job.meta.get("config") or {}).get("time_budget_sec")
+            raise TimeoutError_(
+                f"AI 生成超过 {budget:g} 秒，本轮结果未输出",
+                stage=states.GENERATING, details={"time_budget_sec": budget},
+            )
+
+    def _save_output_before_deadline(self, job: Job, data: bytes) -> None:
+        self._check_deadline(job)
+        self._run_output_written = True
+        try:
+            job.save_output(data)
+        finally:
+            self._check_deadline(job)
 
     def _prepare_job(
         self, style_id: str | None = None, job_id: str | None = None, force: bool = False
@@ -215,6 +308,10 @@ class Pipeline:
                     "重跑不得更换画派"
                 )
             self.ensure_idle(ignore_job_id=job_id)
+            if (job.meta.get("config") or {}).get("checker_enabled", True) and (
+                not self.config.checker_enabled or self.checker is None
+            ):
+                raise ConfigError("原任务启用了审查；请先启用 checker 后再重跑，不能改为免审查")
             previous = job.state
             job.meta["state"] = states.CAPTURED
             job.meta.setdefault("reruns", []).append(
@@ -229,54 +326,81 @@ class Pipeline:
 
 
     def _run_job(self, job: Job, source_bytes: bytes, source_name: str) -> None:
+        review_enabled = (job.meta.get("config") or {}).get("checker_enabled", True)
+        if type(review_enabled) is not bool:
+            raise ConfigError("任务快照 checker_enabled 必须是布尔值")
+        if review_enabled and self.checker is None:
+            raise ConfigError("该任务要求审查；请启用 checker 后再执行")
+        if not review_enabled:
+            job.meta["review"] = {
+                "enabled": False, "status": "not_performed",
+                "validation_scope": "file_integrity_only",
+                "reason": "checker_disabled_by_configuration",
+            }
+            job.meta["review_status"] = "not_performed"
+            job.meta["validation_scope"] = "file_integrity_only"
         # 1) 采集结果落盘（原始照片）
         with timed(job.meta, "capture_sec"):
             if not source_bytes:
                 raise PreprocessError(f"原始照片为空: {source_name}", stage=states.CAPTURED)
             job.save_original(source_bytes)
+        self._check_deadline(job)
         job.meta["source_name"] = source_name
 
         # 2) 读回原图并预处理，保存模型输入
+        snapshot = job.meta.get("config") or {}
+        saved_preprocess = snapshot.get("preprocess") or {}
+        paper_format = saved_preprocess.get("paper_format")
+        output_short_side = saved_preprocess.get("output_short_side")
+        # 缺少纸张字段的历史任务继续采用原尺寸策略，不继承新 A4 默认值。
+        frame_detect = saved_preprocess.get("frame_detect", self.config.pre_frame_detect)
+        border_trim = saved_preprocess.get("border_trim_ratio", self.config.pre_border_trim_ratio)
+        crop_ratios = tuple(saved_preprocess.get("crop_ratios", self.config.pre_crop_ratios))
         with timed(job.meta, "preprocess_sec"):
             original = decode_image_bytes(source_bytes, source_name)
             result = preprocess(
                 original,
-                max_input_side=self.config.pre_max_input_side,
-                frame_detect=self.config.pre_frame_detect,
-                border_trim_ratio=self.config.pre_border_trim_ratio,
-                crop_ratios=self.config.pre_crop_ratios,
+                max_input_side=snapshot.get("max_input_side", self.config.pre_max_input_side),
+                frame_detect=frame_detect,
+                border_trim_ratio=border_trim,
+                crop_ratios=crop_ratios,
                 min_area_ratio=self.config.pre_min_area_ratio,
                 max_area_ratio=self.config.pre_max_area_ratio,
                 approx_epsilon_ratio=self.config.pre_approx_epsilon_ratio,
+                paper_format=paper_format,
+                output_short_side=output_short_side,
             )
             input_bytes = encode_png(result.image)
             job.save_input(input_bytes)
+        self._check_deadline(job)
         job.meta["preprocess"] = {
-            "frame_detect": self.config.pre_frame_detect,
-            "border_trim_ratio": self.config.pre_border_trim_ratio,
-            "crop_ratios": list(self.config.pre_crop_ratios),
+            "frame_detect": frame_detect,
+            "border_trim_ratio": border_trim,
+            "crop_ratios": list(crop_ratios),
             "crop_used": result.crop_used,
             "corners": result.corners,
             "source_size": list(result.source_size),
             "input_size": list(result.output_size),
         }
-        job.meta["checker_reference_file"] = "input.png"
+        if result.paper_layout is not None:
+            job.meta["preprocess"]["paper_layout"] = result.paper_layout
+        if review_enabled:
+            job.meta["checker_reference_file"] = "input.png"
         job.save()
 
         style = self.registry.get((job.meta.get("style") or {}).get("id", ""))
         job.set_state(states.STYLE_ASSIGNED)
 
         generate_prompt = self.build_generate_prompt(style)
-        check_prompt = self.build_check_prompt(style)
-        job.meta["prompts"] = {
-            "generate": generate_prompt,
-            "check": check_prompt,
-        }
+        check_prompt = self.build_check_prompt(style) if review_enabled else None
+        job.meta["prompts"] = {"generate": generate_prompt}
+        if review_enabled:
+            job.meta["prompts"]["check"] = check_prompt
+            job.meta["check_prompt_version"] = (
+                COMPARISON_VERSION if self.config.checker_mode == "comparison"
+                else self.registry.prompt_version
+            )
         job.meta["generate_prompt_version"] = self.registry.prompt_version
-        job.meta["check_prompt_version"] = (
-            COMPARISON_VERSION if self.config.checker_mode == "comparison"
-            else self.registry.prompt_version
-        )
         job.save()
 
         width, height = result.output_size
@@ -284,6 +408,7 @@ class Pipeline:
 
         attempt = 1
         while attempt <= self.config.max_attempts:
+            self._check_deadline(job)
             seed = self.seed_for_attempt(attempt)
             # 进入本地模型调用前先保存任务与尝试信息
             job.begin_attempt(attempt, seed, {**params, "width": width, "height": height})
@@ -293,22 +418,70 @@ class Pipeline:
             candidate_bytes, prompt_id = self._generate_once(
                 job, attempt, seed, input_bytes, width, height, generate_prompt, params
             )
+            self._check_deadline(job)
+            if not review_enabled:
+                image = decode_image_bytes(candidate_bytes, f"attempt_{attempt}.png")
+                self._check_deadline(job)
+                job.finish_attempt(
+                    attempt, review_status="not_performed",
+                    validation_scope="file_integrity_only",
+                    file_integrity={"decodable": True, "width": image.shape[1], "height": image.shape[0]},
+                )
+                with timed(job.meta, "save_output_sec"):
+                    output_bytes = candidate_bytes
+                    resize_meta = None
+                    if result.paper_layout is not None:
+                        output_bytes, resize_meta = downsample_output(
+                            candidate_bytes, tuple(result.paper_layout["output_size"])
+                        )
+                    self._check_deadline(job)
+                    self._save_output_before_deadline(job, output_bytes)
+                output_size = (
+                    resize_meta["output_size"] if resize_meta is not None
+                    else [image.shape[1], image.shape[0]]
+                )
+                job.meta["output"] = {
+                    "file": "output.png", "bytes": len(output_bytes),
+                    "attempt": attempt, "saved_at": utc_now_iso(),
+                    "review_status": "not_performed", "validation_scope": "file_integrity_only",
+                    "width": output_size[0], "height": output_size[1],
+                }
+                if resize_meta is not None:
+                    job.meta["output"]["resize"] = resize_meta
+                job.save()
+                self._check_deadline(job)
+                job.set_state(states.COMPLETED)
+                return
             check_result = self._check_once(
                 job, attempt, input_bytes, candidate_bytes, check_prompt, style=style
             )
+            self._check_deadline(job)
 
             if check_result.passed:
                 with timed(job.meta, "confirm_sec"):
                     if job.state != states.CONFIRMED:
                         job.set_state(states.CONFIRMED)
-                    job.save_output(candidate_bytes)
+                    output_bytes = candidate_bytes
+                    resize_meta = None
+                    if result.paper_layout is not None:
+                        output_bytes, resize_meta = downsample_output(
+                            candidate_bytes, tuple(result.paper_layout["output_size"])
+                        )
+                    self._check_deadline(job)
+                    self._save_output_before_deadline(job, output_bytes)
                 job.meta["output"] = {
                     "file": "output.png",
-                    "bytes": len(candidate_bytes),
+                    "bytes": len(output_bytes),
                     "attempt": attempt,
                     "confirmed_at": utc_now_iso(),
                 }
+                if resize_meta is not None:
+                    job.meta["output"].update(
+                        width=resize_meta["output_size"][0], height=resize_meta["output_size"][1],
+                        resize=resize_meta,
+                    )
                 job.save()
+                self._check_deadline(job)
                 job.set_state(states.COMPLETED)
                 return
 
@@ -318,12 +491,7 @@ class Pipeline:
                 attempt += 1
                 continue
 
-            job.meta["final_quality_result"] = {
-                "style_match": check_result.style_match,
-                "content_preserved": check_result.content_preserved,
-                "reason": check_result.reason,
-                "attempt": attempt,
-            }
+            job.meta["final_quality_result"] = {**check_result.to_dict(), "attempt": attempt}
             raise PipelineError(
                 "第二次质量检查仍未通过，任务失败（保留候选图与检查原因，不产生 output.png）",
                 stage=states.CHECKING,
@@ -352,6 +520,7 @@ class Pipeline:
                 params=params,
                 filename_prefix=f"amcc/{job.job_id}/attempt_{attempt}",
             )
+            self._check_deadline(job)
         except PipelineError as exc:
             job.finish_attempt(
                 attempt,
@@ -363,6 +532,7 @@ class Pipeline:
             raise
 
         job.save_attempt(attempt, candidate_bytes)
+        self._check_deadline(job)
         job.finish_attempt(
             attempt,
             generate_sec=round(time.monotonic() - started, 3),
@@ -378,6 +548,7 @@ class Pipeline:
             raise GenerationError(
                 f"第 {attempt} 次生成结果无法解码: {exc.message}", stage=states.GENERATING
             ) from exc
+        self._check_deadline(job)
         return candidate_bytes, prompt_id
 
     def _check_once(
@@ -403,6 +574,11 @@ class Pipeline:
                     preservation_rules=style.preservation_rules,
                     attempt=attempt,
                     duration_sec=None,
+                    # A rerun retains its original policy. Missing legacy keys
+                    # mean enforced, regardless of today's application default.
+                    style_validation=(job.meta.get("config") or {}).get(
+                        "checker_style_validation", "enforced"
+                    ),
                 )
             else:
                 result = self.checker.check(
@@ -530,6 +706,12 @@ class Pipeline:
         summary = job.to_summary()
         summary["error"] = (job.meta.get("errors") or [None])[-1]
         summary["timings"] = job.meta.get("timings", {})
+        if "generation_deadline" in job.meta:
+            summary["generation_deadline"] = dict(job.meta["generation_deadline"])
+        if "review" in job.meta:
+            summary["review"] = dict(job.meta["review"])
+            summary["review_status"] = job.meta["review_status"]
+            summary["validation_scope"] = job.meta["validation_scope"]
         if summary.get("has_output"):
             summary["output_path"] = str(job.output_path)
         return summary

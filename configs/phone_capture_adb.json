@@ -1,0 +1,77 @@
+{
+  "mode": "confirm",
+  "capture_runs_dir": "runs/phone",
+  "phone": {
+    "adb_path": "tools/android/platform-tools/adb.exe",
+    "serial": null,
+    "preview_roi": [
+      0.020833333333333332,
+      0.12626262626262627,
+      0.9791666666666666,
+      0.7510822510822511
+    ],
+    "preview_screen_size": [
+      1344,
+      2772
+    ],
+    "screenshot_timeout_sec": 3,
+    "fallback_photo": true,
+    "photo_timeout_sec": 20,
+    "camera_shutter": {
+      "method": "tap",
+      "camera_package": "com.huawei.camera",
+      "screen_size": [
+        1344,
+        2772
+      ],
+      "position": [
+        672,
+        2390
+      ],
+      "wake_position": [
+        672,
+        1386
+      ],
+      "wake_delay_sec": 0.7
+    }
+  },
+  "extraction": {
+    "method": "paper",
+    "rotation_degrees": 270,
+    "max_detection_side": 1000,
+    "max_output_side": 1024,
+    "preview_occlusion_regions": [
+      [
+        0.26786,
+        0.86894,
+        0.35326,
+        0.93822
+      ],
+      [
+        0.3882,
+        0.8649,
+        0.48137,
+        0.94573
+      ],
+      [
+        0.51708,
+        0.86894,
+        0.60559,
+        0.93822
+      ],
+      [
+        0.6413,
+        0.86894,
+        0.73292,
+        0.93822
+      ],
+      [
+        0.86025,
+        0.86028,
+        0.95109,
+        0.944
+      ]
+    ]
+  },
+  "generation_warmup": true
+}

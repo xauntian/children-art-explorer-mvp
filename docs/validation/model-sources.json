@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-10-24T21:51:52.868857+00:00",
+  "elapsed_sec": 102.344,
+  "models": [
+    {
+      "role": "vae",
+      "repo": "Comfy-Org/Flux-2-Klein-4B",
+      "file": "split_files/vae/flux2-vae.safetensors",
+      "destination": "vae",
+      "size_bytes": 336211292,
+      "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
+      "url": "https://huggingface.co/Comfy-Org/Flux-2-Klein-4B/resolve/main/split_files/vae/flux2-vae.safetensors",
+      "source_gated": false,
+      "status": "verified",
+      "sha256_matches": true,
+      "safetensors_header_valid": true,
+      "tensor_count": 251,
+      "verified_at": "2026-10-24T21:50:26.544436+00:00"
+    },
+    {
+      "role": "diffusion_model",
+      "repo": "black-forest-labs/FLUX.2-klein-4b-fp8",
+      "file": "flux-2-klein-4b-fp8.safetensors",
+      "destination": "diffusion_models",
+      "size_bytes": 4070624520,
+      "sha256": "97ed34fe0567e436200f2faee3939b88f2b5d99f8af2a4dc16532c4245c0ccb6",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4b-fp8/resolve/main/flux-2-klein-4b-fp8.safetensors",
+      "source_gated": false,
+      "status": "verified",
+      "sha256_matches": true,
+      "safetensors_header_valid": true,
+      "tensor_count": 309,
+      "verified_at": "2026-10-24T21:51:50.123321+00:00"
+    },
+    {
+      "role": "text_encoder",
+      "repo": "Comfy-Org/Flux-2-Klein-4B",
+      "file": "split_files/text_encoders/qwen_3_4b_fp4_flux2.safetensors",
+      "destination": "text_encoders",
+      "size_bytes": 3848213998,
+      "sha256": "3eab03a77adb0ee5304a4e677d5c10ac22f9049c1d7c894adca4f8bb39206ca8",
+      "url": "https://huggingface.co/Comfy-Org/Flux-2-Klein-4B/resolve/main/split_files/text_encoders/qwen_3_4b_fp4_flux2.safetensors",
+      "source_gated": false,
+      "status": "verified",
+      "sha256_matches": true,
+      "safetensors_header_valid": true,
+      "tensor_count": 1028,
+      "verified_at": "2026-10-24T21:51:52.865351+00:00"
+    }
+  ],
+  "all_verified": true
+}

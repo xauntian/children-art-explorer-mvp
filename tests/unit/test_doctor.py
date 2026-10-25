@@ -129,6 +129,22 @@ def test_checkpoint_workflow_checks_checkpoint_route(doctor_app):
     app.comfy_client.session.get.assert_not_called()
 
 
+@pytest.mark.parametrize("missing_lora", [False, True])
+def test_checkpoint_lora_route_is_reported_and_checked(doctor_app, missing_lora):
+    app = doctor_app(uses_unet=False, missing_lora=missing_lora)
+    app.generator.workflow_nodes["14"] = {
+        "class_type": "LoraLoaderModelOnly",
+        "inputs": {"model": ["2", 0], "lora_name": "__lora_name__"},
+    }
+    report = app.doctor()
+    assert report["config"]["lora_name"] == "lightning.safetensors"
+    assert report["comfyui"]["generation_model_ok"] is (not missing_lora)
+    if missing_lora:
+        assert "lightning.safetensors" in report["comfyui"]["error"]
+    app.comfy_client.available_checkpoints.assert_called_once_with()
+    assert app.comfy_client.session.get.call_args.args[0].endswith("/LoraLoaderModelOnly")
+
+
 def test_offline_doctor_does_not_claim_services_are_disconnected(doctor_app, monkeypatch):
     app = doctor_app()
     monkeypatch.setattr(entrypoint, "App", lambda: app)

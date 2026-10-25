@@ -1,38 +1,24 @@
-# Children’s Art Explorer · MVP V1.0
+# Children’s Art Explorer
 
-面向儿童艺术展览的本地生成原型：**粗马克笔创作 → 拍摄或导入 → 随机画派 → 本地重绘 → 自动粗检 → 保存数字作品**。
+面向儿童艺术展览的本地生成原型：**实体绘画 → 手机采集 → 整纸透视校正 → 随机画派 → 本地 AI 重绘 → 保存 A4 比例图片**。儿童使用实体材料，工作人员通过 Windows 桌面 GUI 操作后台。
 
-儿童使用实体材料，后台由工作人员触发。应用随机池启用野兽派、立体主义和印象派，采用本地 ComfyUI 与 Ollama；独立视觉样例已扩展至八画派。打印仅保留接口，默认关闭。
-
-**V1.0 是工程与文档基线。三画派的独立质量验收、摄像头现场测试和儿童体验研究尚未完成。**
+当前应用配置为 `1.10.0`，生成 Prompt 为 `1.7.0`。生产流程采用 **FLUX.2 Klein 4B、八画派、单轮 AI 10 秒截止预算**；风格审查和实体打印均关闭。八种风格共用同一套模型权重，各自使用画派 Prompt，项目没有训练八套模型或画派 LoRA。
 
 ## 文档入口
 
 | 文档 | 用途 |
 |---|---|
-| [MVP_V1.0.md](MVP_V1.0.md) | 项目概念、儿童与艺术研究、当前方案、技术路径、验证和课程时间线 |
-| [SPEC.md](SPEC.md) | 可执行需求、模块接口、状态、参数和验收条件 |
-| [agent.md](agent.md) | 开发 Agent 的工作范围与规则；[AGENTS.md](AGENTS.md) 为自动发现入口 |
-| [部署说明](docs/DEPLOYMENT.md) | Python、ComfyUI、模型、Ollama 的完整安装与故障处理 |
-| [样例与配方](examples/README.md) | 三张输入、八画派二十四张结果、认可状态、实际 Prompt 和复现命令 |
-| [验证记录](docs/VALIDATION.md) | V1.0 发布检查及尚未完成的验证 |
+| [MVP_SPEC.md](MVP_SPEC.md) | 当前功能、设备约束、模型、输出和超时规则 |
+| [部署说明](docs/DEPLOYMENT.md) | Windows、ComfyUI、模型和手机工具安装 |
+| [手机采集规格](docs/phone-capture-spec.md) | 原生相机截图与 Camera2 命令行入口的区别 |
+| [验证记录](docs/VALIDATION.md) | 真实测量、历史证据及待验收内容 |
+| [agent.md](agent.md) · [AGENTS.md](AGENTS.md) | 开发约定与 Agent 入口 |
+| [SPEC.md](SPEC.md) · [MVP_V1.0.md](MVP_V1.0.md) | 当前规格入口与项目研究背景 |
+| [历史样例与配方](examples/README.md) | 三张输入、八画派二十四张历史 Qwen 结果及认可状态 |
 
-## 当前结果
+## 启动与操作
 
-| 画派 | 状态 |
-|---|---|
-| 野兽派 | 三张开发候选，尚未完成独立验收 |
-| 立体主义 | 三张展示图获用户认可；跨新输入的稳定性仍待验证 |
-| 印象派 | 山坡与房屋为用户选定参照；花园和家庭的新候选仍待评价 |
-| 后印象派、表现主义、超现实主义、新造型主义、波普艺术 | 各三张新增开发候选，十五张均待用户评价，未运行自动粗检或独立质量验收 |
-
-后印象派选择梵高式笔触与色彩方向，超现实主义选择明亮的云海漂浮岛方向，均不代表整个流派。表现主义偏紧张、焦虑的情绪表达；新造型主义高度抽象后的主题关联仍需验证。完整八画派比较见 [样例页](examples/README.md)；克隆后可在浏览器打开 [本地画廊](examples/gallery.html)。GitHub 文件页仅显示 HTML 源码。
-
-五种新增画派使用独立的 [实验注册表](examples/styles.json)，每画派跨三张原图共用提示，原图是唯一图像条件。新增样例不改变应用的三画派随机池。2026 年 10 月 19 日的仓库更新仅打包既有选图与复现文件，未重新生成或自动确认图片。
-
-## 快速开始
-
-以下命令在 Windows PowerShell 中执行。先安装 Git 和 Python 3.12：
+在 Windows PowerShell 中准备项目环境：
 
 ```powershell
 git clone https://github.com/xauntian/children-art-explorer-mvp.git
@@ -40,75 +26,77 @@ cd children-art-explorer-mvp
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe -m app.main doctor --offline
-.\.venv\Scripts\python.exe -m pytest tests/unit
 ```
 
-这一步可检查配置和程序规则，不会调用图像模型。生成前，按 [部署说明](docs/DEPLOYMENT.md) 安装并启动本地 ComfyUI（`127.0.0.1:8188`）与 Ollama（`127.0.0.1:11434`），下载所需权重。
+按[部署说明](docs/DEPLOYMENT.md)另行安装 ComfyUI、三份模型权重、ADB 和官方 scrcpy server。项目环境不需要安装 PyTorch，生产流程不需要 Ollama。仓库没有打包这些环境、权重或工具二进制。
+
+双击 `start_gui.cmd`，或在仓库根目录运行：
+
+```powershell
+.\start_gui.cmd
+```
+
+1. USB 连接并授权手机调试，解锁手机，手动打开华为原生相机，设好位置、方向和倍率，使完整纸边可见。当前取景框配置针对已标定的 Mate 40 Pro；其他手机须重新核对屏幕尺寸与 ROI。
+2. 点击 GUI 的「开始」。程序检查手机、服务与模型，复用已运行的 ComfyUI，或按配置在后台启动；逐一预热全部八个启用画派后，P 才激活。
+3. 待机时第一栏显示手机屏幕实时视频。在 GUI 窗口按 **P**，执行原始截图、整纸检测与透视校正、随机画派、AI 生成和保存。界面显示步骤与原图、校正图、AI 结果。
+4. 处理中忽略 P，不排队、不重复触发。本轮完成或失败后，P 重新激活；待机时恢复实时视频，可换画后再按 P。
+
+GUI 不读取倍率、不定时截图、不调整相机设置，也不触发相机快门。预览采用独立的屏幕 H.264 视频，默认长边 1280、最高 15 fps、4 Mbps，关闭音频与远程控制。正式原图来自 P 触发的原生屏幕截图，不用低分辨率视频帧代替。GUI 截图路径不调用 Camera2、不自动切换拍照路径；尺寸不符、锁屏或纸边不完整时提示本轮失败。
+
+## 当前生成配置
+
+| 项目 | 当前值 |
+|---|---|
+| 生成服务 | 本地 ComfyUI，`http://127.0.0.1:8189` |
+| 扩散模型 | `flux-2-klein-4b-fp8.safetensors` |
+| 编码器 / VAE | `qwen_3_4b_fp4_flux2.safetensors` / `flux2-vae.safetensors` |
+| 工作流 | `workflows/image_edit_flux2_klein.json`；原图经 VAE 与 ReferenceLatent 提供图像条件 |
+| 采样 | 4 steps、CFG 1、Euler、Flux2Scheduler、denoise 1 |
+| 分配 | 八个启用画派等概率随机，单轮选择一派并生成一次 |
+| A4 原生生成 | 横向 1088×768；竖向 768×1088 |
+| 最终图片 | 横向 1018×720；竖向 720×1018，Lanczos4 下采样 |
+| 检查 / 打印 | `checker.enabled=false`；GUI `printer.enabled=false` |
+
+八种画派为：野兽派、立体主义、印象派、后印象派、表现主义、超现实主义、新造型主义、波普艺术。原作提供主题或可辨认线索；Prompt 总结画派语言，允许重组构图，不插入逐图识别生成的场景描述。4B 指扩散模型参数规模，独立编码器另计；FP8 和 FP4 是量化格式。
+
+**10 秒预算覆盖 AI 阶段的准备、上传、推理、读取、完整性检查、下采样与保存；手机采集、纸面校正和启动预热另计。** 到达截止时间仍无完整 AI 成品时，结束本轮并仅在 GUI 显示超时提示，保留原图和校正图，不用原图冒充 AI 结果、不添加图片标注，P 随后重新激活。程序只取消自身请求并拒收迟到结果；预算用于结束等待，不保证每次都能在 10 秒内生成成品。
+
+生产流程只检查图片可解码、尺寸等文件完整性，不执行主题或画派审查；记录 `review_status=not_performed`、`validation_scope=file_integrity_only`。存在最终图不表示通过独立画质验收。
+
+## 打印与文件
+
+当前跳过实体打印机检查、提交与出纸等待，无需连接打印机。需要接入时在 `configs/gui.json` 显式启用 `printer.enabled`，安装 Windows 驱动并配置实体 A4 打印机，再进行真实设备联调。启用后，P 要等驱动确认已打印或工作人员确认出纸才重新激活；故障不自动重印。打印关闭时不改写此前的待打印记录。
+
+```text
+app/                    GUI、采集、纸边提取、生成、截止预算、状态与持久化
+configs/                当前应用、八画派、手机和 GUI 配置及备用配方
+workflows/              当前 FLUX.2 与保留模型的 ComfyUI API 工作流
+prompts/                生成模板及流程外检查模板
+tools/                  采集、生成验证与校准工具；Android 二进制需另装
+tests/                  单元测试、集成测试及固定回归素材
+examples/               保留的历史 Qwen 样图、参数、Prompt 与哈希
+docs/                   部署、规格和选定验证记录
+runs/phone/<session>/   原始屏幕、取景框、校正图与会话记录（本机生成）
+runs/phone-<session>/   AI 候选、最终 output.png 与 meta.json（本机生成）
+runs/runtime/           本机日志与预热记录，不提交
+```
+
+配置使用仓库相对路径，手机序列号默认不固定。模型、环境、运行日志、密钥和个人机器路径不进入源码提交；已有公开样例按原字节保留。独立的 Camera2 命令行入口和导入入口仍保留，其取景策略与 GUI 不同，见[手机采集规格](docs/phone-capture-spec.md)。例如导入完整画作：
 
 ```powershell
 .\.venv\Scripts\python.exe -m app.main doctor
 .\.venv\Scripts\python.exe -m app.main import --photo samples/children_originals/01_garden.png --artwork
 ```
 
-`--artwork` 适用于已经完整裁好的画作，关闭前处理中的纸边检测和裁边。带画框或背景的真实照片使用普通导入。应用默认工作流仍有模型侧中心裁切；样例配方另外关闭了该裁切，两者不要混为一谈。
+`--artwork` 用于已经裁好的原作；需要重新处理时建立新任务，不覆盖历史结果。
 
-正常导入等概率随机选择一个画派。开发调试可加 `--style cubism`，不改变默认随机机制。通过后生成 `runs/<job_id>/output.png`；不通过则保留候选和原因，不产生最终图。
+## 验证范围
 
-```powershell
-.\.venv\Scripts\python.exe -m app.main doctor --camera
-.\.venv\Scripts\python.exe -m app.main camera
-.\.venv\Scripts\python.exe -m app.main list --all
-.\.venv\Scripts\python.exe -m app.main resume
-```
-
-相机默认使用 Windows DirectShow，其他平台需调整 `capture.backend` 并实机验证。日常重做请新建任务；开发参数 `--force` 会重跑指定终态任务，可能重写其候选与记录，不用于保留历史结果。
-
-## 生成与确认规则
-
-- 画派特征优先，允许省略、合并、增补相关元素和重组构图；结果需保留主题关联或可辨认线索。
-- 每画派跨原图使用共用摘要；原图直接作为图像条件，不插入逐图识别所得的场景描述。
-- 自动确认必须同时满足 `style_match == "match"` 和 `content_preserved is True`。后者表示主题关联，不要求完整保留全部元素。
-- 每次正常自动流程最多两次生成：质量失败重试一次，固定输入与画派；技术错误直接失败。
-- 仅确认并可靠保存的结果进入 `COMPLETED`。无效、截断或类型错误的检查响应不视为成功。
-- 无云端推理、人工审批、Arduino 或真实打印步骤。
-
-## 技术配置
-
-| 环节 | 当前配置 |
-|---|---|
-| 后台 | Python 3.12、OpenCV、Pillow、Requests |
-| 图像生成 | ComfyUI + ComfyUI-GGUF；Qwen-Image-Edit-2509 Q3_K_M |
-| 图像编码 | Qwen2.5-VL-7B-Instruct Q4_K_M + 配套 mmproj；Qwen Image VAE |
-| 默认采样 | 4 steps、CFG 1、Lightning 4-step LoRA；Euler/simple、shift 3、denoise 1 |
-| 本地粗检 | Ollama `qwen3-vl:8b-instruct`；`comparison-v3-style-first`；默认 CPU |
-| 配置版本 | 应用 1.2.0；生成 Prompt 1.6.0；工程 1.0.0 |
-
-展示配方与应用默认分开保存：野兽派示例为 4 步、CFG 1.5、Lightning；其余七画派示例为 20 步、CFG 4、无 LoRA。样例的用户认可不等于自动确认，仓库没有训练新的画派权重。
-
-## 项目结构
-
-```text
-app/                  采集、生成、检查、状态与保存
-configs/              应用与三画派配置
-prompts/              应用默认生成和检查提示
-workflows/            ComfyUI API 工作流
-tools/                生成实验、评估与检查器校准工具
-tests/                规则测试、集成测试及固定校准夹具
-samples/children_originals/  三张开发输入
-examples/             当前展示、实际参数、共用提示与独立配方
-docs/                 部署与验证说明
-runs/                 本机任务与生成记录，Git 忽略
-```
-
-模型权重、运行环境、任务日志和本机配置不随仓库发布。示例输入已用于调参，不属于独立验收集，也不代表已完成儿童参与者测试。
-
-## 验证与后续工作
+本机 RTX 5080 16 GB、约 96 GB 内存、ComfyUI 0.39.0 / Torch 2.11.0+cu130 环境中，FLUX.2 对既有校正图的一次完整生成管线耗时 **3.89 秒**。该记录产生于三画派配置阶段，不是当前八派全部真实输入测速，也不包含手机采集或完整冷启动。八派预热另有 **22.792 秒**完成记录，输入是合成纯色图，不能作为八派画质或全流程速度证据。详情见[验证记录](docs/VALIDATION.md)。
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest tests/unit
 .\.venv\Scripts\python.exe -m ruff check app tools tests conftest.py
 ```
 
-需要主动调用真实本地服务时才运行 `python -m pytest tests/integration -v -m integration`。不要用裸 `pytest` 作为离线检查，它会收集集成测试。
-
-后续依次验证稳定的画派配方、独立输入质量、检查器误判、连续三件、断网及相机体验，再开展儿童现场研究。课程节点为 10 月 27 日进度汇报、11 月 24 日最终汇报、12 月 4 日 17:00 报告提交，均为 2026 年香港时间。
+单元测试包含模拟服务与设备；只有明确需要真实服务时才运行 `python -m pytest tests/integration -v -m integration`。工程检查不能替代八派独立质量、GUI 连续多件、断网、实体打印和儿童体验验收。历史样例使用不同的 Qwen 配方，不作为当前 FLUX.2 画质或速度的证明。

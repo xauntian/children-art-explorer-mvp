@@ -140,7 +140,7 @@ def test_validate_registry_returns_enabled_ids_and_rejects_empty():
 
 
 def test_real_project_style_config_is_valid():
-    """真实 configs/styles.json 必须通过校验，且三种首轮画派均启用。"""
+    """正式八画派全部可随机选择，并各自具备当前模型的生成参数。"""
     from pathlib import Path
 
     from app.config import load_app_config
@@ -149,7 +149,14 @@ def test_real_project_style_config_is_valid():
     config = load_app_config(root)
     registry = config.load_styles()
     enabled = validate_registry(registry)
-    assert set(enabled) == {"fauvism", "cubism", "impressionism"}
+    assert set(enabled) == {
+        "fauvism", "cubism", "impressionism", "post_impressionism",
+        "expressionism", "surrealism", "neoplasticism", "pop_art",
+    }
     for style in registry.enabled:
         assert style.style_features.strip()
         assert style.preservation_rules.strip()
+        assert config.sampler_for(style.id) == {
+            "steps": 4, "cfg": 1.0, "denoise": 1.0,
+            "sampler_name": "euler", "scheduler": "flux2",
+        }

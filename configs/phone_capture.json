@@ -1,0 +1,58 @@
+{
+  "mode": "confirm",
+  "capture_runs_dir": "runs/phone",
+  "phone": {
+    "adb_path": "tools/android/platform-tools/adb.exe",
+    "serial": null,
+    "preview_roi": [
+      0.020833333333333332,
+      0.12626262626262627,
+      0.9791666666666666,
+      0.7510822510822511
+    ],
+    "preview_screen_size": [
+      1344,
+      2772
+    ],
+    "screenshot_timeout_sec": 3,
+    "fallback_photo": false,
+    "photo_timeout_sec": 20,
+    "camera_shutter": {
+      "method": "tap",
+      "camera_package": "com.huawei.camera",
+      "screen_size": [
+        1344,
+        2772
+      ],
+      "position": [
+        672,
+        2390
+      ],
+      "wake_position": [
+        672,
+        1386
+      ],
+      "wake_delay_sec": 0.7
+    }
+  },
+  "extraction": {
+    "method": "paper",
+    "rotation_degrees": 0,
+    "max_detection_side": 1000,
+    "max_output_side": 1536
+  },
+  "generation_warmup": true,
+  "capture_backend": "camera_stream",
+  "stream": {
+    "server_path": "tools/android/scrcpy-server-v5.0.1",
+    "version": "5.0.1",
+    "camera_id": "0",
+    "size": "2048x1536",
+    "fps": 30,
+    "zoom": 1.5,
+    "bit_rate": 16000000,
+    "startup_timeout_sec": 12,
+    "fresh_frame_timeout_sec": 1.0,
+    "max_frame_age_ms": 150
+  }
+}

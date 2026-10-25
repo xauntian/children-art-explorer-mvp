@@ -1,0 +1,60 @@
+{
+  "_meta": {
+    "name": "SD 1.5 LCM artwork img2img",
+    "purpose": "Fast local image-conditioned art movement conversion with an LCM LoRA",
+    "source": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5",
+    "note": "The reference enters VAEEncode and KSampler.latent_image. ModelSamplingDiscrete uses LCM noise prediction. No text-to-image substitution or semantic review."
+  },
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": { "image": "__input_image__" }
+  },
+  "2": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": { "ckpt_name": "__checkpoint__" }
+  },
+  "3": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": ["1", 0], "upscale_method": "area",
+      "width": "__width__", "height": "__height__", "crop": "disabled"
+    }
+  },
+  "4": {
+    "class_type": "VAEEncode",
+    "inputs": { "pixels": ["3", 0], "vae": ["2", 2] }
+  },
+  "5": {
+    "class_type": "CLIPTextEncode",
+    "inputs": { "text": "__positive_prompt__", "clip": ["2", 1] }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": { "text": "__negative_prompt__", "clip": ["2", 1] }
+  },
+  "7": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["11", 0], "seed": "__seed__", "steps": "__steps__",
+      "cfg": "__cfg__", "sampler_name": "__sampler_name__",
+      "scheduler": "__scheduler__", "positive": ["5", 0], "negative": ["6", 0],
+      "latent_image": ["4", 0], "denoise": "__denoise__"
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": { "samples": ["7", 0], "vae": ["2", 2] }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": { "images": ["8", 0], "filename_prefix": "__filename_prefix__" }
+  },
+  "10": {
+    "class_type": "LoraLoaderModelOnly",
+    "inputs": { "model": ["2", 0], "lora_name": "__lora_name__", "strength_model": "__lora_strength__" }
+  },
+  "11": {
+    "class_type": "ModelSamplingDiscrete",
+    "inputs": { "model": ["10", 0], "sampling": "lcm", "zsnr": false }
+  }
+}

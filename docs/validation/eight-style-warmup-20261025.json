@@ -1,0 +1,207 @@
+{
+  "status": "completed",
+  "started_at": "2026-10-25T00:09:04.472+00:00",
+  "purpose": "startup_model_warmup",
+  "input_source": "synthetic_solid_colour",
+  "creates_user_job": false,
+  "route": "flux2",
+  "checkpoint": null,
+  "unet_name": "flux-2-klein-4b-fp8.safetensors",
+  "text_encoder": "qwen_3_4b_fp4_flux2.safetensors",
+  "vae_name": "flux2-vae.safetensors",
+  "lora_name": null,
+  "workflow_file": "workflows/image_edit_flux2_klein.json",
+  "width": 1088,
+  "height": 768,
+  "seed": 1203128484,
+  "style_prewarms": [
+    {
+      "style_id": "fauvism",
+      "seed": 1203128484,
+      "params": {
+        "steps": 4,
+        "cfg": 1.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "flux2"
+      },
+      "status": "completed",
+      "started_at": "2026-10-25T00:09:04.489+00:00",
+      "prompt_id": "8d322467-27af-4f4b-bcf0-ab806a852bd8",
+      "output_size": [
+        1088,
+        768
+      ],
+      "finished_at": "2026-10-25T00:09:07.365+00:00",
+      "total_sec": 2.877
+    },
+    {
+      "style_id": "cubism",
+      "seed": 1203128485,
+      "params": {
+        "steps": 4,
+        "cfg": 1.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "flux2"
+      },
+      "status": "completed",
+      "started_at": "2026-10-25T00:09:07.370+00:00",
+      "prompt_id": "0afc73a0-edcf-42ea-8b91-ba7f31d37435",
+      "output_size": [
+        1088,
+        768
+      ],
+      "finished_at": "2026-10-25T00:09:10.048+00:00",
+      "total_sec": 2.678
+    },
+    {
+      "style_id": "impressionism",
+      "seed": 1203128486,
+      "params": {
+        "steps": 4,
+        "cfg": 1.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "flux2"
+      },
+      "status": "completed",
+      "started_at": "2026-10-25T00:09:10.504+00:00",
+      "prompt_id": "cf357bf0-703a-4232-a473-f5553c4ede6c",
+      "output_size": [
+        1088,
+        768
+      ],
+      "finished_at": "2026-10-25T00:09:13.186+00:00",
+      "total_sec": 2.682
+    },
+    {
+      "style_id": "post_impressionism",
+      "seed": 1203128487,
+      "params": {
+        "steps": 4,
+        "cfg": 1.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "flux2"
+      },
+      "status": "completed",
+      "started_at": "2026-10-25T00:09:13.190+00:00",
+      "prompt_id": "a527f39c-2b4b-45e2-98b2-d6f16557ddd0",
+      "output_size": [
+        1088,
+        768
+      ],
+      "finished_at": "2026-10-25T00:09:15.874+00:00",
+      "total_sec": 2.684
+    },
+    {
+      "style_id": "expressionism",
+      "seed": 1203128488,
+      "params": {
+        "steps": 4,
+        "cfg": 1.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "flux2"
+      },
+      "status": "completed",
+      "started_at": "2026-10-25T00:09:15.879+00:00",
+      "prompt_id": "083e95d0-33dc-4057-936e-244914fcf0e7",
+      "output_size": [
+        1088,
+        768
+      ],
+      "finished_at": "2026-10-25T00:09:18.763+00:00",
+      "total_sec": 2.886
+    },
+    {
+      "style_id": "surrealism",
+      "seed": 1203128489,
+      "params": {
+        "steps": 4,
+        "cfg": 1.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "flux2"
+      },
+      "status": "completed",
+      "started_at": "2026-10-25T00:09:18.768+00:00",
+      "prompt_id": "061ec523-b182-4751-9cac-fd23b47bf7dd",
+      "output_size": [
+        1088,
+        768
+      ],
+      "finished_at": "2026-10-25T00:09:21.444+00:00",
+      "total_sec": 2.676
+    },
+    {
+      "style_id": "neoplasticism",
+      "seed": 1203128490,
+      "params": {
+        "steps": 4,
+        "cfg": 1.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "flux2"
+      },
+      "status": "completed",
+      "started_at": "2026-10-25T00:09:21.449+00:00",
+      "prompt_id": "a4704f6b-e42b-474a-8306-e79bb50cecef",
+      "output_size": [
+        1088,
+        768
+      ],
+      "finished_at": "2026-10-25T00:09:24.122+00:00",
+      "total_sec": 2.673
+    },
+    {
+      "style_id": "pop_art",
+      "seed": 1203128491,
+      "params": {
+        "steps": 4,
+        "cfg": 1.0,
+        "denoise": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "flux2"
+      },
+      "status": "completed",
+      "started_at": "2026-10-25T00:09:24.127+00:00",
+      "prompt_id": "4620f9cf-e3e0-4b6d-9fe1-a49517f1740e",
+      "output_size": [
+        1088,
+        768
+      ],
+      "finished_at": "2026-10-25T00:09:26.806+00:00",
+      "total_sec": 2.679
+    }
+  ],
+  "planned_styles": [
+    "fauvism",
+    "cubism",
+    "impressionism",
+    "post_impressionism",
+    "expressionism",
+    "surrealism",
+    "neoplasticism",
+    "pop_art"
+  ],
+  "style_id": "fauvism",
+  "params": {
+    "steps": 4,
+    "cfg": 1.0,
+    "denoise": 1.0,
+    "sampler_name": "euler",
+    "scheduler": "flux2"
+  },
+  "prompt_id": "8d322467-27af-4f4b-bcf0-ab806a852bd8",
+  "output_size": [
+    1088,
+    768
+  ],
+  "finished_at": "2026-10-25T00:09:27.262+00:00",
+  "total_sec": 22.792,
+  "app_config_version": "1.10.0",
+  "prompt_version": "1.7.0",
+  "measurement_scope": "Synthetic solid-colour input; eight style prompts; includes model RPC and decode validation; excludes phone capture, GUI readiness and full cold startup."
+}

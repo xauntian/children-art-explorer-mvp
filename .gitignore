@@ -33,3 +33,8 @@ dist/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Downloaded Android platform tools and scrcpy server
+/tools/android/platform-tools/
+/tools/android/platform-tools-*.zip
+/tools/android/scrcpy-server-*

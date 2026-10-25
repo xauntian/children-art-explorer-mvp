@@ -1,6 +1,6 @@
 {
-  "config_version": "1.0.0",
-  "prompt_version": "1.6.0",
+  "config_version": "1.1.0",
+  "prompt_version": "1.7.0",
   "styles": [
     {
       "id": "fauvism",
@@ -25,6 +25,51 @@
       "enabled": true,
       "style_features": "French Impressionism exemplified by Claude Monet and Camille Pissarro: fleeting natural light, luminous atmosphere and optical colour mixing; loose, short, irregular brushstrokes and adjacent touches of colour build the forms; warm sunlit highlights, cool blue-violet shadows and soft lost-and-found edges replace hard outlines",
       "preservation_rules": "use the reference as thematic inspiration, retaining only its broad subject or a few recognisable visual cues; freely omit, merge or add related elements and change their number, scale, positions and composition whenever this strengthens the style"
+    },
+    {
+      "id": "post_impressionism",
+      "name": "Post-Impressionism (Van Gogh-inspired direction)",
+      "name_zh": "后印象派（梵高式方向）",
+      "enabled": true,
+      "style_features": "one selected Van Gogh-inspired direction within the diverse Post-Impressionist movement: rhythmic directional brushstrokes, distinct dashes of opaque colour and expressive contour changes construct solid forms; saturated yellow-orange and blue-violet contrasts organise light and shadow; visible painted marks follow the movement and volume of the subject",
+      "preservation_rules": "use the reference as thematic inspiration, retaining its broad subject or a few recognisable visual cues; freely simplify, omit, merge or add related elements and reorganise composition, scale and colour to support the selected painterly direction",
+      "generate_prompt": "Repaint the entire source using one selected Van Gogh-inspired direction within Post-Impressionism. Build the image from rhythmic, directional dashes of opaque paint that follow the movement and volume of the forms. Use saturated yellow-orange light against blue-violet shadows, expressive contour changes and energetic colour contrasts. Distinct marks should construct substantial painted forms and create a unified visual rhythm, with varied stroke direction and density across the surface. Let the energy arise from the relationships between shapes and marks rather than uniform decorative spirals.\n\nUse the supplied original as the only visual input and thematic starting point. Retain its broad subject, relationships or a few recognisable cues; freely simplify, merge, omit or add related elements and reorganise scale, position and composition. Replace all original linework, filling marks and paper texture with fresh painted structure. Keep the source aspect ratio and extend the painting to every edge. Output one complete painting without text, letters, signature, watermark or border."
+    },
+    {
+      "id": "expressionism",
+      "name": "Expressionism",
+      "name_zh": "表现主义",
+      "enabled": true,
+      "style_features": "emotional intensity shapes the entire picture through deliberately distorted contours, tense angular forms, compressed or unstable perspective and urgent, rough brushwork; dissonant non-natural colours and sharp light-dark contrasts create psychological atmosphere; expressive deformation and spatial tension are visible beyond colour changes alone",
+      "preservation_rules": "use the reference as thematic inspiration, retaining its broad subject, relationship or a few recognisable visual cues; freely distort, simplify, merge or add related forms and reorganise scale, viewpoint and composition to express a coherent emotional atmosphere",
+      "generate_prompt": "Repaint the entire source as an Expressionist painting in which emotion changes the construction of the image. Use deliberately distorted contours, tense angular forms, compressed or unstable perspective and urgent, rough brushwork. Dissonant non-natural colours, dark accents and sharp light-dark contrasts should create one strong psychological atmosphere. Let the shapes lean, stretch and press against each other, with expressive differences in scale and an active rhythm of painted marks. Make the emotional deformation and spatial tension visible throughout the picture; colour changes alone are insufficient.\n\nUse the supplied original as the only visual input and thematic starting point. Keep its broad subject, central relationship or a few recognisable cues while freely simplifying, merging, omitting or adding related forms and changing viewpoint or composition. Rebuild all subjects and surroundings in the same expressive language. Replace the source outlines, filling marks and paper texture with a coherent painted surface. Keep the source aspect ratio. Output one complete painting without text, letters, signature, watermark or border."
+    },
+    {
+      "id": "surrealism",
+      "name": "Surrealism",
+      "name_zh": "超现实主义",
+      "enabled": true,
+      "style_features": "dream logic transforms familiar forms through unexpected juxtaposition, metamorphosis, shifts of scale and impossible spatial relationships; convincing light and carefully rendered surfaces make the impossible relationships feel tangible; imagery grows from the source theme, with coherent visual connections rather than arbitrary unrelated fantasy objects",
+      "preservation_rules": "use the reference as the sole visual source and thematic starting point; retain at least a few recognisable source-derived cues or relationships while freely transforming their scale, material, position and context and introducing related dreamlike connections",
+      "generate_prompt": "Completely repaint the ENTIRE source image as a luminous Surrealist oil painting. Reconstruct its theme inside a visibly impossible dream space: the whole landscape is lifted into separate floating islands above a continuous sea of clouds, while familiar forms repeat at dramatically different scales. Paint every figure and object with convincing solid volumes, warm daylight and deliberate soft shadows. Human faces remain calm and friendly. Replace ALL source outlines, filling marks and white paper with fresh painted forms and continuous painted space. Preserve a few recognisable source motifs while freely changing their positions, sizes and relationships. Keep the original aspect ratio. Output one complete painting with no text, letters, signature, watermark or frame."
+    },
+    {
+      "id": "neoplasticism",
+      "name": "Neo-Plasticism",
+      "name_zh": "新造型主义",
+      "enabled": true,
+      "style_features": "strict horizontal and vertical black lines divide an asymmetrical orthogonal composition into flat rectangular fields; pure red, yellow and blue balance white, black and occasional neutral grey; unequal spacing, line weights and colour areas create dynamic equilibrium; all forms are reduced to a flat geometric structure without diagonals, curves, gradients or modeled depth",
+      "preservation_rules": "abstract the reference through its broad distribution of visual weight, relative groupings, scale contrasts or directional rhythm; preserve a few traceable layout relationships while translating all figurative forms into horizontal and vertical rectangular structure; literal object recognition is optional",
+      "generate_prompt": "Create a fully abstract Neo-Plasticist painting from the source. Translate every source figure, object and background mark into flat rectangular colour fields inside an asymmetric grid of thick horizontal and vertical black lines. Use pure red, yellow, blue, white and black, with broad white regions and unequal divisions in dynamic balance. All edges are straight and orthogonal. All fields are uniform and completely flat. Leave no figurative silhouettes, curves, diagonals, depth, shading or texture. Use the source only to suggest the relative grouping, scale and balance of areas. Keep the original aspect ratio. Output one complete unsigned geometric composition with no text, lettering, watermark or frame."
+    },
+    {
+      "id": "pop_art",
+      "name": "Pop Art",
+      "name_zh": "波普艺术",
+      "enabled": true,
+      "style_features": "screenprinted advertising and mass-produced commercial imagery: bold flattened source-derived motifs, a small vivid spot-colour palette, hard silhouettes, slight colour-registration offsets and deliberate serial repetition; repeated image panels vary ink colours and cropping while retaining graphic recognition; printing and repetition define the treatment, with halftone dots only as an optional secondary texture",
+      "preservation_rules": "use the reference as the sole visual source and retain its broad theme or a few recognisable motifs; simplify, crop, repeat and recolour source-derived imagery freely to create a coherent commercial-print composition without introducing unrelated brands, readable slogans or product labels",
+      "generate_prompt": "Rebuild the source imagery as one Pop Art silkscreen print arranged in a two-by-two grid of four panels. Each panel repeats the same source-inspired scene with a different vivid spot-colour palette. Replace every crayon line and filling mark with bold clean silhouettes, flat graphic shapes, crisp ink edges and strong figure-ground contrast. Slight ink-registration offsets and selective printed texture support the repeated commercial-image appearance; dots are optional. Retain the source theme and recognisable motifs while freely simplifying and recolouring them. All four panels belong to one complete print with the original overall aspect ratio. No text, slogans, lettering, signature, logo, watermark or decorative border."
     }
   ]
 }

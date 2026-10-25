@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "name": "Qwen-Image 2.1 Turbo 7B reference image edit",
+    "model_family": "qwen_image21",
+    "source": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/main/templates/image_qwen_image_2_1_turbo_image_edit.json",
+    "note": "Official native edit encoding includes the reference image in both VL and VAE conditioning, with its matching target latent. Eight official Turbo sigma intervals, Euler, CFG 1, prefix KV cache; no prompt enhancer or semantic review."
+  },
+  "1": {"class_type": "LoadImage", "inputs": {"image": "__input_image__"}},
+  "2": {"class_type": "UNETLoader", "inputs": {"unet_name": "__unet_name__", "weight_dtype": "default"}},
+  "3": {"class_type": "CLIPLoader", "inputs": {"clip_name": "__text_encoder__", "type": "qwen_image", "device": "default"}},
+  "4": {"class_type": "VAELoader", "inputs": {"vae_name": "__vae_name__"}},
+  "5": {"class_type": "ImageScale", "inputs": {"image": ["1", 0], "upscale_method": "lanczos", "width": "__width__", "height": "__height__", "crop": "disabled"}},
+  "6": {"class_type": "TextEncodeQwenImage21", "inputs": {"clip": ["3", 0], "vae": ["4", 0], "prompt": "__positive_prompt__", "negative_prompt": "__negative_prompt__", "resolution": 0, "images.image_1": ["5", 0]}},
+  "7": {"class_type": "QwenImage21Cache", "inputs": {"model": ["2", 0], "device": "auto", "dtype": "int8"}},
+  "8": {"class_type": "CFGGuider", "inputs": {"model": ["7", 0], "positive": ["6", 0], "negative": ["6", 1], "cfg": "__cfg__"}},
+  "9": {"class_type": "RandomNoise", "inputs": {"noise_seed": "__seed__"}},
+  "10": {"class_type": "KSamplerSelect", "inputs": {"sampler_name": "__sampler_name__"}},
+  "11": {"class_type": "ManualSigmas", "inputs": {"sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"}},
+  "12": {"class_type": "SamplerCustomAdvanced", "inputs": {"noise": ["9", 0], "guider": ["8", 0], "sampler": ["10", 0], "sigmas": ["11", 0], "latent_image": ["6", 2]}},
+  "13": {"class_type": "VAEDecode", "inputs": {"samples": ["12", 0], "vae": ["4", 0]}},
+  "14": {"class_type": "SaveImage", "inputs": {"images": ["13", 0], "filename_prefix": "__filename_prefix__"}}
+}

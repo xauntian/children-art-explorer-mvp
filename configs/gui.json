@@ -1,0 +1,22 @@
+{
+  "phone_config": "configs/phone_capture_adb.json",
+  "comfyui": {
+    "python": "comfyui/.venv/Scripts/python.exe",
+    "directory": "comfyui",
+    "startup_timeout_sec": 120,
+    "reserve_vram": 1.0
+  },
+  "printer": {
+    "enabled": false,
+    "name": null,
+    "timeout_sec": 180,
+    "poll_interval_sec": 0.5
+  },
+  "preview": {
+    "max_size": 1280,
+    "max_fps": 15,
+    "bit_rate": 4000000,
+    "startup_timeout_sec": 12,
+    "max_frame_age_ms": 1000
+  }
+}

@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from math import ceil
 from pathlib import Path
 
 import cv2
@@ -25,6 +26,52 @@ class PreprocessResult:
     corners: list[list[float]] | None
     source_size: tuple[int, int]   # (w, h) 原照片尺寸
     output_size: tuple[int, int]   # (w, h) 模型输入尺寸
+    paper_layout: dict | None = None
+
+
+def a4_dimensions(short_side: int = 720, *, landscape: bool = True) -> tuple[tuple, tuple]:
+    """A4 原生模型桶与最终输出；原生两边均不小于交付尺寸。"""
+    native_short = ceil(short_side / 64) * 64
+    native_long = ceil(native_short * 297 / 210 / 32) * 32
+    output_long = round(short_side * 297 / 210)
+    native = (native_long, native_short)
+    output = (output_long, short_side)
+    return (native, output) if landscape else (native[::-1], output[::-1])
+
+
+def contain_a4(image: np.ndarray, short_side: int = 720) -> tuple[np.ndarray, dict]:
+    """保留整幅作品与横竖方向，等比置于白色 A4 模型画布。"""
+    height, width = image.shape[:2]
+    native, output = a4_dimensions(short_side, landscape=width >= height)
+    native_w, native_h = native
+    scale = min(native_w / width, native_h / height)
+    content_w, content_h = round(width * scale), round(height * scale)
+    content = cv2.resize(
+        image, (content_w, content_h),
+        interpolation=cv2.INTER_AREA if scale < 1 else cv2.INTER_LANCZOS4,
+    )
+    left, top = (native_w - content_w) // 2, (native_h - content_h) // 2
+    canvas = np.full((native_h, native_w, 3), 255, dtype=np.uint8)
+    canvas[top:top + content_h, left:left + content_w] = content
+    return canvas, {
+        "paper_format": "a4", "orientation": "landscape" if width >= height else "portrait",
+        "fit": "contain", "background": "#FFFFFF", "source_size": [width, height],
+        "content_box": [left, top, left + content_w, top + content_h],
+        "native_size": list(native), "output_size": list(output),
+    }
+
+
+def downsample_output(data: bytes, output_size: tuple[int, int]) -> tuple[bytes, dict]:
+    """仅从足够大的原生生成图下采样；拒绝将小图放大当作 720p。"""
+    image = decode_image_bytes(data, "generated output")
+    height, width = image.shape[:2]
+    if width < output_size[0] or height < output_size[1]:
+        raise PreprocessError("原生生成尺寸不足，不能通过放大满足 A4 输出尺寸")
+    resized = cv2.resize(image, output_size, interpolation=cv2.INTER_LANCZOS4)
+    return encode_png(resized), {
+        "method": "lanczos4", "operation": "downsample", "upscaled": False,
+        "native_size": [width, height], "output_size": list(output_size),
+    }
 
 
 def decode_image_bytes(data: bytes, source_name: str = "<bytes>") -> np.ndarray:
@@ -188,6 +235,8 @@ def preprocess(
     min_area_ratio: float = 0.15,
     max_area_ratio: float = 0.98,
     approx_epsilon_ratio: float = 0.02,
+    paper_format: str | None = None,
+    output_short_side: int | None = None,
 ) -> PreprocessResult:
     """完整预处理：透视校正 → 固定区域裁切 → 缩放到输入尺寸。"""
     if image is None or image.size == 0:
@@ -215,7 +264,13 @@ def preprocess(
         image = crop_ratios_region(image, crop_ratios)
         image = trim_border(image, border_trim_ratio)
 
-    resized = resize_to_max_side(image, max_input_side)
+    paper_layout = None
+    if paper_format == "a4":
+        resized, paper_layout = contain_a4(image, output_short_side or 720)
+        if max(resized.shape[:2]) > max_input_side:
+            raise PreprocessError("A4 原生模型尺寸超出 max_input_side")
+    else:
+        resized = resize_to_max_side(image, max_input_side)
     output_size = (int(resized.shape[1]), int(resized.shape[0]))
     return PreprocessResult(
         image=resized,
@@ -223,6 +278,7 @@ def preprocess(
         corners=None if corners is None else [[float(x), float(y)] for x, y in corners],
         source_size=source_size,
         output_size=output_size,
+        paper_layout=paper_layout,
     )
 
 
@@ -242,6 +298,8 @@ def prepare_model_input(
     min_area_ratio: float = 0.15,
     max_area_ratio: float = 0.98,
     approx_epsilon_ratio: float = 0.02,
+    paper_format: str | None = None,
+    output_short_side: int | None = None,
 ) -> tuple[PreprocessResult, bytes]:
     """从照片文件生成模型输入 PNG 字节。"""
     image = load_image(source_path)
@@ -254,5 +312,7 @@ def prepare_model_input(
         min_area_ratio=min_area_ratio,
         max_area_ratio=max_area_ratio,
         approx_epsilon_ratio=approx_epsilon_ratio,
+        paper_format=paper_format,
+        output_short_side=output_short_side,
     )
     return result, encode_png(result.image)

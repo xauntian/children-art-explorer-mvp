@@ -1,12 +1,10 @@
-# 本地部署
+# Windows 本地部署
 
-本文以 Windows PowerShell、Python 3.12 为基准。开发机器使用 RTX 5080 16 GB 和约 96 GB 内存；这是已有环境，不是最低配置承诺。其他硬件需要重新检查显存、耗时与稳定性。
+以下命令从仓库根目录的 PowerShell 执行，基准为 Python 3.12。已验证设备为 RTX 5080 16 GB、约 96 GB 内存；这不是最低配置要求，也不是跨设备的速度承诺。当前流程为 Windows GUI、华为原生相机截图、FLUX.2 Klein 4B 生成，风格审查与实体打印关闭。
 
-项目后台与 ComfyUI 可以使用不同的 Python 环境。后台只通过本地 HTTP 接口调用服务，不需要将 PyTorch 安装进项目环境。
+项目 Python 与 ComfyUI Python 分开管理。项目通过本地 HTTP 调用生成服务，不需要在项目 `.venv` 中安装 PyTorch；生产不依赖 Ollama。
 
-## 1. 项目后台
-
-在仓库根目录执行：
+## 1. 项目环境
 
 ```powershell
 py -3.12 -m venv .venv
@@ -15,84 +13,102 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pytest tests/unit
 ```
 
-预期启用 `fauvism`、`cubism`、`impressionism`，最大尝试数 2，打印关闭。`--offline` 不检查服务在线状态，也不表示模型已安装。
+离线检查应识别全部八个启用画派、FLUX.2 工作流、10 秒 AI 预算和关闭的审查/打印。它不检查手机或模型服务在线状态，也不表示权重已安装。GUI 依赖 Tkinter、Pillow；屏幕视频解码依赖 `av`（PyAV），已列入项目依赖。
 
-## 2. ComfyUI 与 GGUF 节点
+## 2. ComfyUI 环境
 
-在自行选择的运行时父目录执行以下命令。将大型模型保存在适合的位置，避免上传进源码仓库。
+GUI 默认查找仓库内的 `comfyui/` 和 `comfyui/.venv/Scripts/python.exe`。该目录由部署者自行安装，Git 忽略其中的程序环境与权重；亦可修改 `configs/gui.json` 中的相对路径。
 
 ```powershell
-git clone https://github.com/Comfy-Org/ComfyUI.git
-cd ComfyUI
-py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-git clone https://github.com/city96/ComfyUI-GGUF.git custom_nodes/ComfyUI-GGUF
-.\.venv\Scripts\python.exe -m pip install -r custom_nodes/ComfyUI-GGUF/requirements.txt
-.\.venv\Scripts\python.exe -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+git clone https://github.com/Comfy-Org/ComfyUI.git comfyui
+py -3.12 -m venv comfyui/.venv
+.\comfyui\.venv\Scripts\python.exe -m pip install torch==2.11.0 torchvision --index-url https://download.pytorch.org/whl/cu130
+.\comfyui\.venv\Scripts\python.exe -m pip install -r comfyui/requirements.txt
+.\comfyui\.venv\Scripts\python.exe -c "import torch; print(torch.__version__, torch.cuda.is_available())"
 ```
 
-CUDA 12.8 构建用于已有 RTX 50 系环境；其他设备按 PyTorch 官方支持情况选择。GGUF 节点的依赖需完整安装，包括其声明的 `gguf`、`sentencepiece` 和 `protobuf`。已有试作使用 ComfyUI 0.39.0；上游版本更新后先运行 `doctor` 并重新验证。
+已有实测为 ComfyUI 0.39.0、Torch 2.11.0+cu130、CUDA 可用。上游安装版本可能变化，安装后须核对节点与实际设备。RTX 50 系需要支持该 GPU 的 PyTorch 构建；其他设备按 [PyTorch 官方安装说明](https://pytorch.org/get-started/locally/)选择。生产 FLUX.2 工作流不要求 ComfyUI-GGUF 自定义节点；历史 Qwen GGUF 配方的依赖另计。
 
-## 3. 模型文件
+## 3. 三份生产模型
 
-从以下来源下载，并按表中的文件名放置；仓库不包含权重。下载前阅读对应来源的许可和使用条件。
+仓库不包含模型权重。阅读模型来源的许可和使用条件，下载后放在以下路径，保持文件名一致：
 
-| 用途 | ComfyUI 下的目录与文件名 | 来源 |
+| 组件 | 仓库根目录下的目标路径 | 官方来源 |
 |---|---|---|
-| 扩散模型 | `models/unet/Qwen-Image-Edit-2509-Q3_K_M.gguf` | [QuantStack](https://huggingface.co/QuantStack/Qwen-Image-Edit-2509-GGUF) |
-| 编码器 | `models/text_encoders/Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf` | [Unsloth](https://huggingface.co/unsloth/Qwen2.5-VL-7B-Instruct-GGUF) |
-| 视觉投影 | `models/text_encoders/Qwen2.5-VL-7B-Instruct-mmproj-BF16.gguf` | 同上，源文件 `mmproj-BF16.gguf` 需重命名 |
-| VAE | `models/vae/qwen_image_vae.safetensors` | [Comfy-Org](https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/tree/main/split_files/vae) |
-| 默认加速 LoRA | `models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors` | [Lightx2v](https://huggingface.co/lightx2v/Qwen-Image-Lightning/tree/main/Qwen-Image-Edit-2509) |
+| 扩散模型 | `comfyui/models/diffusion_models/flux-2-klein-4b-fp8.safetensors` | [black-forest-labs/FLUX.2-klein-4b-fp8](https://huggingface.co/black-forest-labs/FLUX.2-klein-4b-fp8) |
+| 文本编码器 | `comfyui/models/text_encoders/qwen_3_4b_fp4_flux2.safetensors` | [Comfy-Org/Flux-2-Klein-4B · text_encoders](https://huggingface.co/Comfy-Org/Flux-2-Klein-4B/tree/main/split_files/text_encoders) |
+| VAE | `comfyui/models/vae/flux2-vae.safetensors` | [Comfy-Org/Flux-2-Klein-4B · vae](https://huggingface.co/Comfy-Org/Flux-2-Klein-4B/tree/main/split_files/vae) |
 
-`mmproj` 必须与编码器同目录，文件名包含编码器基础名称 `Qwen2.5-VL-7B-Instruct`；仅保存为上游的 `mmproj-BF16.gguf` 可能导致节点找不到投影文件。
+八种画派只切换 Prompt，使用相同权重与采样配置，不需要下载八套模型，也不需要下载训练 LoRA。`configs/app.json` 中保留的其他路线字段不代表当前还需安装 SD 1.5、ControlNet、Qwen 图像编辑模型或检查模型。实际生产工作流为 `workflows/image_edit_flux2_klein.json`。
 
-默认路线是 Qwen GGUF。`workflows/image_edit.json` 是兼容的 SD 1.5 工作流；其 checkpoint 字段不代表默认还需要下载 SD 1.5 或 ControlNet。
-
-在 ComfyUI 目录启动服务，终端保持运行：
+如需手动启动服务，从仓库根目录执行：
 
 ```powershell
-.\.venv\Scripts\python.exe main.py --listen 127.0.0.1 --port 8188 --reserve-vram 1.0
+.\comfyui\.venv\Scripts\python.exe comfyui/main.py --listen 127.0.0.1 --port 8189 --reserve-vram 1.0 --disable-auto-launch
 ```
 
-## 4. Ollama 检查模型
+GUI 可以复用这个服务，也可在「开始」时按 `configs/gui.json` 启动。服务地址须与 `configs/app.json` 的 `comfy.base_url` 一致。GUI 关闭后保留 ComfyUI，方便下次复用缓存。系统内存用于缓存和卸载，不能等同于 GPU 显存带宽；不要把 96 GB 内存理解为一定能达到 10 秒成品。
 
-安装 [Ollama](https://ollama.com/)，下载准确模型标签：
+## 4. Android 工具与手机
+
+下载并解压 [Google 官方 SDK Platform-Tools](https://developer.android.com/tools/releases/platform-tools)，使 ADB 位于：
+
+```text
+tools/android/platform-tools/adb.exe
+```
+
+从 [Genymobile 官方 scrcpy 5.0.1 发布页](https://github.com/Genymobile/scrcpy/releases/tag/v5.0.1)取得 `scrcpy-server-v5.0.1`，保持文件名不变，放在：
+
+```text
+tools/android/scrcpy-server-v5.0.1
+```
+
+ADB 所需的同包 DLL 应与可执行文件一同保留。仓库不打包第三方二进制，不要求安装桌面 scrcpy 客户端；项目自行调用官方 server 与 PyAV 解码。server 版本须与当前协议实现一致。
+
+手机开启 USB 调试、USB 连接电脑并确认授权，然后检查：
 
 ```powershell
-ollama pull qwen3-vl:8b-instruct
-ollama list
+.\tools\android\platform-tools\adb.exe devices -l
 ```
 
-若桌面服务尚未运行，在单独终端执行 `ollama serve`。项目默认地址为 `http://127.0.0.1:11434`。
+预期仅有一台处于 `device` 状态的手机。默认 `phone.serial=null`，使用该设备；连接多台时须在 `configs/phone_capture_adb.json` 中显式指定序列号。不要把个人序列号提交到公共仓库。
 
-当前 `configs/app.json` 使用 `mode="comparison"`，`temperature=0`、`seed=0`、`num_predict=768`、`num_ctx=8192`、`num_gpu=0`。检查放在 CPU 上执行，以减少与生成模型争用显存；改变模型或设备策略后需重新验证，不能自动换成云端服务。
+当前 `preview_screen_size` 和 `preview_roi` 已针对 Mate 40 Pro 的原生相机标定。使用不同分辨率、显示设置或设备时，须以真实截图核对并调整 ROI；程序不会自动猜测取景框。GUI 不读倍率，也不打开、切换或调整相机。解锁手机，手动进入华为原生相机并设好取景，使四条纸边及少量底板完整可见；保持屏幕亮起。
 
-## 5. 验证并运行
+GUI 待机预览是屏幕视频，不是周期截图；P 使用独立 ADB 原生截图保存正式输入。GUI 强制禁用拍照回退，不会因截图失败触发快门。Camera2 命令行入口是另一条显式采集路线，详见[手机采集规格](phone-capture-spec.md)。
 
-返回项目仓库根目录，在后台项目环境中执行：
+## 5. 启动 GUI
 
 ```powershell
 .\.venv\Scripts\python.exe -m app.main doctor
-.\.venv\Scripts\python.exe -m app.main import --photo samples/children_originals/01_garden.png --artwork
+.\start_gui.cmd
 ```
 
-`doctor` 应能连接两个服务并找到配置中的模型。导入后每个任务写入 `runs/<job_id>/`，只在粗检通过且文件保存成功时创建 `output.png`。如果失败，请查看任务原因与检查记录；不要把存在候选图片当作任务成功。
+`doctor` 在服务已启动时应找到当前模型及节点；无需启动 Ollama。点击 GUI 的「开始」后，程序检查手机和服务，逐一预热八派，准备完成后才接受 GUI 窗口中的 P。
 
-默认应用工作流的 `FluxKontextImageScale` 会按预设比例缩放并可能中心裁切，`--artwork` 只关闭前处理裁边。要复现完整画面的展示结果，请使用 [examples 的独立配方](../examples/README.md)，它同时关闭了模型侧裁切。
+每轮显示原图、校正图与 AI 图。处理中 P 失效，完成或失败后重新激活。单轮 AI 预算为 10 秒，采集、纸面校正和预热另计。超时只在 GUI 提示，不生成带标注或原图替代的假成品。原图和校正图可在 `runs/phone/<session>/` 查看，生成记录在 `runs/phone-<session>/meta.json`，GUI 日志在 `runs/runtime/gui.log`。
 
-## 6. 常见问题
+当前打印关闭，会跳过设备检查、系统打印与出纸等待。要启用实体打印，先安装 Windows 打印机驱动，再配置 `configs/gui.json` 的 `printer.enabled=true` 与可选 `printer.name`，重启 GUI。此功能仍需真实设备联调；故障时查询原作业，不反复提交或重新生成图片。
 
-| 情况 | 处理 |
+## 6. 检查与故障处理
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest tests/unit
+.\.venv\Scripts\python.exe -m ruff check app tools tests conftest.py
+```
+
+| 情况 | 核对内容 |
 |---|---|
-| 服务连接失败 | 核对两个服务是否已启动、端口与 `configs/app.json` 地址是否一致 |
-| 找不到 UnetLoaderGGUF / CLIPLoaderGGUF | 检查 GGUF 自定义节点及完整依赖，重启 ComfyUI |
-| 找不到 mmproj | 核对文件名与编码器名称的对应关系，以及是否同目录 |
-| 显存不足 | 检查其他 GPU 程序；保持检查器在 CPU，按实际设备调整输入尺寸与 ComfyUI 显存余量后再验证 |
-| 响应截断或 JSON 类型错误 | 该任务为技术失败；检查原始响应、准确模型标签和长度上限，不放宽通过规则 |
-| 候选有图但无 output.png | 可能未通过粗检；查看 `meta.json` 与 `check_*.json` |
-| 已有活动任务 | 使用 `list --all` 查看，再用 `resume` 按已保存状态恢复 |
-| 相机打不开 | 使用 `doctor --camera` 探测；检查设备索引与系统权限。默认 `dshow` 用于 Windows，其他平台改为受支持的后端 |
+| 找不到项目 Python | 先创建 `.venv` 并安装 `requirements.txt` |
+| GUI 无法启动 ComfyUI | `configs/gui.json` 的 Python/目录相对仓库根目录存在，且 ComfyUI 环境完整 |
+| 服务连接失败 | 地址为 `127.0.0.1:8189`，配置一致；查看本机服务日志 |
+| 缺 FLUX.2 节点或模型 | 更新兼容的 ComfyUI、核对三份文件的目录与名称，再运行 `doctor` |
+| 找不到 ADB 或 server | 核对第四节的路径、文件名及同包 DLL；server 为 5.0.1 |
+| 手机 `unauthorized` / 锁屏 / 不在相机 | 手机手动授权、解锁并打开原生相机，再重新准备 |
+| 截图尺寸不匹配 | 核对实际屏幕尺寸与标定 ROI，不自动套用其他分辨率 |
+| 检测不到完整纸边 | 保留四边及少量底板，避免纸边遮挡、反光或背景混淆，再按 P |
+| AI 超时 | 本轮结束，不输出迟到结果；检查服务队列、GPU 占用与模型缓存，再开始新一轮 |
+| 有原图但无最终图 | 查看会话与任务的错误；候选存在不代表成功，不手动伪造成功状态 |
+| 预览静止 | 屏幕画面静止时可能不产生新帧；确认手机亮屏、相机前景与连接状态 |
 
-保持模型与服务版本、实际 Prompt、种子及参数记录完整。检查耗时和缓存命中不能混作重新生成耗时；不同环境不承诺逐像素复现。
+依赖和权重就绪后的断网流程、GUI 连续多件、长时间运行与真实打印尚需现场验证。单元测试、预热或少量真实调用不能替代独立画质与儿童体验评估。

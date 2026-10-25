@@ -2,7 +2,9 @@
 
 检查模型使用原图与候选图的证据，并清楚区分两张图的角色。
 风格化优先；content_preserved 表示主题或可辨认视觉线索的关联，不要求逐物保留。
-通过条件极严：style_match 必须为 "match" 且 content_preserved 必须是 JSON 的 true。
+通过条件：生效的 style_match 必须为 "match"，content_preserved 必须是 JSON 的 true。
+风格门槛在 enforced 时来自模型；deferred 时来自 user_override，并记录待校准，
+不代表模型独立完成画派验收。主题检查始终真实执行且保持严格类型。
 字符串 "true"、数字 1、模型自称的置信度一律不转换为通过。
 """
 
@@ -190,7 +192,7 @@ def _validate_comparison_observation(raw_text: str) -> dict:
 
 @dataclass
 class CheckResult:
-    """一次合法检查结果的解析产物。"""
+    """合法检查结果：生效的风格策略与真实主题判定，来源保存在 extra。"""
 
     style_match: str
     content_preserved: bool | None
@@ -202,7 +204,7 @@ class CheckResult:
 
     @property
     def passed(self) -> bool:
-        """严格通过条件：match 且 content_preserved is True。"""
+        """生效风格须 match（可能源于 user_override），主题须严格为 True。"""
         return self.style_match == "match" and self.content_preserved is True
 
     def to_dict(self) -> dict:
@@ -389,6 +391,7 @@ class VisionChecker:
         session: requests.Session | None = None,
         mode: str = "two_stage",
         control: bool = False,
+        style_validation: str = "enforced",
     ) -> None:
         self.base_url = base_url.rstrip("/")
         self.model = model
@@ -402,6 +405,15 @@ class VisionChecker:
             raise CheckTechnicalError(f"未知检查方式: {mode}", stage="CHECKING")
         self.mode = mode
         self.control = control
+        self.style_validation = self._style_validation(style_validation)
+
+    def _style_validation(self, value: str | None = None) -> str:
+        policy = getattr(self, "style_validation", "enforced") if value is None else value
+        if policy not in ("enforced", "deferred"):
+            raise CheckTechnicalError("style_validation 必须是 enforced 或 deferred", stage="CHECKING")
+        if policy == "deferred" and self.mode != "comparison":
+            raise CheckTechnicalError("deferred 风格检查策略仅支持 comparison 模式", stage="CHECKING")
+        return policy
 
     # ---- 健康检查 ----
     def list_models(self) -> list[str]:
@@ -658,8 +670,10 @@ class VisionChecker:
         style_features: str,
         attempt: int | None = None,
         duration_sec: float | None = None,
+        style_validation: str | None = None,
     ) -> CheckResult:
         """单张 A/B 图分别检查主题关联和渲染变化，再独立粗判画派。"""
+        policy = self._style_validation(style_validation)
         board, board_metadata = build_comparison_board(original_bytes, candidate_bytes)
         raw: dict[str, str] = {}
         prompts: dict[str, str] = {}
@@ -668,6 +682,26 @@ class VisionChecker:
             prompts[component] = COMPARISON_CONTENT_PROMPT
             raw[component] = self._call(COMPARISON_CONTENT_PROMPT, [board])
             content = _validate_comparison_content(raw[component])
+            if policy == "deferred":
+                result = validate_check_payload({
+                    "content_preserved": content["content_preserved"],
+                    "style_match": "match",
+                    "reason": f"Content: {content['reason']} Style validation deferred by user override; model style judgement was not performed and calibration is pending.",
+                })
+                result.raw_text = json.dumps(raw, ensure_ascii=False)
+                result.attempt = attempt
+                result.duration_sec = duration_sec
+                result.extra.update({
+                    "mode": "comparison", "comparison_version": COMPARISON_VERSION,
+                    "comparison_board": board_metadata, "comparison_content": content,
+                    "comparison_observation": None, "style_judgement": None,
+                    "comparison_raw": dict(raw), "comparison_prompts": dict(prompts),
+                    "verdict_guards": [], "style_validation": "deferred",
+                    "style_check_source": "user_override", "style_calibration_pending": True,
+                    "model_style_match": None, "style_model_called": False,
+                    "skipped_checks": ["rendering_observation", "style_match"],
+                })
+                return result
             component = "observation"
             prompts[component] = COMPARISON_OBSERVATION_PROMPT
             raw[component] = self._call(COMPARISON_OBSERVATION_PROMPT, [board])
@@ -690,6 +724,7 @@ Return JSON with style_match (match/mismatch/uncertain) and reason (string)."""
             exc.details = {
                 **(exc.details or {}), "mode": "comparison",
                 "comparison_version": COMPARISON_VERSION, "comparison_component": component,
+                "style_validation": policy,
                 "comparison_board": board_metadata, "comparison_raw": dict(raw),
                 "comparison_prompts": dict(prompts),
             }
@@ -722,6 +757,8 @@ Return JSON with style_match (match/mismatch/uncertain) and reason (string)."""
             "comparison_content": content, "comparison_observation": observation,
             "style_judgement": style, "comparison_raw": raw, "verdict_guards": guards,
             "comparison_prompts": dict(prompts),
+            "style_validation": "enforced", "style_check_source": "model",
+            "style_calibration_pending": False,
         })
         return result
 
@@ -742,6 +779,8 @@ Return JSON with style_match (match/mismatch/uncertain) and reason (string)."""
         本机模型的双图能力自检未通过，因此分别读取图像，再独立判定两个轴。
         此方法依赖单图描述的准确性；描述仍可能遗漏或误认可见内容。
         """
+        if self.style_validation == "deferred":
+            raise CheckTechnicalError("deferred 策略必须使用 comparison 的 check_pair 入口", stage="CHECKING")
         describe = (
             "Describe only visible evidence in this image in at most 150 words. "
             "Use exactly these four labelled lines, one per line:\n"
@@ -798,8 +837,10 @@ Return JSON with style_match (match/mismatch/uncertain) and reason (string)."""
         preservation_rules: str,
         attempt: int | None = None,
         duration_sec: float | None = None,
+        style_validation: str | None = None,
     ) -> CheckResult:
         """按配置执行 comparison、two_stage 或 pairwise 检查。"""
+        policy = self._style_validation(style_validation)
         if self.mode == "comparison":
             return self.check_comparison(
                 original_bytes=original_bytes,
@@ -808,6 +849,7 @@ Return JSON with style_match (match/mismatch/uncertain) and reason (string)."""
                 style_features=style_features,
                 attempt=attempt,
                 duration_sec=duration_sec,
+                style_validation=policy,
             )
         if self.mode == "two_stage":
             return self.check_two_stage(
@@ -840,6 +882,8 @@ Return JSON with style_match (match/mismatch/uncertain) and reason (string)."""
 
         图像顺序固定为「原图、候选图」，与检查 Prompt 中的说明一致。
         """
+        if self.style_validation == "deferred":
+            raise CheckTechnicalError("deferred 策略必须使用 comparison 的 check_pair 入口", stage="CHECKING")
         raw_text = self._call(prompt, [original_bytes, candidate_bytes])
         payload = extract_json_object(raw_text)
         result = validate_check_payload(payload)

@@ -1,0 +1,94 @@
+{
+  "production_budget_sec": 10,
+  "success_validation": {
+    "job_id": "validation-flux4b-deadline-20261025",
+    "state": "COMPLETED",
+    "timings": {
+      "capture_sec": 0.015,
+      "preprocess_sec": 0.047,
+      "save_output_sec": 0.047,
+      "total_sec": 3.89
+    },
+    "generation_deadline": {
+      "budget_sec": 10.0,
+      "elapsed_sec": 3.89,
+      "met": true
+    },
+    "output": {
+      "file": "output.png",
+      "bytes": 1532931,
+      "attempt": 1,
+      "saved_at": "2026-10-24T23:51:00.394+00:00",
+      "review_status": "not_performed",
+      "validation_scope": "file_integrity_only",
+      "width": 1018,
+      "height": 720,
+      "resize": {
+        "method": "lanczos4",
+        "operation": "downsample",
+        "upscaled": false,
+        "native_size": [
+          1088,
+          768
+        ],
+        "output_size": [
+          1018,
+          720
+        ]
+      }
+    },
+    "style_id": "fauvism"
+  },
+  "forced_timeout_validation": {
+    "test_budget_sec": 1.8,
+    "wall_sec": 1.643,
+    "state": "FAILED",
+    "error_category": "timeout",
+    "prompt_id": "185731de-5318-4d98-9a40-353d2817e894",
+    "output_exists": false,
+    "remaining_own_prompt": false,
+    "has_active_local_job": false,
+    "summary": {
+      "job_id": "validation-flux4b-timeout-20261025",
+      "state": "FAILED",
+      "style_id": "cubism",
+      "created_at": "2026-10-24T23:52:19.160+00:00",
+      "updated_at": "2026-10-24T23:52:20.792+00:00",
+      "attempt_count": 1,
+      "has_output": false,
+      "error": {
+        "at": "2026-10-24T23:52:20.779+00:00",
+        "category": "timeout",
+        "stage": "GENERATING",
+        "message": "AI 生成已到达本轮截止时间，已停止等待本轮结果",
+        "details": {
+          "prompt_id": "185731de-5318-4d98-9a40-353d2817e894",
+          "deadline_sec": 1.8000000000465661,
+          "deadline_monotonic": 1237078.784
+        }
+      },
+      "timings": {
+        "capture_sec": 0.016,
+        "preprocess_sec": 0.046,
+        "total_sec": 1.625
+      },
+      "generation_deadline": {
+        "budget_sec": 1.8,
+        "elapsed_sec": 1.625,
+        "met": true
+      },
+      "review": {
+        "enabled": false,
+        "status": "not_performed",
+        "validation_scope": "file_integrity_only",
+        "reason": "checker_disabled_by_configuration"
+      },
+      "review_status": "not_performed",
+      "validation_scope": "file_integrity_only"
+    },
+    "style_id": "cubism"
+  },
+  "app_config_version": "1.9.0",
+  "prompt_version": "1.6.0",
+  "measurement_scope": "Single Fauvism artwork generation before eight-style expansion; reused rectified input; excludes new phone capture and full cold startup. Timeout check uses a temporary in-memory 1.8 second budget. This does not validate all eight styles on real artwork."
+}

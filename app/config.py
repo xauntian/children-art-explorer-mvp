@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 from copy import deepcopy
+from math import ceil, isfinite
 from pathlib import Path
 from typing import Any
 
@@ -102,10 +103,13 @@ class StyleConfig:
 
         self.style_features: str = _require_str(raw, "style_features", path)
         self.preservation_rules: str = _require_str(raw, "preservation_rules", path)
+        self.generate_prompt: str | None = (
+            _require_str(raw, "generate_prompt", path) if "generate_prompt" in raw else None
+        )
         self.raw = raw
 
     def to_dict(self) -> dict:
-        return {
+        result = {
             "id": self.id,
             "name": self.name,
             "name_zh": self.name_zh,
@@ -113,6 +117,9 @@ class StyleConfig:
             "style_features": self.style_features,
             "preservation_rules": self.preservation_rules,
         }
+        if self.generate_prompt is not None:
+            result["generate_prompt"] = self.generate_prompt
+        return result
 
 
 class StyleRegistry:
@@ -205,6 +212,9 @@ class AppConfig:
         )
 
         checker = _require_dict(raw, "checker", "app")
+        self.checker_enabled: bool = checker.get("enabled", True)
+        if type(self.checker_enabled) is not bool:
+            raise ConfigError("配置字段 app.checker.enabled 必须是布尔值")
         self.checker_base_url: str = str(_require_str(checker, "base_url", "app.checker")).rstrip("/")
         self.checker_api: str = str(_require_str(checker, "api", "app.checker"))
         if self.checker_api not in ("chat", "generate"):
@@ -217,6 +227,11 @@ class AppConfig:
         self.checker_mode: str = str(checker.get("mode", "two_stage"))
         if self.checker_mode not in ("two_stage", "pairwise", "comparison"):
             raise ConfigError("配置字段 app.checker.mode 只能是 'two_stage'、'pairwise' 或 'comparison'")
+        self.checker_style_validation: str = checker.get("style_validation", "enforced")
+        if self.checker_style_validation not in ("enforced", "deferred"):
+            raise ConfigError("配置字段 app.checker.style_validation 只能是 'enforced' 或 'deferred'")
+        if self.checker_style_validation == "deferred" and self.checker_mode != "comparison":
+            raise ConfigError("app.checker.style_validation='deferred' 仅支持 comparison 模式")
         control = checker.get("two_stage_control", False)
         if not isinstance(control, bool):
             raise ConfigError("配置字段 app.checker.two_stage_control 必须是布尔值")
@@ -247,6 +262,23 @@ class AppConfig:
         self.pre_max_input_side: int = int(_require_int(pre, "max_input_side", "app.preprocess"))
         if self.pre_max_input_side < 64:
             raise ConfigError("配置字段 app.preprocess.max_input_side 必须 >= 64")
+        self.pre_paper_format: str | None = pre.get("paper_format")
+        if self.pre_paper_format not in (None, "a4"):
+            raise ConfigError("配置字段 app.preprocess.paper_format 只能是 'a4' 或 null")
+        self.pre_output_short_side: int | None = pre.get("output_short_side")
+        if self.pre_paper_format == "a4":
+            if self.pre_output_short_side is None:
+                self.pre_output_short_side = 720
+            if type(self.pre_output_short_side) is not int or self.pre_output_short_side < 64:
+                raise ConfigError("配置字段 app.preprocess.output_short_side 必须是 >= 64 的整数")
+            native_short = ceil(self.pre_output_short_side / 64) * 64
+            native_long = ceil(native_short * 297 / 210 / 32) * 32
+            if self.pre_max_input_side < native_long:
+                raise ConfigError(
+                    "A4 输出要求 app.preprocess.max_input_side >= " + str(native_long)
+                )
+        elif self.pre_output_short_side is not None:
+            raise ConfigError("app.preprocess.output_short_side 需要 paper_format='a4'")
         self.pre_frame_detect: bool = _require_bool(pre, "frame_detect", "app.preprocess")
         self.pre_border_trim_ratio: float = float(
             _require_number(pre, "border_trim_ratio", "app.preprocess")
@@ -275,6 +307,15 @@ class AppConfig:
         self.max_attempts: int = int(_require_int(gen, "max_attempts", "app.generation"))
         if self.max_attempts != 2:
             raise ConfigError("本阶段要求 app.generation.max_attempts = 2")
+        budget = gen.get("time_budget_sec")
+        if budget is not None and (
+            isinstance(budget, bool) or not isinstance(budget, (int, float))
+            or not isfinite(budget) or budget <= 0
+        ):
+            raise ConfigError("配置字段 app.generation.time_budget_sec 必须是有限的正秒数或 null")
+        self.generation_time_budget_sec: float | None = (
+            float(budget) if budget is not None else None
+        )
         base_seed = gen.get("base_seed")
         if base_seed is not None and (isinstance(base_seed, bool) or not isinstance(base_seed, int)):
             raise ConfigError("配置字段 app.generation.base_seed 必须是整数或 null")
@@ -339,8 +380,13 @@ class AppConfig:
         )
         return AppConfig(raw, self.project_root)
 
-    def require_prompt_files(self) -> None:
-        for path in (self.generate_prompt_path, self.check_prompt_path):
+    def require_prompt_files(self, *, include_check: bool | None = None) -> None:
+        if include_check is None:
+            include_check = self.checker_enabled
+        paths = [self.generate_prompt_path]
+        if include_check:
+            paths.append(self.check_prompt_path)
+        for path in paths:
             if not path.is_file():
                 raise ConfigError(f"Prompt 文件不存在: {path}")
         if not self.comfy_workflow_path.is_file():
@@ -354,11 +400,12 @@ class AppConfig:
         styles = [StyleConfig(item, i) for i, item in enumerate(styles_raw)]
         return StyleRegistry(styles, raw.get("prompt_version"))
 
-    def load_prompts(self) -> tuple[str, str]:
-        self.require_prompt_files()
+    def load_prompts(self, *, include_check: bool = True) -> tuple[str, str | None]:
+        """读取 Prompt；流程外校准兼容默认读检查模板，App 显式传入启用状态。"""
+        self.require_prompt_files(include_check=include_check)
         return (
             self.generate_prompt_path.read_text(encoding="utf-8"),
-            self.check_prompt_path.read_text(encoding="utf-8"),
+            self.check_prompt_path.read_text(encoding="utf-8") if include_check else None,
         )
 
 

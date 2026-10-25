@@ -11,6 +11,7 @@ import pytest
 
 from app.config import load_app_config
 from app.generator import ComfyGenerator, load_workflow
+from tests.fixtures import make_app_config, make_registry
 from tools import bench_generate, prompt_grid
 
 
@@ -46,17 +47,41 @@ def test_missing_or_unrelated_cache_evidence_stays_unknown(history):
 
 
 @pytest.mark.parametrize("explicit_seed", [None, 0])
-@pytest.mark.parametrize("uses_unet", [False, True])
+@pytest.mark.parametrize("model_route", ["checkpoint", "unet", "lcm"])
 @pytest.mark.parametrize("experiment_config", [False, True])
 def test_bench_prompt_seed_and_metadata_match_submission(
-    monkeypatch, tmp_path, capsys, explicit_seed, uses_unet, experiment_config,
+    monkeypatch, tmp_path, capsys, explicit_seed, model_route, experiment_config,
 ):
     submitted = {}
-    config = load_app_config(bench_generate.ROOT)
-    if not uses_unet:
-        config.comfy_workflow_path = bench_generate.ROOT / "workflows" / "image_edit.json"
-        config.comfy_controlnet = "scribble.safetensors"
-    config_path = bench_generate.ROOT / "configs" / "app.json"
+    uses_unet = model_route == "unet"
+    uses_lora = model_route in ("unet", "lcm")
+    workflow_name = {
+        "checkpoint": "image_edit.json",
+        "unet": "image_edit_qwen.json",
+        "lcm": "image_edit_sd15_lcm.json",
+    }[model_route]
+    workflow_path = bench_generate.ROOT / "workflows" / workflow_name
+    config = make_app_config(
+        tmp_path,
+        comfy={
+            "workflow_path": str(workflow_path),
+            "checkpoint": "sd.safetensors",
+            "unet_name": "qwen.gguf",
+            "text_encoder": "qwen-vl.gguf",
+            "vae_name": "qwen-vae.safetensors",
+            "controlnet": "scribble.safetensors" if model_route == "checkpoint" else None,
+            "lora_name": "lcm.safetensors" if model_route == "lcm" else "lightning.safetensors",
+            "lora_strength": 1.0,
+        },
+    )
+    registry = make_registry()
+    config.style_config_path.write_text(
+        json.dumps({"prompt_version": registry.prompt_version,
+                    "styles": [style.to_dict() for style in registry.styles]}),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(bench_generate, "ROOT", tmp_path)
+    config_path = tmp_path / "configs" / "app.json"
     if experiment_config:
         workflow = json.loads(config.comfy_workflow_path.read_text(encoding="utf-8"))
         if uses_unet:
@@ -141,13 +166,14 @@ def test_bench_prompt_seed_and_metadata_match_submission(
     assert metadata["positive_prompt"] == request["positive_prompt"]
     assert metadata["seed"] == request["seed"]
     assert metadata["sampler_params"]["steps"] == 8
-    assert metadata["lora_strength"] == (0.7 if uses_unet else None)
+    assert metadata["lora_strength"] == (0.7 if uses_lora else None)
     expected_model = config.comfy_unet_name if uses_unet else config.comfy_checkpoint
     assert metadata["model"] == expected_model
     printed = capsys.readouterr().out
     assert expected_model in printed
     if not uses_unet:
         assert config.comfy_unet_name not in printed
+    if not uses_lora:
         assert config.comfy_lora_name not in printed
     assert metadata["prompt_id"] == "prompt-unit-test"
     assert metadata["cache"]["status"] == "hit"

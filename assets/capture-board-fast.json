@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "board_size_px": [
+    1200,
+    1600
+  ],
+  "coordinate_system": "top_left_xy_pixels; bounds_ltrb_exclusive",
+  "aruco": {
+    "dictionary": "DICT_4X4_50",
+    "marker_side_px": 112,
+    "border_bits": 1,
+    "quiet_zone_px": 16,
+    "margin_px": 24,
+    "marker_order": "top_left, top_right, bottom_right, bottom_left",
+    "corner_order": "top_left, top_right, bottom_right, bottom_left",
+    "corners_convention": "geometric exterior edges; right and bottom exclusive",
+    "all_four_required": true,
+    "markers": [
+      {
+        "id": 0,
+        "corner": "top_left",
+        "center_px": [
+          96,
+          96
+        ],
+        "bounds_ltrb": [
+          40,
+          40,
+          152,
+          152
+        ],
+        "quiet_bounds_ltrb": [
+          24,
+          24,
+          168,
+          168
+        ],
+        "corners_px": [
+          [
+            40,
+            40
+          ],
+          [
+            152,
+            40
+          ],
+          [
+            152,
+            152
+          ],
+          [
+            40,
+            152
+          ]
+        ],
+        "rotation_clockwise_degrees": 0
+      },
+      {
+        "id": 1,
+        "corner": "top_right",
+        "center_px": [
+          1104,
+          96
+        ],
+        "bounds_ltrb": [
+          1048,
+          40,
+          1160,
+          152
+        ],
+        "quiet_bounds_ltrb": [
+          1032,
+          24,
+          1176,
+          168
+        ],
+        "corners_px": [
+          [
+            1048,
+            40
+          ],
+          [
+            1160,
+            40
+          ],
+          [
+            1160,
+            152
+          ],
+          [
+            1048,
+            152
+          ]
+        ],
+        "rotation_clockwise_degrees": 0
+      },
+      {
+        "id": 2,
+        "corner": "bottom_right",
+        "center_px": [
+          1104,
+          1504
+        ],
+        "bounds_ltrb": [
+          1048,
+          1448,
+          1160,
+          1560
+        ],
+        "quiet_bounds_ltrb": [
+          1032,
+          1432,
+          1176,
+          1576
+        ],
+        "corners_px": [
+          [
+            1048,
+            1448
+          ],
+          [
+            1160,
+            1448
+          ],
+          [
+            1160,
+            1560
+          ],
+          [
+            1048,
+            1560
+          ]
+        ],
+        "rotation_clockwise_degrees": 0
+      },
+      {
+        "id": 3,
+        "corner": "bottom_left",
+        "center_px": [
+          96,
+          1504
+        ],
+        "bounds_ltrb": [
+          40,
+          1448,
+          152,
+          1560
+        ],
+        "quiet_bounds_ltrb": [
+          24,
+          1432,
+          168,
+          1576
+        ],
+        "corners_px": [
+          [
+            40,
+            1448
+          ],
+          [
+            152,
+            1448
+          ],
+          [
+            152,
+            1560
+          ],
+          [
+            40,
+            1560
+          ]
+        ],
+        "rotation_clockwise_degrees": 0
+      }
+    ]
+  },
+  "background": {
+    "checker_cell_px": 24,
+    "origin_px": [
+      0,
+      0
+    ],
+    "colors_rgb": [
+      [
+        105,
+        119,
+        128
+      ],
+      [
+        124,
+        137,
+        145
+      ]
+    ],
+    "parity": "(floor(x/24) + floor(y/24)) modulo 2 indexes colors_rgb"
+  },
+  "artwork_zone_ltrb": [
+    176,
+    220,
+    1024,
+    1340
+  ],
+  "demo": {
+    "file": "capture-board-fast-demo.png",
+    "kind": "synthetic_test_composite",
+    "is_camera_capture": false,
+    "ai_modified": false,
+    "source": "samples/children_originals/02_family.png",
+    "source_sha256": "5305ff0ec487c2a309c61748eb115f1baf1d8bee9cb97e7d8338a013021d8fcd",
+    "source_size_px": [
+      1080,
+      814
+    ],
+    "rotation_clockwise_degrees": 90,
+    "restore_clockwise_degrees": 270,
+    "fitting": "contain; complete original image; no crop",
+    "safety_margin_px": 24,
+    "scale": 0.9828009828009828,
+    "image_size_px": [
+      800,
+      1061
+    ],
+    "image_bounds_ltrb": [
+      200,
+      249,
+      1000,
+      1310
+    ]
+  },
+  "validation": {
+    "board_detected_ids": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "demo_detected_ids": [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}
