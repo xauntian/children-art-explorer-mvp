@@ -1,33 +1,29 @@
-# pytest 配置
-#
-# 仅运行规则测试（不需要模型与服务）：
-#     python -m pytest tests/unit
-# 不指定路径的 python -m pytest 会同时收集真实服务集成测试。
-# 真实服务与模型的集成测试需显式指定：
-#     python -m pytest tests/integration -v -m integration
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mijia-pocket-printer-1s"
+version = "0.1.0"
+description = "A Windows Bluetooth photo-print client and offline card layout for the Xiaomi Mijia 1S"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["Pillow>=10.1"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+mijia1s = "mijia1s.cli:main"
+
+[project.urls]
+ARTO = "https://github.com/xauntian/children-art-explorer-mvp"
+
+[tool.setuptools]
+packages = ["mijia1s"]
+
+[tool.setuptools.package-data]
+mijia1s = ["assets/*.ttf", "assets/*.txt", "assets/*.json", "assets/*.png"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-q --strict-markers"
-markers = [
-    "integration: 需要真实本地服务与模型权重的测试",
-]
-filterwarnings = [
-    "ignore::DeprecationWarning",
-]
-
-[tool.ruff]
-line-length = 100
-target-version = "py312"
-
-[tool.ruff.lint]
-select = ["E", "F", "W", "I", "UP", "B"]
-ignore = [
-    "E501",   # 行长度由 formatter 处理
-    "B008",   # 允许函数调用作为默认值（pytest 夹具常见）
-]
-
-[tool.ruff.lint.per-file-ignores]
-"tests/*" = ["E402"]
-"tools/*" = ["E402"]
-"conftest.py" = ["E402"]

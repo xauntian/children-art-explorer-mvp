@@ -1,40 +1,10 @@
-# Local environments and model weights
-.venv/
-venv/
-comfyui/
-ComfyUI/
-models/
-*.gguf
-*.safetensors
-*.ckpt
-*.pt
-*.pth
-*.onnx
-# Private runtime outputs
-runs/
-logs/
-*.log
-.env
-.env.*
-!.env.example
-samples/_*/
-docs/environment-report.*
-# Python and editor caches
 __pycache__/
 *.py[cod]
 .pytest_cache/
-.ruff_cache/
-.coverage
-htmlcov/
-*.egg-info/
+.venv/
 build/
 dist/
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-# Downloaded Android platform tools and scrcpy server
-/tools/android/platform-tools/
-/tools/android/platform-tools-*.zip
-/tools/android/scrcpy-server-*
+*.egg-info/
+.mijia1s/
+receipts/
+*-print.png

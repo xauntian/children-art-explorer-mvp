@@ -1,0 +1,42 @@
+[
+  {
+    "id": "fauvism",
+    "print_name": "Fauvism",
+    "print_description": "Bold, surprising colours bring the picture to life."
+  },
+  {
+    "id": "cubism",
+    "print_name": "Cubism",
+    "print_description": "Shapes show the same thing from different sides."
+  },
+  {
+    "id": "impressionism",
+    "print_name": "Impressionism",
+    "print_description": "Small brushstrokes capture light and a passing moment."
+  },
+  {
+    "id": "post_impressionism",
+    "print_name": "Post-Impressionism",
+    "print_description": "Expressive colours and energetic brushstrokes add feeling."
+  },
+  {
+    "id": "expressionism",
+    "print_name": "Expressionism",
+    "print_description": "Twisted shapes and strong colours show big feelings."
+  },
+  {
+    "id": "surrealism",
+    "print_name": "Surrealism",
+    "print_description": "Familiar things meet in a strange, dreamlike world."
+  },
+  {
+    "id": "neoplasticism",
+    "print_name": "Neo-Plasticism",
+    "print_description": "Straight black lines balance blocks of red, yellow and blue."
+  },
+  {
+    "id": "pop_art",
+    "print_name": "Pop Art",
+    "print_description": "Bright colours and repeated images turn daily life into art."
+  }
+]
