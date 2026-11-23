@@ -65,7 +65,7 @@ GUI 不读取倍率、不定时截图、不调整相机设置，也不触发相�
 
 ## 打印与文件
 
-ARTO 最终装置用米家口袋照片打印机 1S 把作品、画派名称和一句说明印在同一张卡上。驱动源码记录了 Windows 蓝牙传输、卡片排版、断连后按原作业号恢复的实现，以及参考过的开源项目。[米家 1S 打印驱动与逆向记录](https://github.com/xauntian/children-art-explorer-mvp/tree/mijia-pocket-printer-1s)
+ARTO 最终装置用米家口袋照片打印机 1S 把作品、画派名称和一句说明印在同一张卡上。驱动源码记录了 Windows 蓝牙传输、卡片排版、断连后按原作业号恢复的实现，以及参考过的开源项目。[米家 1S 打印驱动与逆向记录](https://github.com/xauntian/mijia-pocket-printer-1s)
 
 本分支默认跳过实体打印机检查、提交与出纸等待，无需连接打印机。需要接入时在 `configs/gui.json` 显式启用 `printer.enabled`，安装 Windows 驱动并配置实体 A4 打印机，再进行真实设备联调。启用后，P 要等驱动确认已打印或工作人员确认出纸才重新激活；故障不自动重印。打印关闭时不改写此前的待打印记录。
 
