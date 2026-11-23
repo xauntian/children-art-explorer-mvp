@@ -1,5 +1,7 @@
 # Mijia Pocket Photo Printer 1S
 
+The driver is now maintained in its [standalone GitHub repository](https://github.com/xauntian/mijia-pocket-printer-1s). This branch preserves the original ARTO extraction.
+
 A Windows Bluetooth print client for the Xiaomi Mijia Pocket Photo Printer 1S (`hannto.printer.mint`). I built it for ARTO so a child could take home the picture the installation generated, with the art style and a short description printed on the same card. This repository extracts the printer implementation from the completed ARTO installation. [ARTO project](https://github.com/xauntian/children-art-explorer-mvp)
 
 ## Earlier projects this driver builds on
